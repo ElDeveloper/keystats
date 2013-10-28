@@ -1,5 +1,5 @@
 //
-//  YVKeyLogger.h
+//  YVBKeyLogger.h
 //  Keystats
 //
 //  Created by Yoshiki Vázquez Baeza on 10/27/13.
@@ -11,7 +11,9 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void __block (^YVBKeyPressed)(NSString *string, long long keyCode);
+// handler block for the key pressed callback
+typedef void __block (^YVBKeyPressed)(NSString *string, long long keyCode,
+									  CGEventType eventType);
 
 @interface YVBKeyLogger : NSObject{
 	YVBKeyPressed keyPressedHandler;
@@ -23,6 +25,8 @@ typedef void __block (^YVBKeyPressed)(NSString *string, long long keyCode);
 
 -(void)startLogging;
 -(void)stopLogging;
+
+-(BOOL)requestEnableAccessibility;
 
 @property (nonatomic, strong) YVBKeyPressed keyPressedHandler;
 @property (nonatomic, readonly) BOOL isLogging;
