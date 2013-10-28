@@ -27,6 +27,7 @@
 		504A316018164C7200BE4841 /* keystrokes in Resources */ = {isa = PBXBuildFile; fileRef = 504A315F18164C7200BE4841 /* keystrokes */; };
 		504A316218164C9700BE4841 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A316118164C9700BE4841 /* Carbon.framework */; };
 		504A316418164C9F00BE4841 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A316318164C9F00BE4841 /* libsqlite3.dylib */; };
+		505E323D181D530000FD6CDF /* YVBKeyLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E323C181D530000FD6CDF /* YVBKeyLogger.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,8 @@
 		504A315F18164C7200BE4841 /* keystrokes */ = {isa = PBXFileReference; lastKnownFileType = file; path = keystrokes; sourceTree = "<group>"; };
 		504A316118164C9700BE4841 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		504A316318164C9F00BE4841 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		505E323B181D530000FD6CDF /* YVBKeyLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVBKeyLogger.h; sourceTree = "<group>"; };
+		505E323C181D530000FD6CDF /* YVBKeyLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBKeyLogger.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +210,8 @@
 			children = (
 				504A315C18164C6100BE4841 /* KeyLogger.h */,
 				504A315D18164C6100BE4841 /* KeyLogger.m */,
+				505E323B181D530000FD6CDF /* YVBKeyLogger.h */,
+				505E323C181D530000FD6CDF /* YVBKeyLogger.m */,
 			);
 			path = KeyLogger;
 			sourceTree = "<group>";
@@ -316,6 +321,7 @@
 				504A315818164C3500BE4841 /* FMDatabasePool.m in Sources */,
 				504A312418164C0400BE4841 /* main.m in Sources */,
 				504A315718164C3500BE4841 /* FMDatabaseAdditions.m in Sources */,
+				505E323D181D530000FD6CDF /* YVBKeyLogger.m in Sources */,
 				504A315918164C3500BE4841 /* FMDatabaseQueue.m in Sources */,
 				504A315E18164C6100BE4841 /* KeyLogger.m in Sources */,
 			);
@@ -528,6 +534,7 @@
 				504A314718164C0400BE4841 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		504A314818164C0400BE4841 /* Build configuration list for PBXNativeTarget "KeystatsTests" */ = {
 			isa = XCConfigurationList;
@@ -536,6 +543,7 @@
 				504A314A18164C0400BE4841 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
