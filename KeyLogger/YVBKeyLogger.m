@@ -45,7 +45,7 @@ CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 	// create event listener
 	eventTap = CGEventTapCreate(kCGHIDEventTap, kCGHeadInsertEventTap, 0,
 								kCGEventMaskForAllEvents, recordKeysCallback,
-								(__bridge void *)[self keyPressedHandler]);
+								Block_copy((__bridge void *)[self keyPressedHandler]));
 
 	// wrap event listener to loopable form
 	runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap,
@@ -91,7 +91,7 @@ CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 				return event;
 	}
 
-	YVBKeyPressed keyPressedBlock = (__bridge YVBKeyPressed) userInfo;
+	YVBKeyPressed keyPressedBlock = (__bridge_transfer YVBKeyPressed) userInfo;
 
 	long long pressedKeyCode;
 	UniChar *stringOfPressedKeys = (UniChar *) malloc(sizeof(UniChar)*1024);
