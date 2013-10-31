@@ -31,10 +31,10 @@
 	return self;
 }
 
--(NSString *)getTotalCount{
+-(NSString *)_getCountForQuery:(NSString *)query{
 	NSString *result = nil;
 
-	FMResultSet *countTotalResult = [_database executeQuery:@"SELECT COUNT(*) FROM keystrokes;"];
+	FMResultSet *countTotalResult = [_database executeQuery:query];
 	if ([countTotalResult next]) {
 		result = [[NSString alloc] initWithString:[countTotalResult stringForColumnIndex:0]];
 	}
@@ -43,16 +43,20 @@
 	return result;
 }
 
+-(NSString *)getTotalCount{
+	return [self _getCountForQuery:@"SELECT COUNT(*) FROM keystrokes;"];
+}
+
 -(NSString *)getTodayCount{
-	return nil;
+	return [self _getCountForQuery:@"SELECT COUNT(*) FROM keystrokes WHERE DATE(JULIANDAY(timestamp)) == DATE(JULIANDAY('now'));"];
 }
 
 -(NSString *)getWeeklyCount{
-	return nil;
+	return [self _getCountForQuery:@"SELECT COUNT(*) FROM keystrokes WHERE DATE(JULIANDAY(timestamp)) > DATE(JULIANDAY('now')-7);"];
 }
 
 -(NSString *)getMonthlyCount{
-	return nil;
+	return [self _getCountForQuery:@"SELECT COUNT(*) FROM keystrokes WHERE DATE(JULIANDAY(timestamp)) > DATE(JULIANDAY('now')-7);"];
 }
 
 -(BOOL)addKeystrokeWithTimeStamp:(NSString *)timestamp string:(NSString *)stringValue keycode:(long long)keyCode andEventType:(CGEventType)eventType{

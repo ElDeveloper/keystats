@@ -23,9 +23,9 @@
 
 	YVBKeystrokesDataManager * __block dataManager = [[YVBKeystrokesDataManager alloc] initWithFilePath:databaseFilePath];
 	[totalCountLabel setStringValue:[dataManager getTotalCount]];
-	[todayCountLabel setStringValue:@"0"];
-	[thisWeekCountLabel setStringValue:@"0"];
-	[thisMonthCountLabel setStringValue:@"0"];
+	[todayCountLabel setStringValue:[dataManager getTodayCount]];
+	[thisWeekCountLabel setStringValue:[dataManager getWeeklyCount]];
+	[thisMonthCountLabel setStringValue:[dataManager getMonthlyCount]];
 
 	NSDateFormatter * __block dateFormat = [[NSDateFormatter alloc] init];;
 	[dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -40,6 +40,9 @@
 			dateString = [dateFormat stringFromDate:[NSDate date]];
 			[dataManager addKeystrokeWithTimeStamp:dateString string:string keycode:keyCode andEventType:eventType];
 			[totalCountLabel setStringValue:[dataManager getTotalCount]];
+			[todayCountLabel setStringValue:[dataManager getTodayCount]];
+			[thisWeekCountLabel setStringValue:[dataManager getWeeklyCount]];
+			[thisMonthCountLabel setStringValue:[dataManager getMonthlyCount]];
 		}
 	};
 
