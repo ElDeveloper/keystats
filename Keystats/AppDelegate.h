@@ -8,8 +8,18 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate>{
+	IBOutlet NSTextField * __weak __block totalCountLabel;
+	IBOutlet NSTextField * __weak __block todayCountLabel;
+	IBOutlet NSTextField * __weak __block thisWeekCountLabel;
+	IBOutlet NSTextField * __weak __block thisMonthCountLabel;
+}
 
 @property (assign) IBOutlet NSWindow *window;
+@property (nonatomic, weak) IBOutlet NSTextField * __block totalCountLabel;
+@property (nonatomic, weak) IBOutlet NSTextField * __block todayCountLabel;
+@property (nonatomic, weak) IBOutlet NSTextField * __block thisWeekCountLabel;
+@property (nonatomic, weak) IBOutlet NSTextField * __block thisMonthCountLabel;
+
 
 @end
