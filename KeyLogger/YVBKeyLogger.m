@@ -18,6 +18,16 @@ CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 
 @synthesize keyPressedHandler, isLogging;
 
++(BOOL)requestEnableAccessibility{
+	// request permission to start logging if the user has not approved yet
+	// originally taken from http://stackoverflow.com/a/18121292/379593
+	NSDictionary *options = @{(__bridge id)kAXTrustedCheckOptionPrompt: @YES};
+	BOOL accessibilityEnabled = AXIsProcessTrustedWithOptions((__bridge CFDictionaryRef)options);
+
+	return accessibilityEnabled;
+}
+
+
 -(id)init{
 	if (self = [super init]) {
 		// log to stdout each of the keys that get pressed
@@ -72,15 +82,6 @@ CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 	isLogging = NO;
 }
 
--(BOOL)requestEnableAccessibility{
-	// request permission to start logging if the user has not approved yet
-	// originally taken from http://stackoverflow.com/a/18121292/379593
-	NSDictionary *options = @{(__bridge id)kAXTrustedCheckOptionPrompt: @YES};
-	BOOL accessibilityEnabled = AXIsProcessTrustedWithOptions((__bridge CFDictionaryRef)options);
-
-	return accessibilityEnabled;
-}
-
 CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 							  CGEventRef event, void *userInfo){
 
@@ -91,7 +92,7 @@ CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 				return event;
 	}
 
-	YVBKeyPressed keyPressedBlock = (__bridge_transfer YVBKeyPressed) userInfo;
+	YVBKeyPressed keyPressedBlock = (__bridge YVBKeyPressed) userInfo;
 
 	long long pressedKeyCode;
 	UniChar *stringOfPressedKeys = (UniChar *) malloc(sizeof(UniChar)*1024);
