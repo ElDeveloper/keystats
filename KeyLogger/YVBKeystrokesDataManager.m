@@ -62,10 +62,11 @@
 -(BOOL)addKeystrokeWithTimeStamp:(NSString *)timestamp string:(NSString *)stringValue keycode:(long long)keyCode andEventType:(CGEventType)eventType{
 	// SQL insert
 	NSString *sqlInsert = [NSString stringWithFormat:@"INSERT INTO keystrokes (timestamp, type, keycode, ascii) VALUES('%@', %d, %llu, '%@'); commit;", timestamp, eventType, keyCode, stringValue];
-		if (![_database executeUpdate:sqlInsert]) {
-			NSLog(@"Unexpected error %@ FAILED!", sqlInsert);
-			return NO;
-		}
+
+	if (![_database executeUpdate:sqlInsert]) {
+		NSLog(@"Unexpected error %@ FAILED!", sqlInsert);
+		return NO;
+	}
 	return YES;
 }
 
