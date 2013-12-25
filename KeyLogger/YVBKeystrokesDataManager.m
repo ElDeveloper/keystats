@@ -33,15 +33,6 @@
 
 -(NSString *)_getCountForQuery:(NSString *)query{
 	NSString *result = nil;
-	NSInteger trials = 0;
-
-	// I'm pretty sure this is a terrible idea, let's just watch it burn
-	while ([database goodConnection] != YES) {
-		if ([_database open] || trials > 11) {
-			break;
-		}
-		trials += 1;
-	}
 
 	FMResultSet *countTotalResult = [_database executeQuery:query];
 	if ([countTotalResult next]) {
