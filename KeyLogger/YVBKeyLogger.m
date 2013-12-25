@@ -110,7 +110,7 @@ CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 	}
 
 	// get the modifier keys if any of them were pressed
-	flags = CGEventGetFlags (event);
+	flags = CGEventGetFlags(event);
 
 	// conver the array of characters into a NSStrgin object for easy handling
 	result = [NSString stringWithCharacters:stringOfPressedKeys
