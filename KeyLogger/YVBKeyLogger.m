@@ -95,13 +95,13 @@ CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 	YVBKeyPressed keyPressedBlock = (__bridge YVBKeyPressed) userInfo;
 
 	long long pressedKeyCode;
-	UniChar *stringOfPressedKeys = (UniChar *) malloc(sizeof(UniChar)*1024);
+	UniChar *stringOfPressedKeys = (UniChar *) malloc(sizeof(UniChar)*4);
 	UniCharCount charactersInString = 0;
 	CGEventFlags flags;
 	NSString *result;
 
 	pressedKeyCode = CGEventGetIntegerValueField(event,kCGKeyboardEventKeycode);
-	CGEventKeyboardGetUnicodeString(event, 1024, &charactersInString,
+	CGEventKeyboardGetUnicodeString(event, 4, &charactersInString,
 									stringOfPressedKeys);
 
 	// if the string is empty we will ignore this call right away
