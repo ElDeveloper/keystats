@@ -65,7 +65,7 @@
 }
 
 -(NSString *)getMonthlyCount{
-	return [self _getCountForQuery:@"SELECT COUNT(*) FROM keystrokes WHERE DATE(JULIANDAY(timestamp)) > DATE(JULIANDAY('now')-7);"];
+	return [self _getCountForQuery:@"SELECT COUNT(*) FROM keystrokes WHERE DATE(JULIANDAY(timestamp)) > DATE(JULIANDAY('now')-30);"];
 }
 
 -(BOOL)addKeystrokeWithTimeStamp:(NSString *)timestamp string:(NSString *)stringValue keycode:(long long)keyCode andEventType:(CGEventType)eventType{
