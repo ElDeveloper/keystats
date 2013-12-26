@@ -8,25 +8,29 @@
 
 #import <Foundation/Foundation.h>
 
-@class FMDatabase;
+@class FMDatabaseQueue;
+
+// handler block for the query execution callback
+typedef void __block (^YVBResult)(NSString *result);
+
 
 @interface YVBKeystrokesDataManager : NSObject{
-	FMDatabase *database;
+	FMDatabaseQueue *queue;
 	NSString *filePath;
 }
 
-@property (nonatomic, retain) FMDatabase *database;
+@property (nonatomic, retain) FMDatabaseQueue *queue;
 @property (nonatomic, retain) NSString *filePath;
 
 -(id)init;
 -(id)initWithFilePath:(NSString *)databaseFilePath;
 
--(NSString *)getTotalCount;
--(NSString *)getTodayCount;
--(NSString *)getWeeklyCount;
--(NSString *)getMonthlyCount;
+-(void)getTotalCount:(YVBResult)handler;
+-(void)getTodayCount:(YVBResult)handler;
+-(void)getWeeklyCount:(YVBResult)handler;
+-(void)getMonthlyCount:(YVBResult)handler;
 
--(BOOL)addKeystrokeWithTimeStamp:(NSString *)timestamp string:(NSString *)stringValue keycode:(long long)keyCode andEventType:(CGEventType)eventType;
+-(void)addKeystrokeWithTimeStamp:(NSString *)timestamp string:(NSString *)stringValue keycode:(long long)keyCode andEventType:(CGEventType)eventType;
 
 -(BOOL)managerIsHealthy;
 
