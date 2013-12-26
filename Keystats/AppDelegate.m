@@ -22,10 +22,9 @@
 	NSString *databaseFilePath = [[NSBundle mainBundle] pathForResource:@"keystrokes" ofType:@""];
 
 	YVBKeystrokesDataManager * __block dataManager = [[YVBKeystrokesDataManager alloc] initWithFilePath:databaseFilePath];
-	[totalCountLabel setStringValue:[dataManager getTotalCount]];
-	[todayCountLabel setStringValue:[dataManager getTodayCount]];
-	[thisWeekCountLabel setStringValue:[dataManager getWeeklyCount]];
-	[thisMonthCountLabel setStringValue:[dataManager getMonthlyCount]];
+	[dataManager getTotalCount:^(NSString *result) {
+		[totalCountLabel setStringValue:result];
+	}];
 
 	NSDateFormatter * __block dateFormat = [[NSDateFormatter alloc] init];;
 	[dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -39,10 +38,9 @@
 			// get the current time-stamp for this keystroke
 			dateString = [dateFormat stringFromDate:[NSDate date]];
 			[dataManager addKeystrokeWithTimeStamp:dateString string:string keycode:keyCode andEventType:eventType];
-			[totalCountLabel setStringValue:[dataManager getTotalCount]];
-			[todayCountLabel setStringValue:[dataManager getTodayCount]];
-			[thisWeekCountLabel setStringValue:[dataManager getWeeklyCount]];
-			[thisMonthCountLabel setStringValue:[dataManager getMonthlyCount]];
+			[dataManager getTotalCount:^(NSString *result) {
+				[totalCountLabel setStringValue:result];
+			}];
 		}
 	};
 
