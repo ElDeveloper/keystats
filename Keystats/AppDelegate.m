@@ -16,12 +16,48 @@
 
 @synthesize totalCountLabel, todayCountLabel, thisWeekCountLabel, thisMonthCountLabel;
 
+- (void)awakeFromNib{
+	// now check that we have accessibility access
+	if (![YVBKeyLogger accessibilityIsEnabled]) {
+		NSAlert *alert = [[NSAlert alloc] init];
+		[alert setMessageText:@"Keystats has not yet been allowed as an "
+		 "assistive application."];
+		[alert setInformativeText:@"Keystats requires that 'Enable access for "
+		 "assistive devices' in the 'Universal Access'"
+		 " preferences panel be enabled in order to "
+		 "register the keys being pressed. Once you "
+		 " do this, restart Keystats."];
+		[alert addButtonWithTitle:@"Quit"];
+		[alert addButtonWithTitle:@"Enable Accessibility"];
+		[alert setAlertStyle:NSCriticalAlertStyle];
+
+		// modal alerts block the main thread so they get a return code
+		NSInteger result = [alert runModal];
+
+		if (result == NSAlertFirstButtonReturn) {
+			[NSApp terminate:self];
+
+		}
+		else if (result == NSAlertSecondButtonReturn) {
+			[YVBKeyLogger requestAccessibilityEnabling];
+			[NSApp terminate:self];
+		}
+
+	}
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification{
 	// Insert code here to initialize your application
-	NSLog(@"The key logger %@ work as expected", [YVBKeyLogger requestEnableAccessibility] ? @"will" : @"will not");
-	NSString *databaseFilePath = [[NSBundle mainBundle] pathForResource:@"keystrokes" ofType:@""];
+	NSString *databaseFilePath = [[self pathForApplicationDatabase] path];
+
+	// verify we have a database outside the application's environment
+	if (![[NSFileManager defaultManager] fileExistsAtPath:databaseFilePath]) {
+		[self copyDatabase];
+	}
 
 	YVBKeystrokesDataManager * __block dataManager = [[YVBKeystrokesDataManager alloc] initWithFilePath:databaseFilePath];
+
+	// set the labels
 	[dataManager getTotalCount:^(NSString *result) {
 		[totalCountLabel setStringValue:result];
 	}];
@@ -37,7 +73,10 @@
 
 			// get the current time-stamp for this keystroke
 			dateString = [dateFormat stringFromDate:[NSDate date]];
-			[dataManager addKeystrokeWithTimeStamp:dateString string:string keycode:keyCode andEventType:eventType];
+			[dataManager addKeystrokeWithTimeStamp:dateString
+											string:string
+										   keycode:keyCode
+									  andEventType:eventType];
 			[dataManager getTotalCount:^(NSString *result) {
 				[totalCountLabel setStringValue:result];
 			}];
