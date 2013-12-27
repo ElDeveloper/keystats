@@ -18,9 +18,11 @@ CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 
 @synthesize keyPressedHandler, isLogging;
 
-+(BOOL)requestEnableAccessibility{
-	// request permission to start logging if the user has not approved yet
-	// originally taken from http://stackoverflow.com/a/18121292/379593
++(BOOL)accessibilityIsEnabled{
+	return AXAPIEnabled();
+}
+
++(BOOL)requestAccessibilityEnabling{
 	NSDictionary *options = @{(__bridge id)kAXTrustedCheckOptionPrompt: @YES};
 	BOOL accessibilityEnabled = AXIsProcessTrustedWithOptions((__bridge CFDictionaryRef)options);
 

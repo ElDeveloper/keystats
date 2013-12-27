@@ -20,7 +20,8 @@ typedef void __block (^YVBKeyPressed)(NSString *string, long long keyCode,
 	BOOL isLogging;
 }
 
-+(BOOL)requestEnableAccessibility;
++(BOOL)accessibilityIsEnabled;
++(BOOL)requestAccessibilityEnabling;
 
 -(id)init;
 -(id)initWithKeyPressedHandler:(YVBKeyPressed)handler;
