@@ -21,5 +21,7 @@
 @property (nonatomic, weak) IBOutlet NSTextField * __block thisWeekCountLabel;
 @property (nonatomic, weak) IBOutlet NSTextField * __block thisMonthCountLabel;
 
+- (void)copyDatabase;
+- (NSURL *)pathForApplicationDatabase;
 
 @end
