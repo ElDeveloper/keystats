@@ -87,6 +87,11 @@
 	[someKeyLogger startLogging];
 }
 
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{
+    return YES;
+}
+
+
 - (void)copyDatabase{
 	NSFileManager *defaultManager = [NSFileManager defaultManager];
 	NSURL *appSupportDir = [defaultManager URLForDirectory:NSApplicationSupportDirectory
