@@ -28,6 +28,7 @@
 		504A316418164C9F00BE4841 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A316318164C9F00BE4841 /* libsqlite3.dylib */; };
 		505E323D181D530000FD6CDF /* YVBKeyLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E323C181D530000FD6CDF /* YVBKeyLogger.m */; };
 		50937AAC18223755000F1685 /* YVBKeystrokesDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50937AAB18223755000F1685 /* YVBKeystrokesDataManager.m */; };
+		50A5F180186EA7C600C9A994 /* YVBDailyExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A5F17F186EA7C600C9A994 /* YVBDailyExecutor.m */; };
 		50D46E1D186D5DCB0049F333 /* KeystatsIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 50D46E1C186D5DCB0049F333 /* KeystatsIcon.icns */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,8 @@
 		505E323C181D530000FD6CDF /* YVBKeyLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBKeyLogger.m; sourceTree = "<group>"; };
 		50937AAA18223755000F1685 /* YVBKeystrokesDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVBKeystrokesDataManager.h; sourceTree = "<group>"; };
 		50937AAB18223755000F1685 /* YVBKeystrokesDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBKeystrokesDataManager.m; sourceTree = "<group>"; };
+		50A5F17E186EA7C600C9A994 /* YVBDailyExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVBDailyExecutor.h; sourceTree = "<group>"; };
+		50A5F17F186EA7C600C9A994 /* YVBDailyExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBDailyExecutor.m; sourceTree = "<group>"; };
 		50D46E1C186D5DCB0049F333 /* KeystatsIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = KeystatsIcon.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -152,6 +155,8 @@
 			children = (
 				504A312918164C0400BE4841 /* AppDelegate.h */,
 				504A312A18164C0400BE4841 /* AppDelegate.m */,
+				50A5F17E186EA7C600C9A994 /* YVBDailyExecutor.h */,
+				50A5F17F186EA7C600C9A994 /* YVBDailyExecutor.m */,
 				504A312C18164C0400BE4841 /* MainMenu.xib */,
 				504A312F18164C0400BE4841 /* Images.xcassets */,
 				504A311E18164C0400BE4841 /* Supporting Files */,
@@ -331,6 +336,7 @@
 				504A312B18164C0400BE4841 /* AppDelegate.m in Sources */,
 				504A315A18164C3500BE4841 /* FMResultSet.m in Sources */,
 				504A315818164C3500BE4841 /* FMDatabasePool.m in Sources */,
+				50A5F180186EA7C600C9A994 /* YVBDailyExecutor.m in Sources */,
 				50937AAC18223755000F1685 /* YVBKeystrokesDataManager.m in Sources */,
 				504A312418164C0400BE4841 /* main.m in Sources */,
 				504A315718164C3500BE4841 /* FMDatabaseAdditions.m in Sources */,
