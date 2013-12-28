@@ -17,10 +17,12 @@ typedef void __block (^YVBResult)(NSString *result);
 @interface YVBKeystrokesDataManager : NSObject{
 	FMDatabaseQueue *queue;
 	NSString *filePath;
+	NSNumberFormatter *resultFormatter;
 }
 
 @property (nonatomic, retain) FMDatabaseQueue *queue;
 @property (nonatomic, retain) NSString *filePath;
+@property (nonatomic, retain) NSNumberFormatter *resultFormatter;
 
 -(id)init;
 -(id)initWithFilePath:(NSString *)databaseFilePath;

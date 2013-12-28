@@ -13,11 +13,19 @@
 @implementation YVBKeystrokesDataManager
 @synthesize queue = _queue;
 @synthesize filePath = _filePath;
+@synthesize resultFormatter = _resultFormatter;
 
 -(id)init{
 	if (self = [super init]) {
 		_queue = nil;
 		_filePath = nil;
+		_resultFormatter = [[NSNumberFormatter alloc] init];
+		[_resultFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+
+		// Make the result look like 11,111,111
+		[_resultFormatter setGroupingSize:3];
+		[_resultFormatter setHasThousandSeparators:YES];
+		[_resultFormatter setThousandSeparator:@","];
 	}
 	return self;
 }
@@ -34,14 +42,14 @@
 -(void)_getCountForQuery:(NSString *)query andHandler:(YVBResult)handler{
 
 	[_queue inDatabase:^(FMDatabase *db) {
-		NSString *result;
+		NSNumber *result;
 		FMResultSet *countTotalResult = [db executeQuery:query];
 		if ([countTotalResult next]) {
-			result = [[NSString alloc] initWithString:[countTotalResult stringForColumnIndex:0]];
+			result = [[NSNumber alloc] initWithLong:[countTotalResult longForColumnIndex:0]];
 		}
 		[countTotalResult close];
 
-		handler(result);
+		handler([_resultFormatter stringFromNumber:result]);
 	}];
 }
 
