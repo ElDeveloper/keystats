@@ -8,11 +8,20 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class YVBKeystrokesDataManager;
+
 @interface AppDelegate : NSObject <NSApplicationDelegate>{
 	IBOutlet NSTextField * __weak __block totalCountLabel;
 	IBOutlet NSTextField * __weak __block todayCountLabel;
 	IBOutlet NSTextField * __weak __block thisWeekCountLabel;
 	IBOutlet NSTextField * __weak __block thisMonthCountLabel;
+
+	YVBKeystrokesDataManager * __block dataManager;
+
+	long long _totalCountValue;
+	long long _monthlyCountValue;
+	long long _weeklyCountValue;
+	long long _todayCountValue;
 }
 
 @property (assign) IBOutlet NSWindow *window;
@@ -23,5 +32,6 @@
 
 - (void)copyDatabase;
 - (NSURL *)pathForApplicationDatabase;
+- (void)computeBufferValuesAndUpdateLabels;
 
 @end

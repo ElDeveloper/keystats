@@ -11,6 +11,7 @@
 #import "YVBKeyLogger.h"
 #import "FMDatabase.h"
 #import "YVBKeystrokesDataManager.h"
+#import "YVBDailyExecutor.h"
 
 @implementation AppDelegate
 
@@ -55,21 +56,47 @@
 		[self copyDatabase];
 	}
 
-	YVBKeystrokesDataManager * __block dataManager = [[YVBKeystrokesDataManager alloc] initWithFilePath:databaseFilePath];
+	dataManager = [[YVBKeystrokesDataManager alloc] initWithFilePath:databaseFilePath];
 
-	// set the labels
-	[dataManager getTotalCount:^(NSString *result) {
-		[totalCountLabel setStringValue:result];
+	// serve like cache of the values, until I figure out how to query a sqlite
+	// database about 100 times per second without it delaying the callbacks
+	_totalCountValue = 0;
+	_todayCountValue = 0;
+	_weeklyCountValue = 0;
+	_monthlyCountValue = 0;
+	[self computeBufferValuesAndUpdateLabels];
+
+	// this executor will take care on updating the labels on day change
+	YVBDailyExecutor *executor = [[YVBDailyExecutor alloc] initWithHandler:^(void){
+		[self computeBufferValuesAndUpdateLabels];
 	}];
+	[executor start];
 
 	NSDateFormatter * __block dateFormat = [[NSDateFormatter alloc] init];
 	[dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
 
-	NSLog(@"The database filepath is %@", databaseFilePath);
-
 	YVBKeyPressed handlerBlock = ^(NSString *string, long long keyCode, CGEventType eventType){
 		if (eventType == kCGEventKeyDown) {
 			NSString *dateString = nil;
+
+			_totalCountValue++;
+			_weeklyCountValue++;
+			_monthlyCountValue++;
+			_todayCountValue++;
+
+			// update from the count buffers
+			[todayCountLabel setStringValue:
+			 [[dataManager resultFormatter] stringFromNumber:
+			  [NSNumber numberWithLongLong:_todayCountValue]]];
+			[totalCountLabel setStringValue:
+			 [[dataManager resultFormatter] stringFromNumber:
+			  [NSNumber numberWithLongLong:_totalCountValue]]];
+			[thisWeekCountLabel setStringValue:
+			 [[dataManager resultFormatter] stringFromNumber:
+			  [NSNumber numberWithLongLong:_weeklyCountValue]]];
+			[thisMonthCountLabel setStringValue:
+			 [[dataManager resultFormatter] stringFromNumber:
+			  [NSNumber numberWithLongLong: _monthlyCountValue]]];
 
 			// get the current time-stamp for this keystroke
 			dateString = [dateFormat stringFromDate:[NSDate date]];
@@ -77,9 +104,6 @@
 											string:string
 										   keycode:keyCode
 									  andEventType:eventType];
-			[dataManager getTotalCount:^(NSString *result) {
-				[totalCountLabel setStringValue:result];
-			}];
 		}
 	};
 
@@ -152,5 +176,30 @@
 
 	return keystatsSandbox;
 }
+
+- (void)computeBufferValuesAndUpdateLabels{
+	// set the labels
+	[dataManager getTotalCount:^(NSString *result) {
+		[totalCountLabel setStringValue:result];
+		_totalCountValue = [[result stringByReplacingOccurrencesOfString:@","
+															  withString:@""] longLongValue];
+	}];
+	[dataManager getTodayCount:^(NSString *result) {
+		[todayCountLabel setStringValue:result];
+		_todayCountValue = [[result stringByReplacingOccurrencesOfString:@","
+															  withString:@""] longLongValue];
+	}];
+	[dataManager getWeeklyCount:^(NSString *result) {
+		[thisWeekCountLabel setStringValue:result];
+		_weeklyCountValue = [[result stringByReplacingOccurrencesOfString:@","
+															   withString:@""] longLongValue];
+	}];
+	[dataManager getMonthlyCount:^(NSString *result) {
+		[thisMonthCountLabel setStringValue:result];
+		_monthlyCountValue = [[result stringByReplacingOccurrencesOfString:@","
+																withString:@""] longLongValue];
+	}];
+}
+
 
 @end
