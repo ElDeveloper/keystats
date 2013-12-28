@@ -34,6 +34,7 @@
 }
 
 -(void)start{
+	isRunning = YES;
 
 	// adapted from the answer in http://stackoverflow.com/q/2410186/379593
 	NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -59,11 +60,12 @@
 
 -(void)stop{
 	[_timer invalidate];
+	_timer = nil;
+
 	isRunning = NO;
 }
 
 -(void)timerCallback{
-	isRunning = YES;
 	_handler();
 
 	[self start];
