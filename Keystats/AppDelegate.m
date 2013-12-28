@@ -62,7 +62,7 @@
 		[totalCountLabel setStringValue:result];
 	}];
 
-	NSDateFormatter * __block dateFormat = [[NSDateFormatter alloc] init];;
+	NSDateFormatter * __block dateFormat = [[NSDateFormatter alloc] init];
 	[dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
 
 	NSLog(@"The database filepath is %@", databaseFilePath);
