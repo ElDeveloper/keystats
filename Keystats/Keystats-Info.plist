@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>KeystatsIcon</string>
+	<string>Keystats.icns</string>
 	<key>CFBundleIdentifier</key>
 	<string>yoshiki.developmet.team.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>

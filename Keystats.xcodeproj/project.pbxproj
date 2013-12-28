@@ -29,7 +29,7 @@
 		505E323D181D530000FD6CDF /* YVBKeyLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E323C181D530000FD6CDF /* YVBKeyLogger.m */; };
 		50937AAC18223755000F1685 /* YVBKeystrokesDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50937AAB18223755000F1685 /* YVBKeystrokesDataManager.m */; };
 		50A5F180186EA7C600C9A994 /* YVBDailyExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A5F17F186EA7C600C9A994 /* YVBDailyExecutor.m */; };
-		50D46E1D186D5DCB0049F333 /* KeystatsIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 50D46E1C186D5DCB0049F333 /* KeystatsIcon.icns */; };
+		50E73464186F76F80031095F /* Keystats.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 50E73463186F76F80031095F /* Keystats.iconset */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,7 +81,7 @@
 		50937AAB18223755000F1685 /* YVBKeystrokesDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBKeystrokesDataManager.m; sourceTree = "<group>"; };
 		50A5F17E186EA7C600C9A994 /* YVBDailyExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVBDailyExecutor.h; sourceTree = "<group>"; };
 		50A5F17F186EA7C600C9A994 /* YVBDailyExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBDailyExecutor.m; sourceTree = "<group>"; };
-		50D46E1C186D5DCB0049F333 /* KeystatsIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = KeystatsIcon.icns; sourceTree = "<group>"; };
+		50E73463186F76F80031095F /* Keystats.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = Keystats.iconset; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,7 +227,7 @@
 		50D46E05186D5B820049F333 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
-				50D46E1C186D5DCB0049F333 /* KeystatsIcon.icns */,
+				50E73463186F76F80031095F /* Keystats.iconset */,
 			);
 			name = Icons;
 			sourceTree = "<group>";
@@ -309,10 +309,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				504A316018164C7200BE4841 /* keystrokes in Resources */,
+				50E73464186F76F80031095F /* Keystats.iconset in Resources */,
 				504A312218164C0400BE4841 /* InfoPlist.strings in Resources */,
 				504A313018164C0400BE4841 /* Images.xcassets in Resources */,
 				504A312818164C0400BE4841 /* Credits.rtf in Resources */,
-				50D46E1D186D5DCB0049F333 /* KeystatsIcon.icns in Resources */,
 				504A312E18164C0400BE4841 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
