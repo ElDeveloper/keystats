@@ -91,6 +91,9 @@
 }
 
 -(void)systemClockChanged:(NSNotification *)notification{
+	// Update just to make sure everything is consistent in the GUI
+	_handler();
+
 	[self stop];
 	[self start];
 }
