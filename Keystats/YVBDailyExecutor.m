@@ -24,7 +24,10 @@
 		};
 		_timer = nil;
 
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(systemClockChanged:) name:NSSystemClockDidChangeNotification object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(systemClockChanged:)
+													 name:NSSystemClockDidChangeNotification
+												   object:nil];
 	}
 	return self;
 }
