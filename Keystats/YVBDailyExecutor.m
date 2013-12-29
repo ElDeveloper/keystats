@@ -53,7 +53,7 @@
 
 	_timer = [NSTimer scheduledTimerWithTimeInterval:interval
 											  target:self
-											selector:@selector(timerCallback)
+											selector:@selector(timerCallback:)
 											userInfo:nil
 											 repeats:NO];
 }
@@ -65,9 +65,8 @@
 	isRunning = NO;
 }
 
--(void)timerCallback{
+-(void)timerCallback:(NSTimer *)timer{
 	_handler();
-
 	[self start];
 }
 
