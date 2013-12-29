@@ -16,12 +16,13 @@ typedef void __block (^YVBExecutionBlock)(void);
 	BOOL isRunning;
 	YVBExecutionBlock handler;
 
-	NSTimer *_timer;
+	NSTimer *timer;
 }
 
 @property (nonatomic, retain) NSDate *currentDate;
 @property (nonatomic, readonly) BOOL isRunning;
 @property (nonatomic, copy) YVBExecutionBlock handler;
+@property (nonatomic, strong, readonly) NSTimer *timer;
 
 -(id)init;
 -(id)initWithHandler:(YVBExecutionBlock)aHandler;
