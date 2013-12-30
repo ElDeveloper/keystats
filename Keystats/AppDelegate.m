@@ -183,21 +183,33 @@
 		[totalCountLabel setStringValue:result];
 		_totalCountValue = [[result stringByReplacingOccurrencesOfString:@","
 															  withString:@""] longLongValue];
+#ifdef DEBUG
+		NSLog(@"The value of total %lld", _totalCountValue);
+#endif
 	}];
 	[dataManager getTodayCount:^(NSString *result) {
 		[todayCountLabel setStringValue:result];
 		_todayCountValue = [[result stringByReplacingOccurrencesOfString:@","
 															  withString:@""] longLongValue];
+#ifdef DEBUG
+		NSLog(@"The value of today %lld", _todayCountValue);
+#endif
 	}];
 	[dataManager getWeeklyCount:^(NSString *result) {
 		[thisWeekCountLabel setStringValue:result];
 		_weeklyCountValue = [[result stringByReplacingOccurrencesOfString:@","
 															   withString:@""] longLongValue];
+#ifdef DEBUG
+		NSLog(@"The value of this week %lld", _weeklyCountValue);
+#endif
 	}];
 	[dataManager getMonthlyCount:^(NSString *result) {
 		[thisMonthCountLabel setStringValue:result];
 		_monthlyCountValue = [[result stringByReplacingOccurrencesOfString:@","
 																withString:@""] longLongValue];
+#ifdef DEBUG
+		NSLog(@"The value of this month %lld", _monthlyCountValue);
+#endif
 	}];
 }
 
