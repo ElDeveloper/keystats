@@ -213,5 +213,27 @@
 	}];
 }
 
+- (IBAction)showAboutWindow:(id)sender{
+	//Get the information from the plist
+	NSDictionary *dictionary = [[NSBundle mainBundle] infoDictionary];;
+	NSString *hash = [dictionary objectForKey:@"GitSHA"];
+	NSString *status = [dictionary objectForKey:@"GitStatus"];
+	NSString *branch = [dictionary objectForKey:@"GitBranch"];
+
+	// If the current branch is master do not output any extra information but
+	// the SHA, else then print SHA@BRANCH_NAME for the info in head
+	NSString *head = [NSString stringWithFormat:@"%@%@", hash, ([branch isEqualToString:@"master"] ? @"" : [NSString stringWithFormat:@"@%@", branch])];
+	NSString *gitInfo;
+	NSDictionary *options;
+
+	// when status is 1 the repository has unstaged changes, therefore append a
+	// star to tipify a non-clean repository, else just print the SHA1
+	gitInfo = [NSString stringWithFormat:@"%@%@",head,([status isEqualToString:@"1"] ? @" *" : @"")];
+
+	// version right now will be the current git SHA and status
+	options = [NSDictionary dictionaryWithObjectsAndKeys:gitInfo,@"Version",nil];
+
+	[[NSApplication sharedApplication] orderFrontStandardAboutPanelWithOptions:options];
+}
 
 @end

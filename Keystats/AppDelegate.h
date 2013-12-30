@@ -34,4 +34,6 @@
 - (NSURL *)pathForApplicationDatabase;
 - (void)computeBufferValuesAndUpdateLabels;
 
+- (IBAction)showAboutWindow:(id)sender;
+
 @end
