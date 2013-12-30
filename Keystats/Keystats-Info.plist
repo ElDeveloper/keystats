@@ -32,5 +32,11 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>GitSHA</key>
+	<string></string>
+	<key>GitStatus</key>
+	<string></string>
+	<key>GitBranch</key>
+	<string></string>
 </dict>
 </plist>
