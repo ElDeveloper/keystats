@@ -62,11 +62,11 @@
 }
 
 -(void)getWeeklyCount:(YVBResult)handler{
-	[self _getCountForQuery:@"SELECT COUNT(*) FROM keystrokes WHERE DATE(timestamp) > DATE('now', 'localtime')-7;" andHandler:handler];
+	[self _getCountForQuery:@"SELECT COUNT(*) FROM keystrokes WHERE DATE(timestamp) > DATE('now','-7 day','localtime');" andHandler:handler];
 }
 
 -(void)getMonthlyCount:(YVBResult)handler{
-	[self _getCountForQuery:@"SELECT COUNT(*) FROM keystrokes WHERE DATE(timestamp) > DATE('now', 'localtime')-30;" andHandler:handler];
+	[self _getCountForQuery:@"SELECT COUNT(*) FROM keystrokes WHERE DATE(timestamp) > DATE('now','-30 day','localtime');" andHandler:handler];
 }
 
 -(void)addKeystrokeWithTimeStamp:(NSString *)timestamp string:(NSString *)stringValue keycode:(long long)keyCode andEventType:(CGEventType)eventType{
