@@ -46,12 +46,14 @@
 	NSCalendar *calendar = nil;
 	NSDateComponents *components = nil;
 	NSDate *lastSecondDate = nil;
+	NSCalendarUnit calendarUnits;
+	calendarUnits = NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit;
 
 	// avoid a multitude of callbacks for 23:59:59...
 	do {
 		// adapted from the answer in http://stackoverflow.com/q/2410186/379593
 		calendar = [NSCalendar currentCalendar];
-		components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit
+		components = [calendar components:calendarUnits
 								 fromDate:[NSDate date]];
 		lastSecondDate = nil;
 
