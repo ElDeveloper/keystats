@@ -43,21 +43,24 @@
 	isRunning = YES;
 
 	NSTimeInterval interval;
+	NSCalendar *calendar = nil;
+	NSDateComponents *components = nil;
+	NSDate *lastSecondDate = nil;
 
 	// avoid a multitude of callbacks for 23:59:59...
 	do {
 		// adapted from the answer in http://stackoverflow.com/q/2410186/379593
-		NSCalendar *calendar = [NSCalendar currentCalendar];
-		NSDateComponents *comps = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit
-											  fromDate:[NSDate date]];
-		NSDate *lasSecondDate = nil;
+		calendar = [NSCalendar currentCalendar];
+		components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit
+								 fromDate:[NSDate date]];
+		lastSecondDate = nil;
 
-		[comps setHour: 23];
-		[comps setMinute: 59];
-		[comps setSecond: 59];
+		[components setHour: 23];
+		[components setMinute: 59];
+		[components setSecond: 59];
 
-		lasSecondDate = [calendar dateFromComponents:comps];
-		interval = [lasSecondDate timeIntervalSinceNow];
+		lastSecondDate = [calendar dateFromComponents:components];
+		interval = [lastSecondDate timeIntervalSinceNow];
 
 		if (interval < 1) {
 			[NSThread sleepForTimeInterval:1.11];
