@@ -77,9 +77,12 @@
 			// to avoid checking if
 			if ([stringValue isEqualToString:@"'"]) {
 				sqlInsert = [NSString stringWithFormat:@"INSERT INTO keystrokes (timestamp, type, keycode, ascii) VALUES('%@', %d, %llu, \"%@\"); commit;", timestamp, eventType, keyCode, stringValue];
-				[db executeUpdate:sqlInsert];
+
+				// if this fails, then we really need to worry about this
+				if (![db executeUpdate:sqlInsert]) {
+					NSLog(@"Unexpected error %@ FAILED!", sqlInsert);
+				}
 			}
-			NSLog(@"Unexpected error %@ FAILED!", sqlInsert);
 		}
 	}];
 }
