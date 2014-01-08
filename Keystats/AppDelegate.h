@@ -18,6 +18,7 @@
 
 	YVBKeystrokesDataManager * __block dataManager;
 
+	@private
 	long long _totalCountValue;
 	long long _monthlyCountValue;
 	long long _weeklyCountValue;
