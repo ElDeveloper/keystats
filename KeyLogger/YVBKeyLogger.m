@@ -11,6 +11,8 @@
 #import <ApplicationServices/ApplicationServices.h>
 #import <Carbon/Carbon.h>
 
+NSString *YVBKeyLoggerPerishedNotification = @"YVBKeyLoggerPerishedNotification";
+
 CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 							  CGEventRef event, void *userInfo);
 
@@ -87,6 +89,17 @@ CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 							  CGEventRef event, void *userInfo){
 
+	if (type == kCGEventTapDisabledByTimeout ||
+		type == kCGEventTapDisabledByUserInput ) {
+		// send a notification to let observers know that the keylogger has
+		// encountered a problem that made the OS kill the callbacks
+		dispatch_async(dispatch_get_main_queue(),^{
+			[[NSNotificationCenter defaultCenter] postNotificationName:YVBKeyLoggerPerishedNotification
+																object:nil
+															  userInfo:nil];
+		});
+	}
+
 	// only key-up, key-down and flagsChanged events are listened to; other
 	// events like mouse coordinates changed or function keys will be ignored
 	if (type != kCGEventKeyDown && type != kCGEventKeyUp &&
@@ -123,6 +136,7 @@ CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 
 	// make the callback execution
 	keyPressedBlock(result, pressedKeyCode, type);
+
 	return event;
 }
 
