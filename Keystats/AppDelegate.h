@@ -29,6 +29,8 @@
 - (NSURL *)pathForApplicationDatabase;
 - (void)computeBufferValuesAndUpdateLabels;
 
+- (void)keyLoggerPerishedNotification:(NSNotification *)aNotification;
+
 - (IBAction)showAboutWindow:(id)sender;
 
 @end

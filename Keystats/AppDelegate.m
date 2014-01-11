@@ -53,6 +53,43 @@
 	[[_summaryView view] setFrame:CGRectMake(7, 180, currentSize.width,
 											 currentSize.height)];
 	[[[self window] contentView] addSubview:[_summaryView view]];
+
+	// the keylogger can stop logging at any time as a requirement from the OS
+	// make sure we listen to this notification so we can take action about it
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(keyLoggerPerishedNotification:)
+												 name:YVBKeyLoggerPerishedNotification
+											   object:nil];
+}
+
+- (void)keyLoggerPerishedNotification:(NSNotification *)aNotification{
+#ifdef DEBUG
+	NSLog(@"KeyLogger perished");
+#endif
+
+	NSAlert *alert = [[NSAlert alloc] init];
+	[alert setMessageText:@"Keystats has stopped logging keystrokes"];
+	[alert setInformativeText:@"This usually happens when the system is being "
+	 "slowed down by the action of logging the keystrokes in your system. "
+	 "Keystats is letting you know in case you want to continue Keystats "
+	 "regardless or if you've seen this message a few times recently, then "
+	 "quit the application and contact the developer."];
+	[alert addButtonWithTitle:@"Continue using Keystats"];
+	[alert addButtonWithTitle:@"Terminate Keystats"];
+	[alert setAlertStyle:NSCriticalAlertStyle];
+
+	// modal alerts block the main thread so they get a return code
+	NSInteger result = [alert runModal];
+
+	if (result == NSAlertFirstButtonReturn) {
+		// restart the keylogger
+		[self applicationDidFinishLaunching:nil];
+	}
+	else if (result == NSAlertSecondButtonReturn) {
+		[NSApp terminate:self];
+	}
+
+
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification{
