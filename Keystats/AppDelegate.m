@@ -25,10 +25,9 @@
 		[alert setMessageText:@"Keystats has not yet been allowed as an "
 		 "assistive application."];
 		[alert setInformativeText:@"Keystats requires that 'Enable access for "
-		 "assistive devices' in the 'Universal Access'"
-		 " preferences panel be enabled in order to "
-		 "register the keys being pressed. Once you "
-		 " do this, restart Keystats."];
+		 "assistive devices' in the 'Universal Access' preferences panel be "
+		 "enabled in order to register the keys being pressed. Once you do "
+		 "this, restart Keystats."];
 		[alert addButtonWithTitle:@"Quit"];
 		[alert addButtonWithTitle:@"Enable Accessibility"];
 		[alert setAlertStyle:NSCriticalAlertStyle];
