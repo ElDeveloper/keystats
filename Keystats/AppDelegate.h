@@ -9,14 +9,11 @@
 #import <Cocoa/Cocoa.h>
 
 @class YVBKeystrokesDataManager;
+@class YVBKeystrokesSummaryViewController;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>{
-	IBOutlet NSTextField * __weak __block totalCountLabel;
-	IBOutlet NSTextField * __weak __block todayCountLabel;
-	IBOutlet NSTextField * __weak __block thisWeekCountLabel;
-	IBOutlet NSTextField * __weak __block thisMonthCountLabel;
-
 	YVBKeystrokesDataManager * __block dataManager;
+	YVBKeystrokesSummaryViewController * __block summaryView;
 
 	@private
 	long long _totalCountValue;
@@ -26,10 +23,7 @@
 }
 
 @property (assign) IBOutlet NSWindow *window;
-@property (nonatomic, weak) IBOutlet NSTextField * __block totalCountLabel;
-@property (nonatomic, weak) IBOutlet NSTextField * __block todayCountLabel;
-@property (nonatomic, weak) IBOutlet NSTextField * __block thisWeekCountLabel;
-@property (nonatomic, weak) IBOutlet NSTextField * __block thisMonthCountLabel;
+@property (nonatomic, retain) YVBKeystrokesSummaryViewController * __block summaryView;
 
 - (void)copyDatabase;
 - (NSURL *)pathForApplicationDatabase;

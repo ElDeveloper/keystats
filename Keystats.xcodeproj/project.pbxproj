@@ -32,6 +32,8 @@
 		50937AAC18223755000F1685 /* YVBKeystrokesDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50937AAB18223755000F1685 /* YVBKeystrokesDataManager.m */; };
 		50A5F180186EA7C600C9A994 /* YVBDailyExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A5F17F186EA7C600C9A994 /* YVBDailyExecutor.m */; };
 		50E73464186F76F80031095F /* Keystats.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 50E73463186F76F80031095F /* Keystats.iconset */; };
+		50E9A0C8187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9A0C7187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m */; };
+		50E9A0CA187D25F70085ECBB /* YVBKeystrokesSummaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50E9A0C9187D25F70085ECBB /* YVBKeystrokesSummaryView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +88,9 @@
 		50A5F17E186EA7C600C9A994 /* YVBDailyExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVBDailyExecutor.h; sourceTree = "<group>"; };
 		50A5F17F186EA7C600C9A994 /* YVBDailyExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBDailyExecutor.m; sourceTree = "<group>"; };
 		50E73463186F76F80031095F /* Keystats.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = Keystats.iconset; sourceTree = "<group>"; };
+		50E9A0C6187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVBKeystrokesSummaryViewController.h; sourceTree = "<group>"; };
+		50E9A0C7187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBKeystrokesSummaryViewController.m; sourceTree = "<group>"; };
+		50E9A0C9187D25F70085ECBB /* YVBKeystrokesSummaryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YVBKeystrokesSummaryView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +166,9 @@
 				504A312A18164C0400BE4841 /* AppDelegate.m */,
 				50A5F17E186EA7C600C9A994 /* YVBDailyExecutor.h */,
 				50A5F17F186EA7C600C9A994 /* YVBDailyExecutor.m */,
+				50E9A0C6187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.h */,
+				50E9A0C7187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m */,
+				50E9A0C9187D25F70085ECBB /* YVBKeystrokesSummaryView.xib */,
 				504A312C18164C0400BE4841 /* MainMenu.xib */,
 				504A312F18164C0400BE4841 /* Images.xcassets */,
 				504A311E18164C0400BE4841 /* Supporting Files */,
@@ -321,6 +329,7 @@
 				504A313018164C0400BE4841 /* Images.xcassets in Resources */,
 				504A312818164C0400BE4841 /* Credits.rtf in Resources */,
 				504A312E18164C0400BE4841 /* MainMenu.xib in Resources */,
+				50E9A0CA187D25F70085ECBB /* YVBKeystrokesSummaryView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,6 +374,7 @@
 				504A312418164C0400BE4841 /* main.m in Sources */,
 				504A315718164C3500BE4841 /* FMDatabaseAdditions.m in Sources */,
 				505E323D181D530000FD6CDF /* YVBKeyLogger.m in Sources */,
+				50E9A0C8187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m in Sources */,
 				504A315918164C3500BE4841 /* FMDatabaseQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

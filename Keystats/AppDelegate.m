@@ -12,10 +12,11 @@
 #import "FMDatabase.h"
 #import "YVBKeystrokesDataManager.h"
 #import "YVBDailyExecutor.h"
+#import "YVBKeystrokesSummaryViewController.h"
 
 @implementation AppDelegate
 
-@synthesize totalCountLabel, todayCountLabel, thisWeekCountLabel, thisMonthCountLabel;
+@synthesize summaryView = _summaryView;
 
 - (void)awakeFromNib{
 	// now check that we have accessibility access
@@ -45,6 +46,14 @@
 		}
 
 	}
+
+	// add the view controller & reposition it to a nice location in the window
+	CGSize currentSize;
+	_summaryView = [[YVBKeystrokesSummaryViewController alloc] init];
+	currentSize = [[_summaryView view] frame].size;
+	[[_summaryView view] setFrame:CGRectMake(7, 180, currentSize.width,
+											 currentSize.height)];
+	[[[self window] contentView] addSubview:[_summaryView view]];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification{
@@ -85,18 +94,10 @@
 			_todayCountValue++;
 
 			// update from the count buffers
-			[todayCountLabel setStringValue:
-			 [[dataManager resultFormatter] stringFromNumber:
-			  [NSNumber numberWithLongLong:_todayCountValue]]];
-			[totalCountLabel setStringValue:
-			 [[dataManager resultFormatter] stringFromNumber:
-			  [NSNumber numberWithLongLong:_totalCountValue]]];
-			[thisWeekCountLabel setStringValue:
-			 [[dataManager resultFormatter] stringFromNumber:
-			  [NSNumber numberWithLongLong:_weeklyCountValue]]];
-			[thisMonthCountLabel setStringValue:
-			 [[dataManager resultFormatter] stringFromNumber:
-			  [NSNumber numberWithLongLong: _monthlyCountValue]]];
+			[_summaryView updateWithTotalValue:[[dataManager resultFormatter] stringFromNumber:[NSNumber numberWithLongLong:_totalCountValue]]
+									todayValue:[[dataManager resultFormatter] stringFromNumber:[NSNumber numberWithLongLong:_todayCountValue]]
+							lastSevenDaysValue:[[dataManager resultFormatter] stringFromNumber:[NSNumber numberWithLongLong:_weeklyCountValue]]
+						andLastThirtyDaysValue:[[dataManager resultFormatter] stringFromNumber:[NSNumber numberWithLongLong:_monthlyCountValue]]];
 
 			// get the current time-stamp for this keystroke
 			dateString = [dateFormat stringFromDate:[NSDate date]];
@@ -180,7 +181,7 @@
 - (void)computeBufferValuesAndUpdateLabels{
 	// set the labels
 	[dataManager getTotalCount:^(NSString *result) {
-		[totalCountLabel setStringValue:result];
+		[[_summaryView totalCountLabel] setStringValue:result];
 		_totalCountValue = [[result stringByReplacingOccurrencesOfString:@","
 															  withString:@""] longLongValue];
 #ifdef DEBUG
@@ -188,7 +189,7 @@
 #endif
 	}];
 	[dataManager getTodayCount:^(NSString *result) {
-		[todayCountLabel setStringValue:result];
+		[[_summaryView todayCountLabel] setStringValue:result];
 		_todayCountValue = [[result stringByReplacingOccurrencesOfString:@","
 															  withString:@""] longLongValue];
 #ifdef DEBUG
@@ -196,7 +197,7 @@
 #endif
 	}];
 	[dataManager getWeeklyCount:^(NSString *result) {
-		[thisWeekCountLabel setStringValue:result];
+		[[_summaryView lastSevenDaysCountLabel] setStringValue:result];
 		_weeklyCountValue = [[result stringByReplacingOccurrencesOfString:@","
 															   withString:@""] longLongValue];
 #ifdef DEBUG
@@ -204,7 +205,7 @@
 #endif
 	}];
 	[dataManager getMonthlyCount:^(NSString *result) {
-		[thisMonthCountLabel setStringValue:result];
+		[[_summaryView lastThirtyDaysCountLabel] setStringValue:result];
 		_monthlyCountValue = [[result stringByReplacingOccurrencesOfString:@","
 																withString:@""] longLongValue];
 #ifdef DEBUG
