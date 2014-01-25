@@ -98,13 +98,14 @@ CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 																object:nil
 															  userInfo:nil];
 		});
+		return event;
 	}
 
 	// only key-up, key-down and flagsChanged events are listened to; other
 	// events like mouse coordinates changed or function keys will be ignored
 	if (type != kCGEventKeyDown && type != kCGEventKeyUp &&
 		type != kCGEventFlagsChanged){
-				return event;
+		return event;
 	}
 
 	YVBKeyPressed keyPressedBlock = (__bridge YVBKeyPressed) userInfo;
