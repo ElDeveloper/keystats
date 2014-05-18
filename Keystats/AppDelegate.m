@@ -58,7 +58,11 @@
 	// make sure we listen to this notification so we can take action about it
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(keyLoggerPerishedNotification:)
-												 name:YVBKeyLoggerPerishedNotification
+												 name:YVBKeyLoggerPerishedByLackOfResponseNotification
+											   object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(keyLoggerPerishedNotification:)
+												 name:YVBKeyLoggerPerishedByUserChangeNotification
 											   object:nil];
 }
 
@@ -67,8 +71,25 @@
 	NSLog(@"KeyLogger perished");
 #endif
 
+	NSString *explanationString = @"Keystats has stopped logging keystrokes";
+	NSLog(@"Notification name is %@", [aNotification name]);
+	if ([[aNotification name] isEqualToString:YVBKeyLoggerPerishedByUserChangeNotification]) {
+		explanationString = @"USER CHANGES NOTIFICATION";
+	}
+	if ([[aNotification name] isEqualToString:YVBKeyLoggerPerishedByLackOfResponseNotification]) {
+		explanationString = @"TIMEOUT NOTIFICATION";
+	}
+
+	// You don't want to have un-endable amounts of alerts asking about this
+	if ([self waitingForConfirmation]) {
+		return;
+	}
+
+	// do not allow this notification to be called again until the user verifies
+	[self setWaitingForConfirmation:YES];
+
 	NSAlert *alert = [[NSAlert alloc] init];
-	[alert setMessageText:@"Keystats has stopped logging keystrokes"];
+	[alert setMessageText:explanationString];
 	[alert setInformativeText:@"This usually happens when the system is being "
 	 "slowed down by the action of logging the keystrokes in your system. "
 	 "Keystats is letting you know in case you want to continue Keystats "

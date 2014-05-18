@@ -16,6 +16,8 @@ typedef void __block (^YVBKeyPressed)(NSString *string, long long keyCode,
 									  CGEventType eventType);
 
 extern NSString *YVBKeyLoggerPerishedNotification;
+extern NSString *YVBKeyLoggerPerishedByLackOfResponseNotification;
+extern NSString *YVBKeyLoggerPerishedByUserChangeNotification;
 
 @interface YVBKeyLogger : NSObject{
 	YVBKeyPressed keyPressedHandler;

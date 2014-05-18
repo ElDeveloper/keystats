@@ -12,6 +12,8 @@
 #import <Carbon/Carbon.h>
 
 NSString *YVBKeyLoggerPerishedNotification = @"YVBKeyLoggerPerishedNotification";
+NSString *YVBKeyLoggerPerishedByLackOfResponseNotification = @"YVBKeyLoggerPerishedByLackOfResponseNotification";
+NSString *YVBKeyLoggerPerishedByUserChangeNotification = @"YVBKeyLoggerPerishedByUserChangeNotification";
 
 CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 							  CGEventRef event, void *userInfo);
@@ -89,12 +91,21 @@ CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 							  CGEventRef event, void *userInfo){
 
-	if (type == kCGEventTapDisabledByTimeout ||
-		type == kCGEventTapDisabledByUserInput ) {
+	if (type == kCGEventTapDisabledByTimeout) {
 		// send a notification to let observers know that the keylogger has
 		// encountered a problem that made the OS kill the callbacks
 		dispatch_async(dispatch_get_main_queue(),^{
-			[[NSNotificationCenter defaultCenter] postNotificationName:YVBKeyLoggerPerishedNotification
+			[[NSNotificationCenter defaultCenter] postNotificationName:YVBKeyLoggerPerishedByLackOfResponseNotification
+																object:nil
+															  userInfo:nil];
+		});
+		return event;
+	}
+	if ( type == kCGEventTapDisabledByUserInput ) {
+		// send a notification to let observers know that the keylogger has
+		// encountered a problem that made the OS kill the callbacks
+		dispatch_async(dispatch_get_main_queue(),^{
+			[[NSNotificationCenter defaultCenter] postNotificationName:YVBKeyLoggerPerishedByUserChangeNotification
 																object:nil
 															  userInfo:nil];
 		});
