@@ -41,16 +41,20 @@
 
 -(void)_getCountForQuery:(NSString *)query andHandler:(YVBResult)handler{
 
-	[_queue inDatabase:^(FMDatabase *db) {
-		NSNumber *result;
-		FMResultSet *countTotalResult = [db executeQuery:query];
-		if ([countTotalResult next]) {
-			result = [[NSNumber alloc] initWithLong:[countTotalResult longForColumnIndex:0]];
-		}
-		[countTotalResult close];
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,
+											 (unsigned long)NULL), ^(void) {
+		[_queue inDatabase:^(FMDatabase *db) {
+			NSNumber *result;
+			FMResultSet *countTotalResult = [db executeQuery:query];
+			if ([countTotalResult next]) {
+				result = [[NSNumber alloc] initWithLong:[countTotalResult longForColumnIndex:0]];
+			}
+			[countTotalResult close];
 
-		handler([_resultFormatter stringFromNumber:result]);
-	}];
+			handler([_resultFormatter stringFromNumber:result]);
+		}];
+	});
+
 }
 
 -(void)getTotalCount:(YVBResult)handler{
