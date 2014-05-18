@@ -20,10 +20,12 @@
 	long long _monthlyCountValue;
 	long long _weeklyCountValue;
 	long long _todayCountValue;
+	BOOL waitingForConfirmation;
 }
 
 @property (assign) IBOutlet NSWindow *window;
 @property (nonatomic, retain) YVBKeystrokesSummaryViewController * __block summaryView;
+@property (atomic) BOOL waitingForConfirmation;
 
 - (void)copyDatabase;
 - (NSURL *)pathForApplicationDatabase;

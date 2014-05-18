@@ -17,6 +17,7 @@
 @implementation AppDelegate
 
 @synthesize summaryView = _summaryView;
+@synthesize waitingForConfirmation = _waitingForConfirmation;
 
 - (void)awakeFromNib{
 	// now check that we have accessibility access
@@ -103,8 +104,11 @@
 	NSInteger result = [alert runModal];
 
 	if (result == NSAlertFirstButtonReturn) {
-		// restart the keylogger
+		// restart the keylogger and unlock this alert
 		[self applicationDidFinishLaunching:nil];
+		[self setWaitingForConfirmation:NO];
+
+		return;
 	}
 	else if (result == NSAlertSecondButtonReturn) {
 		[NSApp terminate:self];
