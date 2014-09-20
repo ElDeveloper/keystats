@@ -55,12 +55,13 @@ CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 }
 
 -(void)_addKeyEventListener{
-	CFMachPortRef		eventTap;
-	CFRunLoopSourceRef	runLoopSource;
+	CFMachPortRef eventTap;
+	CFRunLoopSourceRef runLoopSource;
+	CGEventMask keyboardMask = CGEventMaskBit(kCGEventKeyDown);
 
 	// create event listener
 	eventTap = CGEventTapCreate(kCGHIDEventTap, kCGHeadInsertEventTap, 0,
-								kCGEventMaskForAllEvents, recordKeysCallback,
+								keyboardMask, recordKeysCallback,
 								Block_copy((__bridge void *)[self keyPressedHandler]));
 
 	// wrap event listener to loopable form
@@ -91,31 +92,28 @@ CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 							  CGEventRef event, void *userInfo){
 
+	// only key-up, key-down and flagsChanged events are listened to; other
+	// events like mouse coordinates changed or function keys will be ignored
+	if (type != kCGEventKeyDown && type != kCGEventKeyUp &&
+		type != kCGEventFlagsChanged){
+		return event;
+	}
+
 	if (type == kCGEventTapDisabledByTimeout) {
 		// send a notification to let observers know that the keylogger has
 		// encountered a problem that made the OS kill the callbacks
-		dispatch_async(dispatch_get_main_queue(),^{
-			[[NSNotificationCenter defaultCenter] postNotificationName:YVBKeyLoggerPerishedByLackOfResponseNotification
-																object:nil
-															  userInfo:nil];
-		});
+		[[NSNotificationCenter defaultCenter] postNotificationName:YVBKeyLoggerPerishedByLackOfResponseNotification
+															object:nil
+														  userInfo:nil];
+
 		return event;
 	}
 	if ( type == kCGEventTapDisabledByUserInput ) {
 		// send a notification to let observers know that the keylogger has
 		// encountered a problem that made the OS kill the callbacks
-		dispatch_async(dispatch_get_main_queue(),^{
-			[[NSNotificationCenter defaultCenter] postNotificationName:YVBKeyLoggerPerishedByUserChangeNotification
-																object:nil
-															  userInfo:nil];
-		});
-		return event;
-	}
-
-	// only key-up, key-down and flagsChanged events are listened to; other
-	// events like mouse coordinates changed or function keys will be ignored
-	if (type != kCGEventKeyDown && type != kCGEventKeyUp &&
-		type != kCGEventFlagsChanged){
+		[[NSNotificationCenter defaultCenter] postNotificationName:YVBKeyLoggerPerishedByUserChangeNotification
+															object:nil
+														  userInfo:nil];
 		return event;
 	}
 
