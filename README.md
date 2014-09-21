@@ -3,6 +3,8 @@ Keystats
 
 A simple key logger for OS X.
 
+[![Build Status](https://travis-ci.org/ElDeveloper/keystats.svg?branch=master)](https://travis-ci.org/ElDeveloper/keystats)
+
 
 ### Features
 

@@ -10,6 +10,7 @@ Thumbs.db
 
 # vi files
 *.*~
+*.swp
 
 # Xcode
 .DS_Store
