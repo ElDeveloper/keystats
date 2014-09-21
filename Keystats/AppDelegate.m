@@ -81,14 +81,6 @@
 		explanationString = @"TIMEOUT NOTIFICATION";
 	}
 
-	// You don't want to have un-endable amounts of alerts asking about this
-	if ([self waitingForConfirmation]) {
-		return;
-	}
-
-	// do not allow this notification to be called again until the user verifies
-	[self setWaitingForConfirmation:YES];
-
 	NSAlert *alert = [[NSAlert alloc] init];
 	[alert setMessageText:explanationString];
 	[alert setInformativeText:@"This usually happens when the system is being "
@@ -147,8 +139,6 @@
 
 	YVBKeyPressed handlerBlock = ^(NSString *string, long long keyCode, CGEventType eventType){
 		if (eventType == kCGEventKeyDown) {
-			NSString *dateString = nil;
-
 			_totalCountValue++;
 			_weeklyCountValue++;
 			_monthlyCountValue++;
@@ -160,12 +150,16 @@
 							lastSevenDaysValue:[[dataManager resultFormatter] stringFromNumber:[NSNumber numberWithLongLong:_weeklyCountValue]]
 						andLastThirtyDaysValue:[[dataManager resultFormatter] stringFromNumber:[NSNumber numberWithLongLong:_monthlyCountValue]]];
 
-			// get the current time-stamp for this keystroke
-			dateString = [dateFormat stringFromDate:[NSDate date]];
-			[dataManager addKeystrokeWithTimeStamp:dateString
-											string:string
-										   keycode:keyCode
-									  andEventType:eventType];
+
+			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,
+													 (unsigned long)NULL), ^(void) {
+				NSString *dateString = nil;
+				dateString = [dateFormat stringFromDate:[NSDate date]];
+				[dataManager addKeystrokeWithTimeStamp:dateString
+												string:string
+											   keycode:keyCode
+										  andEventType:eventType];
+			});
 		}
 	};
 
