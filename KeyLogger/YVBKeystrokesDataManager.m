@@ -73,14 +73,14 @@
 	[self _getCountForQuery:@"SELECT COUNT(*) FROM keystrokes WHERE timestamp >= strftime('%Y-%m-%d 00:00:00', 'now', '-30 day', 'localtime');" andHandler:handler];
 }
 
--(void)addKeystrokeWithTimeStamp:(NSString *)timestamp string:(NSString *)stringValue keycode:(long long)keyCode andEventType:(CGEventType)eventType{
+-(void)addKeystrokeWithTimeStamp:(NSString *)timestamp string:(NSString *)stringValue keycode:(long long)keyCode eventType:(CGEventType)eventType andApplicationName:(NSString *)application{
 	// SQL insert
 	[_queue inDatabase:^(FMDatabase *db) {
-		NSString *sqlInsert = [NSString stringWithFormat:@"INSERT INTO keystrokes (timestamp, type, keycode, ascii) VALUES('%@', %d, %llu, '%@'); commit;", timestamp, eventType, keyCode, stringValue];
+		NSString *sqlInsert = [NSString stringWithFormat:@"INSERT INTO keystrokes (timestamp, type, keycode, ascii, application) VALUES('%@', %d, %llu, '%@', '%@'); commit;", timestamp, eventType, keyCode, stringValue, application];
 		if (![db executeUpdate:sqlInsert]) {
 			// to avoid checking if
 			if ([stringValue isEqualToString:@"'"]) {
-				sqlInsert = [NSString stringWithFormat:@"INSERT INTO keystrokes (timestamp, type, keycode, ascii) VALUES('%@', %d, %llu, \"%@\"); commit;", timestamp, eventType, keyCode, stringValue];
+				sqlInsert = [NSString stringWithFormat:@"INSERT INTO keystrokes (timestamp, type, keycode, ascii, application) VALUES('%@', %d, %llu, \"%@\", \"%@\"); commit;", timestamp, eventType, keyCode, stringValue, application];
 
 				// if this fails, then we really need to worry about this
 				if (![db executeUpdate:sqlInsert]) {

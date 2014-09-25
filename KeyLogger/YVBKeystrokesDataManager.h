@@ -32,7 +32,7 @@ typedef void __block (^YVBResult)(NSString *result);
 -(void)getWeeklyCount:(YVBResult)handler;
 -(void)getMonthlyCount:(YVBResult)handler;
 
--(void)addKeystrokeWithTimeStamp:(NSString *)timestamp string:(NSString *)stringValue keycode:(long long)keyCode andEventType:(CGEventType)eventType;
+-(void)addKeystrokeWithTimeStamp:(NSString *)timestamp string:(NSString *)stringValue keycode:(long long)keyCode eventType:(CGEventType)eventType andApplicationName:(NSString *)application;
 
 -(BOOL)managerIsHealthy;
 

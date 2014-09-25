@@ -137,6 +137,8 @@
 	NSDateFormatter * __block dateFormat = [[NSDateFormatter alloc] init];
 	[dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
 
+	NSWorkspace * __block workspace = [NSWorkspace sharedWorkspace];
+
 	YVBKeyPressed handlerBlock = ^(NSString *string, long long keyCode, CGEventType eventType){
 		if (eventType == kCGEventKeyDown) {
 			_totalCountValue++;
@@ -158,7 +160,8 @@
 				[dataManager addKeystrokeWithTimeStamp:dateString
 												string:string
 											   keycode:keyCode
-										  andEventType:eventType];
+											 eventType:eventType
+									andApplicationName:[[workspace frontmostApplication] localizedName]];
 			});
 		}
 	};
