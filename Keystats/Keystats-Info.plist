@@ -9,7 +9,7 @@
 	<key>CFBundleIconFile</key>
 	<string>Keystats.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>yoshiki.developmet.team.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>com.eldeveloper.$(PRODUCT_NAME:rfc1034identifier)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -22,6 +22,12 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>GitBranch</key>
+	<string></string>
+	<key>GitSHA</key>
+	<string></string>
+	<key>GitStatus</key>
+	<string></string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
@@ -32,11 +38,5 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>GitSHA</key>
-	<string></string>
-	<key>GitStatus</key>
-	<string></string>
-	<key>GitBranch</key>
-	<string></string>
 </dict>
 </plist>
