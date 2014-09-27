@@ -58,19 +58,19 @@
 	[writableDatabaseSpecial open];
 
 	NSInteger days[13] = {0,0,0,-1,-1,-2,-2,-3,-3,-4,-11,-33,-46};
-	NSArray *insertStatements = @[@"INSERT INTO keystrokes (timestamp, type, keycode, ascii, application) VALUES('%@', '10', '47', '.', 'Mutt');",
-								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, application) VALUES('%@', '10', '83', '1', 'Mutt');",
-								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, application) VALUES('%@', '10', '83', '1', 'Mutt');",
-								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, application) VALUES('%@', '10', '87', '5', 'Mutt');",
-								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, application) VALUES('%@', '10', '87', '5', 'Mutt');",
-								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, application) VALUES('%@', '10', '92', '9', 'Mutt');",
-								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, application) VALUES('%@', '10', '92', '9', 'Mutt');",
-								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, application) VALUES('%@', '10', '91', '8', 'Mutt');",
-								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, application) VALUES('%@', '10', '91', '8', 'Mutt');",
-								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, application) VALUES('%@', '10', '91', '8', 'Mutt');",
-								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, application) VALUES('%@', '10', '91', '8', 'Mutt');",
-								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, application) VALUES('%@', '10', '91', '8', 'Mutt');",
-								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, application) VALUES('%@', '10', '47', '.', 'Mutt');"];
+	NSArray *insertStatements = @[@"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', '10', '47', '.', 'com.dev.Mutt');",
+								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', '10', '83', '1', 'com.dev.Mutt');",
+								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', '10', '83', '1', 'com.dev.Mutt');",
+								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', '10', '87', '5', 'com.dev.Mutt');",
+								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', '10', '87', '5', 'com.dev.Mutt');",
+								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', '10', '92', '9', 'com.dev.Mutt');",
+								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', '10', '92', '9', 'com.dev.Mutt');",
+								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', '10', '91', '8', 'com.dev.Mutt');",
+								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', '10', '91', '8', 'com.dev.Mutt');",
+								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', '10', '91', '8', 'com.dev.Mutt');",
+								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', '10', '91', '8', 'com.dev.Mutt');",
+								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', '10', '91', '8', 'com.dev.Mutt');",
+								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', '10', '47', '.', 'com.dev.Mutt');"];
 
 	NSDateFormatter * dateFormat = [[NSDateFormatter alloc] init];
 	[dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -148,7 +148,6 @@
 - (void)testGetWeeklyCount{
 	YVBKeystrokesDataManager *manager = [[YVBKeystrokesDataManager alloc] initWithFilePath:temporaryDatabasePath];
 	[manager getWeeklyCount:^(NSString *result){
-		NSLog(@"The result is %@", result);
 		XCTAssert([@"10" isEqualToString:result], @"The weekly count query is wrong");
 	}];
 }
@@ -162,8 +161,9 @@
 
 - (void)testAddKeystrokeRegularCharacter{
 	YVBKeystrokesDataManager *manager = [[YVBKeystrokesDataManager alloc] initWithFilePath:writableDatabasePath];
-	[manager addKeystrokeWithTimeStamp:@"2013-12-29 14:44:30" string:@"K" keycode:40 eventType:10 andApplicationName:@"Mutt"];
+	[manager addKeystrokeWithTimeStamp:@"2013-12-29 14:44:30" string:@"K" keycode:40 eventType:10 andApplicationBundleIdentifier:@"com.dev.Mutt"];
 	[manager getTotalCount:^(NSString *result){
+		NSLog(@"%@", result);
 		XCTAssert([@"14" isEqualToString:result], @"The K keystroke was not added correctly");
 	}];
 
@@ -171,7 +171,7 @@
 
 - (void)testAddKeystrokeSpecialCharacter{
 	YVBKeystrokesDataManager *manager = [[YVBKeystrokesDataManager alloc] initWithFilePath:writableDatabasePathSpecial];
-	[manager addKeystrokeWithTimeStamp:@"2013-12-29 14:44:30" string:@"'" keycode:39 eventType:10 andApplicationName:@"Mutt"];
+	[manager addKeystrokeWithTimeStamp:@"2013-12-29 14:44:30" string:@"'" keycode:39 eventType:10 andApplicationBundleIdentifier:@"com.dev.Mutt"];
 	[manager getTotalCount:^(NSString *result){
 		XCTAssert([@"14" isEqualToString:result], @"The ' keystroke was not added correctly");
 	}];

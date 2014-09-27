@@ -161,7 +161,7 @@
 												string:string
 											   keycode:keyCode
 											 eventType:eventType
-									andApplicationName:[[workspace frontmostApplication] localizedName]];
+						andApplicationBundleIdentifier:[[workspace frontmostApplication] bundleIdentifier]];
 			});
 		}
 	};
