@@ -31,6 +31,7 @@ typedef void __block (^YVBResult)(NSString *result);
 -(void)getTodayCount:(YVBResult)handler;
 -(void)getWeeklyCount:(YVBResult)handler;
 -(void)getMonthlyCount:(YVBResult)handler;
+-(void)getEarliestDate:(YVBResult)handler;
 
 -(void)addKeystrokeWithTimeStamp:(NSString *)timestamp string:(NSString *)stringValue keycode:(long long)keyCode eventType:(CGEventType)eventType andApplicationBundleIdentifier:(NSString *)bid;
 

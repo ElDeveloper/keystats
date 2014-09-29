@@ -73,6 +73,22 @@
 	[self _getCountForQuery:@"SELECT COUNT(*) FROM keystrokes WHERE timestamp >= strftime('%Y-%m-%d 00:00:00', 'now', '-30 day', 'localtime');" andHandler:handler];
 }
 
+-(void)getEarliestDate:(YVBResult)handler{
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,
+											 (unsigned long)NULL), ^(void) {
+		[_queue inDatabase:^(FMDatabase *db) {
+			NSString *value;
+			FMResultSet *result = [db executeQuery:@"SELECT MIN(timestamp) FROM keystrokes;"];
+			if ([result next]) {
+				value = [result stringForColumnIndex:0];
+			}
+			[result close];
+
+			handler(value);
+		}];
+	});
+}
+
 -(void)addKeystrokeWithTimeStamp:(NSString *)timestamp string:(NSString *)stringValue keycode:(long long)keyCode eventType:(CGEventType)eventType andApplicationBundleIdentifier:(NSString *)bid{
 	// SQL insert
 	[_queue inDatabase:^(FMDatabase *db) {
