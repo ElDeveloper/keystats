@@ -46,12 +46,13 @@
 		}
 
 	}
+	_knowsEarliestDate = NO;
 
 	// add the view controller & reposition it to a nice location in the window
 	CGSize currentSize;
 	_summaryView = [[YVBKeystrokesSummaryViewController alloc] init];
 	currentSize = [[_summaryView view] frame].size;
-	[[_summaryView view] setFrame:CGRectMake(7, 180, currentSize.width,
+	[[_summaryView view] setFrame:CGRectMake(7, 5, currentSize.width,
 											 currentSize.height)];
 	[[[self window] contentView] addSubview:[_summaryView view]];
 
@@ -270,6 +271,27 @@
 		NSLog(@"The value of this month %lld", _monthlyCountValue);
 #endif
 	}];
+
+	if (!_knowsEarliestDate){
+		[dataManager getEarliestDate:^(NSString *result) {
+			NSString *dateString;
+
+			// we only need to compute the earliest date one time
+			_knowsEarliestDate = YES;
+
+			if (!result) {
+				dateString = @"No data has been collected yet";
+			}
+			else{
+				dateString = [NSString stringWithFormat:@"Keystrokes collected since %@", result];
+			}
+			[[_summaryView earliestDateLabel] setStringValue:dateString];
+#ifdef DEBUG
+			NSLog(@"Collecting since: %@", dateString);
+#endif
+		}];
+	}
+
 }
 
 - (IBAction)showAboutWindow:(id)sender{

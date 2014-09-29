@@ -14,6 +14,7 @@
 @synthesize todayCountLabel = _todayCountLable;
 @synthesize lastSevenDaysCountLabel = _lastSevenDaysCountLabel;
 @synthesize lastThirtyDaysCountLabel = _lastThirtyDaysCountLabel;
+@synthesize earliestDateLabel = _earliestDateLabel;
 
 -(id)init{
 	if (self = [super initWithNibName:@"YVBKeystrokesSummaryView"

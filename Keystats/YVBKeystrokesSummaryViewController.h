@@ -13,12 +13,14 @@
 	IBOutlet NSTextField * __weak todayCountLabel;
 	IBOutlet NSTextField * __weak lastSevenDaysCountLabel;
 	IBOutlet NSTextField * __weak lastThirtyDaysCountLabel;
+	IBOutlet NSTextField * __weak earliestDateLabel;
 }
 
 @property (nonatomic, weak) IBOutlet NSTextField * totalCountLabel;
 @property (nonatomic, weak) IBOutlet NSTextField * todayCountLabel;
 @property (nonatomic, weak) IBOutlet NSTextField * lastSevenDaysCountLabel;
 @property (nonatomic, weak) IBOutlet NSTextField * lastThirtyDaysCountLabel;
+@property (nonatomic, weak) IBOutlet NSTextField * earliestDateLabel;
 
 -(id)init;
 -(void)updateWithTotalValue:(NSString *)total todayValue:(NSString *)today

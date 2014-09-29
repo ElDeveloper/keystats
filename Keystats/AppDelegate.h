@@ -21,6 +21,7 @@
 	long long _weeklyCountValue;
 	long long _todayCountValue;
 	BOOL waitingForConfirmation;
+	BOOL _knowsEarliestDate;
 }
 
 @property (assign) IBOutlet NSWindow *window;
