@@ -8,18 +8,19 @@ A simple key logger for OS X.
 ### Features
 
 - Logs every keystroke into an `sqlite3` database.
-- Shows total number of registred keystrokes in the database.
+- Shows total number of registered keystrokes in the database.
 - Shows daily, weekly and monthly stats.
+- Shows the date of the earliest registered keystroke.
 - Registers time, keycode, ASCII value and the "front most" application's
 bundle identifier (`Safari` -> `com.apple.Safari`).
 
 ### Screenshot
 
-![Imgur](http://i.imgur.com/ayxwvkD.png)
+![Screenshot](http://i.imgur.com/8PyJj6g.png)
 
 ### Icon
 
-![Imgur](http://i.imgur.com/uapDrb3.png)
+![Keystats Icon](http://i.imgur.com/uapDrb3.png)
 
 ### License
 
