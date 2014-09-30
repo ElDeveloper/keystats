@@ -92,17 +92,15 @@
 -(void)addKeystrokeWithTimeStamp:(NSString *)timestamp string:(NSString *)stringValue keycode:(long long)keyCode eventType:(CGEventType)eventType andApplicationBundleIdentifier:(NSString *)bid{
 	// SQL insert
 	[_queue inDatabase:^(FMDatabase *db) {
-		NSString *sqlInsert = [NSString stringWithFormat:@"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', %d, %llu, '%@', '%@'); commit;", timestamp, eventType, keyCode, stringValue, bid];
-		if (![db executeUpdate:sqlInsert]) {
-			// to avoid checking if
-			if ([stringValue isEqualToString:@"'"]) {
-				sqlInsert = [NSString stringWithFormat:@"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', %d, %llu, \"%@\", \"%@\"); commit;", timestamp, eventType, keyCode, stringValue, bid];
+		NSDictionary *insertArgs = @{@"timestamp": timestamp,
+									@"type": [NSNumber numberWithInt:eventType],
+									@"keycode": [NSNumber numberWithLongLong:keyCode],
+									@"ascii": stringValue,
+									@"bundle_id": bid};
+		if (![db executeUpdate:@"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES(:timestamp, :type, :keycode, :ascii, :bundle_id); commit;" withParameterDictionary:insertArgs]) {
+			// FIXME: We should be doing some sort of error management
+			NSLog(@"Query failed: \"%@\" sqlite3 escapes this query, so escape it yourself.", [NSString stringWithFormat:@"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES((%@, %d, %llu, %@, %@); commit;", timestamp, eventType, keyCode, stringValue, bid]);
 
-				// if this fails, then we really need to worry about this
-				if (![db executeUpdate:sqlInsert]) {
-					NSLog(@"Unexpected error %@ FAILED!", sqlInsert);
-				}
-			}
 		}
 	}];
 }
