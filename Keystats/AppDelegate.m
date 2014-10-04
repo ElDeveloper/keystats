@@ -154,7 +154,7 @@
 						andLastThirtyDaysValue:[[dataManager resultFormatter] stringFromNumber:[NSNumber numberWithLongLong:_monthlyCountValue]]];
 
 
-			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,
+			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW,
 													 (unsigned long)NULL), ^(void) {
 				NSString *dateString = nil;
 				dateString = [dateFormat stringFromDate:[NSDate date]];
