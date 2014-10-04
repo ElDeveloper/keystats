@@ -13,6 +13,7 @@
 // handler block for the query execution callback
 typedef void __block (^YVBResult)(NSString *result);
 
+extern NSString *YVBDataManagerErrored;
 
 @interface YVBKeystrokesDataManager : NSObject{
 	FMDatabaseQueue *queue;

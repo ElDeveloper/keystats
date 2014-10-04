@@ -15,6 +15,8 @@
 @synthesize filePath = _filePath;
 @synthesize resultFormatter = _resultFormatter;
 
+NSString *YVBDataManagerErrored = @"YVBDataManagerErrored";
+
 -(id)init{
 	if (self = [super init]) {
 		_queue = nil;
@@ -98,9 +100,12 @@
 									@"ascii": stringValue,
 									@"bundle_id": bid};
 		if (![db executeUpdate:@"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES(:timestamp, :type, :keycode, :ascii, :bundle_id); commit;" withParameterDictionary:insertArgs]) {
-			// FIXME: We should be doing some sort of error management
-			NSLog(@"Query failed: \"%@\" sqlite3 escapes this query, so escape it yourself.", [NSString stringWithFormat:@"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES((%@, %d, %llu, %@, %@); commit;", timestamp, eventType, keyCode, stringValue, bid]);
+			[[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+				[[NSNotificationCenter defaultCenter] postNotificationName:YVBDataManagerErrored
+																	object:nil
+																  userInfo:@{@"message": [NSString stringWithFormat:@"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES((%@, %d, %llu, %@, %@); commit;", timestamp, eventType, keyCode, stringValue, bid]}];
 
+			}];
 		}
 	}];
 }

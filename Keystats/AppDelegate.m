@@ -66,6 +66,10 @@
 											 selector:@selector(keyLoggerPerishedNotification:)
 												 name:YVBKeyLoggerPerishedByUserChangeNotification
 											   object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(datamanagerErrored:)
+												 name:YVBDataManagerErrored
+											   object:nil];
 }
 
 - (void)keyLoggerPerishedNotification:(NSNotification *)aNotification{
@@ -106,7 +110,22 @@
 	else if (result == NSAlertSecondButtonReturn) {
 		[NSApp terminate:self];
 	}
+}
 
+- (void)datamanagerErrored:(NSNotification *)aNotification{
+	NSDictionary *dict = [aNotification userInfo];
+
+	NSAlert *errorAlert = [NSAlert new];
+	[errorAlert setMessageText:@"An error happened, could not execute:"];
+	[errorAlert setInformativeText:[dict objectForKey:@"message"]];
+
+	NSButton *cancelButton = [errorAlert addButtonWithTitle:@"OK"];
+	[cancelButton setKeyEquivalent:@"\e"];
+	[errorAlert setAlertStyle: NSCriticalAlertStyle];
+	[errorAlert beginSheetModalForWindow:[self window]
+								   modalDelegate:self
+								  didEndSelector:nil
+									 contextInfo:nil];
 
 }
 
