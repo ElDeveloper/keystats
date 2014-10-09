@@ -163,7 +163,6 @@
 	YVBKeystrokesDataManager *manager = [[YVBKeystrokesDataManager alloc] initWithFilePath:writableDatabasePath];
 	[manager addKeystrokeWithTimeStamp:@"2013-12-29 14:44:30" string:@"K" keycode:40 eventType:10 andApplicationBundleIdentifier:@"com.dev.Mutt"];
 	[manager getTotalCount:^(NSString *result){
-		NSLog(@"%@", result);
 		XCTAssert([@"14" isEqualToString:result], @"The K keystroke was not added correctly");
 	}];
 
