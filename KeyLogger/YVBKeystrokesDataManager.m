@@ -91,6 +91,24 @@ NSString *YVBDataManagerErrored = @"YVBDataManagerErrored";
 	});
 }
 
+-(void)getKeystrokesPerDay:(YVBResultSeries)handler{
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,
+											 (unsigned long)NULL), ^(void) {
+		[_queue inDatabase:^(FMDatabase *db) {
+			NSMutableArray *x = [NSMutableArray init], *y = [NSMutableArray init];
+			FMResultSet *result = [db executeQuery:@"SELECT DATE(timestamp), COUNT(*) FROM keystrokes GROUP BY date(timestamp) ORDER BY timestamp DESC;"];
+			while ([result next]) {
+				[x addObject:[result stringForColumnIndex:0]];
+				[y addObject:[result stringForColumnIndex:1]];
+			}
+			[result close];
+
+			handler(x, y);
+		}];
+	});
+
+}
+
 -(void)addKeystrokeWithTimeStamp:(NSString *)timestamp string:(NSString *)stringValue keycode:(long long)keyCode eventType:(CGEventType)eventType andApplicationBundleIdentifier:(NSString *)bid{
 	// SQL insert
 	[_queue inDatabase:^(FMDatabase *db) {

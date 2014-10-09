@@ -12,6 +12,7 @@
 
 // handler block for the query execution callback
 typedef void __block (^YVBResult)(NSString *result);
+typedef void __block (^YVBResultSeries)(NSArray *x, NSArray *y);
 
 extern NSString *YVBDataManagerErrored;
 
@@ -33,6 +34,7 @@ extern NSString *YVBDataManagerErrored;
 -(void)getWeeklyCount:(YVBResult)handler;
 -(void)getMonthlyCount:(YVBResult)handler;
 -(void)getEarliestDate:(YVBResult)handler;
+-(void)getKeystrokesPerDay:(YVBResultSeries)handler;
 
 -(void)addKeystrokeWithTimeStamp:(NSString *)timestamp string:(NSString *)stringValue keycode:(long long)keyCode eventType:(CGEventType)eventType andApplicationBundleIdentifier:(NSString *)bid;
 
