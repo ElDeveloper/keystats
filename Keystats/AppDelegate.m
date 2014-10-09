@@ -154,10 +154,12 @@
 	}];
 	[executor start];
 
-	NSDateFormatter * __block dateFormat = [[NSDateFormatter alloc] init];
+	__block NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
 	[dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
 
-	NSWorkspace * __block workspace = [NSWorkspace sharedWorkspace];
+	__block NSWorkspace *workspace = [NSWorkspace sharedWorkspace];
+	__block NSString *bundleIdentifier;
+	__block NSString *dateString;
 
 	YVBKeyPressed handlerBlock = ^(NSString *string, long long keyCode, CGEventType eventType){
 		if (eventType == kCGEventKeyDown) {
@@ -175,13 +177,18 @@
 
 			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW,
 													 (unsigned long)NULL), ^(void) {
-				NSString *dateString = nil;
 				dateString = [dateFormat stringFromDate:[NSDate date]];
+
+				// NSWorkspace's frontmostApplication is not thread safe
+				dispatch_sync(dispatch_get_main_queue(), ^{
+					bundleIdentifier = [[workspace frontmostApplication] bundleIdentifier];
+				});
+
 				[dataManager addKeystrokeWithTimeStamp:dateString
 												string:string
 											   keycode:keyCode
 											 eventType:eventType
-						andApplicationBundleIdentifier:[[workspace frontmostApplication] bundleIdentifier]];
+						andApplicationBundleIdentifier:bundleIdentifier];
 			});
 		}
 	};
