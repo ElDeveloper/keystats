@@ -18,6 +18,7 @@
 
 @synthesize summaryView = _summaryView;
 @synthesize waitingForConfirmation = _waitingForConfirmation;
+@synthesize mainLogger = _mainLogger;
 
 - (void)awakeFromNib{
 	// now check that we have accessibility access
@@ -47,6 +48,8 @@
 
 	}
 	_knowsEarliestDate = NO;
+	_mainLogger = nil;
+	__tasksCompleted = 0;
 
 	// add the view controller & reposition it to a nice location in the window
 	CGSize currentSize;
@@ -193,8 +196,7 @@
 		}
 	};
 
-	YVBKeyLogger *someKeyLogger = [[YVBKeyLogger alloc] initWithKeyPressedHandler:[handlerBlock copy]];
-	[someKeyLogger startLogging];
+	_mainLogger = [[YVBKeyLogger alloc] initWithKeyPressedHandler:[handlerBlock copy]];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{
@@ -263,12 +265,25 @@
 	return keystatsSandbox;
 }
 
+- (void)_startLogger{
+	__tasksCompleted ++;
+	if (__tasksCompleted > 4){
+		dispatch_sync(dispatch_get_main_queue(), ^{
+			[_mainLogger startLogging];
+		});
+		__tasksCompleted = 0;
+	}
+}
+
 - (void)computeBufferValuesAndUpdateLabels{
+	[_mainLogger stopLogging];
+
 	// set the labels
 	[dataManager getTotalCount:^(NSString *result) {
 		[[_summaryView totalCountLabel] setStringValue:result];
 		_totalCountValue = [[result stringByReplacingOccurrencesOfString:@","
 															  withString:@""] longLongValue];
+		[self _startLogger];
 #ifdef DEBUG
 		NSLog(@"The value of total %lld", _totalCountValue);
 #endif
@@ -277,6 +292,7 @@
 		[[_summaryView todayCountLabel] setStringValue:result];
 		_todayCountValue = [[result stringByReplacingOccurrencesOfString:@","
 															  withString:@""] longLongValue];
+		[self _startLogger];
 #ifdef DEBUG
 		NSLog(@"The value of today %lld", _todayCountValue);
 #endif
@@ -285,6 +301,7 @@
 		[[_summaryView lastSevenDaysCountLabel] setStringValue:result];
 		_weeklyCountValue = [[result stringByReplacingOccurrencesOfString:@","
 															   withString:@""] longLongValue];
+		[self _startLogger];
 #ifdef DEBUG
 		NSLog(@"The value of this week %lld", _weeklyCountValue);
 #endif
@@ -293,6 +310,7 @@
 		[[_summaryView lastThirtyDaysCountLabel] setStringValue:result];
 		_monthlyCountValue = [[result stringByReplacingOccurrencesOfString:@","
 																withString:@""] longLongValue];
+		[self _startLogger];
 #ifdef DEBUG
 		NSLog(@"The value of this month %lld", _monthlyCountValue);
 #endif
@@ -312,10 +330,14 @@
 				dateString = [NSString stringWithFormat:@"Keystrokes collected since %@", result];
 			}
 			[[_summaryView earliestDateLabel] setStringValue:dateString];
+			[self _startLogger];
 #ifdef DEBUG
 			NSLog(@"Collecting since: %@", dateString);
 #endif
 		}];
+	}
+	else{
+		[self _startLogger];
 	}
 
 }
