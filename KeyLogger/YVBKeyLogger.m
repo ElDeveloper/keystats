@@ -36,6 +36,9 @@ CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 
 -(id)init{
 	if (self = [super init]) {
+		__event = NULL;
+		__rl = NULL;
+
 		// log to stdout each of the keys that get pressed
 		[self setKeyPressedHandler:^(NSString *string, long long keyCode,
 									 CGEventType eventType){
@@ -55,38 +58,53 @@ CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 }
 
 -(void)_addKeyEventListener{
-	CFMachPortRef eventTap;
-	CFRunLoopSourceRef runLoopSource;
+	CFRunLoopSourceRef rls;
 	CGEventMask keyboardMask = CGEventMaskBit(kCGEventKeyDown);
 
+	// we need to keep a reference to this to be able to stop the callbacks
+	__rl = CFRunLoopGetCurrent();
+
 	// create event listener
-	eventTap = CGEventTapCreate(kCGHIDEventTap, kCGHeadInsertEventTap, 0,
+	__event = CGEventTapCreate(kCGHIDEventTap, kCGHeadInsertEventTap, 0,
 								keyboardMask, recordKeysCallback,
 								Block_copy((__bridge void *)[self keyPressedHandler]));
 
 	// wrap event listener to loopable form
-	runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap,
-												  0);
+	rls = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, __event, 0);
 
 	// add wrapped listener to loop
-	CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource,
-					   kCFRunLoopCommonModes);
+	CFRunLoopAddSource(__rl, rls, kCFRunLoopCommonModes);
 
 	// enable event tab
-	CGEventTapEnable(eventTap, true);
+	CGEventTapEnable(__event, true);
 
 	// run event tab
 	CFRunLoopRun();
 }
 
 -(void)startLogging{
-	[self _addKeyEventListener];
+	[self stopLogging];
 	isLogging = YES;
+	[self _addKeyEventListener];
 }
 
 -(void)stopLogging{
-	// do something magical that will let you stop listening to the events
 	isLogging = NO;
+
+	if (__event != NULL) {
+		if (CFMachPortIsValid(__event)) {
+
+			// stopping an event requires you to disable it and invalidate it
+			CGEventTapEnable(__event, false);
+			CFMachPortInvalidate(__event);
+			CFRelease(__event);
+
+			if (__rl != NULL) {
+				CFRunLoopStop(__rl);
+			}
+		}
+		__event = NULL;
+	}
 }
 
 CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
