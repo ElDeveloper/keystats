@@ -18,16 +18,11 @@
 -(id)init{
 	if (self = [super init]) {
 		_isRunning = NO;
-		_currentDate = nil;
+		_currentDate = [self _getCurrentDate];
 		_handler = ^(void){
 			NSLog(@"%s callback", __FILE__);
 		};
 		_timer = nil;
-
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(systemClockChanged:)
-													 name:NSSystemClockDidChangeNotification
-												   object:nil];
 	}
 	return self;
 }
@@ -39,43 +34,23 @@
 	return self;
 }
 
+// http://stackoverflow.com/a/5611700/379593
+-(NSDate *)_getCurrentDate{
+	NSDate *now = [NSDate date];
+	NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+	NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:now];
+	return [calendar dateFromComponents:components];
+}
+
 -(void)start{
 	isRunning = YES;
 
-	NSTimeInterval interval;
-	NSCalendar *calendar = nil;
-	NSDateComponents *components = nil;
-	NSDate *lastSecondDate = nil;
-	NSCalendarUnit calendarUnits;
-	calendarUnits = NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit;
-
-	// avoid a multitude of callbacks for 23:59:59...
-	do {
-		// adapted from the answer in http://stackoverflow.com/q/2410186/379593
-		calendar = [NSCalendar currentCalendar];
-		components = [calendar components:calendarUnits
-								 fromDate:[NSDate date]];
-		lastSecondDate = nil;
-
-		[components setHour: 23];
-		[components setMinute: 59];
-		[components setSecond: 59];
-
-		lastSecondDate = [calendar dateFromComponents:components];
-		interval = [lastSecondDate timeIntervalSinceNow];
-
-		if (interval < 1) {
-			[NSThread sleepForTimeInterval:1.11];
-		}
-	}
-	while (interval < 1);
-
 	if (!_timer) {
-		_timer = [NSTimer scheduledTimerWithTimeInterval:interval
+		_timer = [NSTimer scheduledTimerWithTimeInterval:300.0f
 												  target:self
 												selector:@selector(timerCallback:)
 												userInfo:nil
-												 repeats:NO];
+												 repeats:YES];
 	}
 }
 
@@ -89,18 +64,22 @@
 }
 
 -(void)timerCallback:(NSTimer *)timer{
-	_handler();
+	NSUInteger a = [[NSCalendar currentCalendar] ordinalityOfUnit:NSDayCalendarUnit inUnit:NSEraCalendarUnit forDate:_currentDate];
+	NSUInteger b = [[NSCalendar currentCalendar] ordinalityOfUnit:NSDayCalendarUnit inUnit:NSEraCalendarUnit forDate:[self _getCurrentDate]];
 
-	[self stop];
-	[self start];
-}
+#ifdef DEBUG
+	NSLog(@"Timer callback ...");
+#endif
 
--(void)systemClockChanged:(NSNotification *)notification{
-	// Update just to make sure everything is consistent in the GUI
-	_handler();
+	if (a != b) {
+#ifdef DEBUG
+		NSLog(@"Day has changed ...");
+#endif
+		_currentDate = [self _getCurrentDate];
+		_handler();
 
-	[self stop];
-	[self start];
+		return;
+	}
 }
 
 @end
