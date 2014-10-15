@@ -153,7 +153,10 @@
 
 	// this executor will take care on updating the labels on day change
 	YVBDailyExecutor *executor = [[YVBDailyExecutor alloc] initWithHandler:^(void){
-		[self computeBufferValuesAndUpdateLabels];
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW,
+												 (unsigned long)NULL), ^(void) {
+			[self computeBufferValuesAndUpdateLabels];
+		});
 	}];
 	[executor start];
 
