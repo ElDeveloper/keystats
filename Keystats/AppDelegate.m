@@ -273,11 +273,13 @@
 	if (__tasksCompleted > 4){
 		[_mainLogger startLogging];
 		__tasksCompleted = 0;
+		[_window performSelectorOnMainThread:@selector(setTitle:) withObject:@"Keystats" waitUntilDone:NO];
 	}
 }
 
 - (void)computeBufferValuesAndUpdateLabels{
 	[_mainLogger stopLogging];
+	[_window performSelectorOnMainThread:@selector(setTitle:) withObject:@"Keystats (loading ...)" waitUntilDone:NO];
 
 	// set the labels
 	[dataManager getTotalCount:^(NSString *result) {
