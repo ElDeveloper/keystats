@@ -335,7 +335,7 @@
 			_knowsEarliestDate = YES;
 
 			if (!result) {
-				dateString = @"No data has been collected yet";
+				dateString = @"";
 			}
 			else{
 				dateString = [NSString stringWithFormat:@"Keystrokes collected since %@", result];
