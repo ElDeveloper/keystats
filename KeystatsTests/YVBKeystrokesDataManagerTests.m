@@ -162,4 +162,26 @@
 	}];
 }
 
+- (void)testGetKeystrokesPerDay{
+	YVBKeystrokesDataManager *manager = [[YVBKeystrokesDataManager alloc] initWithFilePath:temporaryDatabasePath];
+	[manager getKeystrokesPerDay:^(NSArray *x, NSArray *y){
+		XCTAssert([x count] == 9, @"Array size of x is incorrect");
+		XCTAssert([y count] == 9, @"Array size of y is incorrect");
+		XCTAssert([x count] == [y count], @"Array sizes are not equal");
+
+		unsigned long long array[9] = {2, 2, 2, 2, 1, 1, 1, 1, 1};
+		NSArray *datesArray = @[@"2014-11-27", @"2014-11-26", @"2014-11-25",
+								@"2014-11-24", @"2014-11-23", @"2014-11-16",
+								@"2014-10-25", @"2014-10-12", @"2014-10-10"];
+		NSDateFormatter * dateFormat = [[NSDateFormatter alloc] init];
+		[dateFormat setDateFormat:@"yyyy-MM-dd"];
+
+
+		for (char i; i<9; i++) {
+			XCTAssert([x objectAtIndex:i] == [NSNumber numberWithUnsignedLongLong:array[i]], @"Values are incorrectly retrieved from x");
+			XCTAssert([y objectAtIndex:i] == [datesArray objectAtIndex:i], @"Values are incorrectly retrieved from x");
+		}
+	}];
+}
+
 @end

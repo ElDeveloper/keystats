@@ -95,14 +95,19 @@ NSString *YVBDataManagerErrored = @"YVBDataManagerErrored";
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,
 											 (unsigned long)NULL), ^(void) {
 		[_queue inDatabase:^(FMDatabase *db) {
-			NSMutableArray *x = [NSMutableArray init], *y = [NSMutableArray init];
+			NSMutableArray *x=[[NSMutableArray alloc] init], *y=[[NSMutableArray alloc] init];
+
+			// otherwise we get epoch dates
+			NSDateFormatter * dateFormat = [[NSDateFormatter alloc] init];
+			[dateFormat setDateFormat:@"yyyy-MM-dd"];
+			[db setDateFormat:dateFormat];
+
 			FMResultSet *result = [db executeQuery:@"SELECT DATE(timestamp), COUNT(*) FROM keystrokes GROUP BY date(timestamp) ORDER BY timestamp DESC;"];
 			while ([result next]) {
-				[x addObject:[result stringForColumnIndex:0]];
-				[y addObject:[result stringForColumnIndex:1]];
+				[x addObject:[result dateForColumnIndex:0]];
+				[y addObject:[NSNumber numberWithUnsignedLongLong:[result unsignedLongLongIntForColumnIndex:1]]];
 			}
 			[result close];
-
 			handler(x, y);
 		}];
 	});
