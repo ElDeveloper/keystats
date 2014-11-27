@@ -19,7 +19,6 @@
 		5003AF0B1A212AF900361A19 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315318164C3500BE4841 /* FMDatabaseQueue.m */; };
 		5003AF0C1A212AF900361A19 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315518164C3500BE4841 /* FMResultSet.m */; };
 		5039F2F81870D65200D73FBB /* YVBKeystrokesDataManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5039F2F71870D65200D73FBB /* YVBKeystrokesDataManagerTests.m */; };
-		5039F2FA1870DB3000D73FBB /* test-keystrokes in Resources */ = {isa = PBXBuildFile; fileRef = 5039F2F91870DB3000D73FBB /* test-keystrokes */; };
 		504A311818164C0400BE4841 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A311718164C0400BE4841 /* Cocoa.framework */; };
 		504A312218164C0400BE4841 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 504A312018164C0400BE4841 /* InfoPlist.strings */; };
 		504A312418164C0400BE4841 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A312318164C0400BE4841 /* main.m */; };
@@ -58,7 +57,6 @@
 
 /* Begin PBXFileReference section */
 		5039F2F71870D65200D73FBB /* YVBKeystrokesDataManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBKeystrokesDataManagerTests.m; sourceTree = "<group>"; };
-		5039F2F91870DB3000D73FBB /* test-keystrokes */ = {isa = PBXFileReference; lastKnownFileType = file; path = "test-keystrokes"; sourceTree = "<group>"; };
 		504A311418164C0400BE4841 /* Keystats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keystats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		504A311718164C0400BE4841 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		504A311A18164C0400BE4841 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -213,7 +211,6 @@
 		504A313C18164C0400BE4841 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				5039F2F91870DB3000D73FBB /* test-keystrokes */,
 				504A313D18164C0400BE4841 /* KeystatsTests-Info.plist */,
 				504A313E18164C0400BE4841 /* InfoPlist.strings */,
 			);
@@ -347,7 +344,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5039F2FA1870DB3000D73FBB /* test-keystrokes in Resources */,
 				504A314018164C0400BE4841 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

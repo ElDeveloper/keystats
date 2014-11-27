@@ -24,31 +24,9 @@
 - (void)setUp{
     [super setUp];
     // Put setup code here; it will be run once, before the first test case.
-	NSError *error=nil;
-
-	// retrieve the filepath of the database that we are going to be using
-	NSURL *testDatabase = [[NSBundle bundleForClass:[self class]] URLForResource:@"test-keystrokes"
-																   withExtension:@""];
-	
 	temporaryDatabasePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"/test-keystrokes"];
 	writableDatabasePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"/test-keystrokes-writable"];
 	writableDatabasePathSpecial = [NSTemporaryDirectory() stringByAppendingPathComponent:@"/test-keystrokes-writable-special"];
-
-	[[NSFileManager defaultManager]	copyItemAtPath:[testDatabase path]
-											toPath:temporaryDatabasePath
-											 error:&error];
-	XCTAssertNil(error, @"Cannot copy readable database ... cannot continue");
-	error = nil;
-
-	[[NSFileManager defaultManager]	copyItemAtPath:[testDatabase path]
-											toPath:writableDatabasePath
-											 error:&error];
-	XCTAssertNil(error, @"Cannot copy writable database ... cannot continue");
-
-	[[NSFileManager defaultManager]	copyItemAtPath:[testDatabase path]
-											toPath:writableDatabasePathSpecial
-											 error:&error];
-	XCTAssertNil(error, @"Cannot copy special writable database ... cannot continue");
 
 	FMDatabase *database = [FMDatabase databaseWithPath:temporaryDatabasePath];
 	[database open];
@@ -57,8 +35,9 @@
 	FMDatabase *writableDatabaseSpecial = [FMDatabase databaseWithPath:writableDatabasePathSpecial];
 	[writableDatabaseSpecial open];
 
-	NSInteger days[13] = {0,0,0,-1,-1,-2,-2,-3,-3,-4,-11,-33,-46};
-	NSArray *insertStatements = @[@"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', '10', '47', '.', 'com.dev.Mutt');",
+	NSInteger days[14] = {0,0,0,-1,-1,-2,-2,-3,-3,-4,-11,-33,-46, -48};
+	NSArray *insertStatements = @[@"CREATE TABLE keystrokes(id INTEGER PRIMARY KEY, timestamp DATETIME, type INTEGER, keycode INTEGER, ascii VARCHAR(1), bundle_id VARCHAR(64));",
+								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', '10', '47', '.', 'com.dev.Mutt');",
 								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', '10', '83', '1', 'com.dev.Mutt');",
 								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', '10', '83', '1', 'com.dev.Mutt');",
 								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', '10', '87', '5', 'com.dev.Mutt');",
@@ -84,7 +63,6 @@
 	for (int i=0; i<[insertStatements count]; i++) {
 		[dayComponent setDay:days[i]];
 		dateForInsertion = [dateFormat stringFromDate:[theCalendar dateByAddingComponents:dayComponent toDate:currentDate options:0]];
-
 		[database executeUpdate:[NSString stringWithFormat:[insertStatements objectAtIndex:i], dateForInsertion]];
 		[writableDatabase executeUpdate:[NSString stringWithFormat:[insertStatements objectAtIndex:i], dateForInsertion]];
 		[writableDatabaseSpecial executeUpdate:[NSString stringWithFormat:[insertStatements objectAtIndex:i], dateForInsertion]];
