@@ -10,10 +10,12 @@
 
 @class YVBKeystrokesDataManager;
 @class YVBKeystrokesSummaryViewController;
+@class YVBKeyLogger;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>{
-	YVBKeystrokesDataManager * __block dataManager;
-	YVBKeystrokesSummaryViewController * __block summaryView;
+	 __block YVBKeystrokesDataManager *dataManager;
+	 __block YVBKeystrokesSummaryViewController *summaryView;
+	 __block YVBKeyLogger *mainLogger;
 
 	@private
 	long long _totalCountValue;
@@ -22,10 +24,12 @@
 	long long _todayCountValue;
 	BOOL waitingForConfirmation;
 	BOOL _knowsEarliestDate;
+	NSUInteger __tasksCompleted;
 }
 
 @property (assign) IBOutlet NSWindow *window;
-@property (nonatomic, retain) YVBKeystrokesSummaryViewController * __block summaryView;
+@property (nonatomic, retain)  __block  YVBKeystrokesSummaryViewController *summaryView;
+@property (atomic, retain)  __block  YVBKeyLogger *mainLogger;
 @property (atomic) BOOL waitingForConfirmation;
 
 - (void)copyDatabase;

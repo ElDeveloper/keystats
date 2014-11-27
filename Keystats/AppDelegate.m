@@ -18,6 +18,7 @@
 
 @synthesize summaryView = _summaryView;
 @synthesize waitingForConfirmation = _waitingForConfirmation;
+@synthesize mainLogger = _mainLogger;
 
 - (void)awakeFromNib{
 	// now check that we have accessibility access
@@ -47,6 +48,8 @@
 
 	}
 	_knowsEarliestDate = NO;
+	_mainLogger = nil;
+	__tasksCompleted = 0;
 
 	// add the view controller & reposition it to a nice location in the window
 	CGSize currentSize;
@@ -150,14 +153,19 @@
 
 	// this executor will take care on updating the labels on day change
 	YVBDailyExecutor *executor = [[YVBDailyExecutor alloc] initWithHandler:^(void){
-		[self computeBufferValuesAndUpdateLabels];
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW,
+												 (unsigned long)NULL), ^(void) {
+			[self computeBufferValuesAndUpdateLabels];
+		});
 	}];
 	[executor start];
 
-	NSDateFormatter * __block dateFormat = [[NSDateFormatter alloc] init];
+	__block NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
 	[dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
 
-	NSWorkspace * __block workspace = [NSWorkspace sharedWorkspace];
+	__block NSWorkspace *workspace = [NSWorkspace sharedWorkspace];
+	__block NSString *bundleIdentifier;
+	__block NSString *dateString;
 
 	YVBKeyPressed handlerBlock = ^(NSString *string, long long keyCode, CGEventType eventType){
 		if (eventType == kCGEventKeyDown) {
@@ -175,19 +183,23 @@
 
 			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW,
 													 (unsigned long)NULL), ^(void) {
-				NSString *dateString = nil;
 				dateString = [dateFormat stringFromDate:[NSDate date]];
+
+				// NSWorkspace's frontmostApplication is not thread safe
+				dispatch_sync(dispatch_get_main_queue(), ^{
+					bundleIdentifier = [[workspace frontmostApplication] bundleIdentifier];
+				});
+
 				[dataManager addKeystrokeWithTimeStamp:dateString
 												string:string
 											   keycode:keyCode
 											 eventType:eventType
-						andApplicationBundleIdentifier:[[workspace frontmostApplication] bundleIdentifier]];
+						andApplicationBundleIdentifier:bundleIdentifier];
 			});
 		}
 	};
 
-	YVBKeyLogger *someKeyLogger = [[YVBKeyLogger alloc] initWithKeyPressedHandler:[handlerBlock copy]];
-	[someKeyLogger startLogging];
+	_mainLogger = [[YVBKeyLogger alloc] initWithKeyPressedHandler:[handlerBlock copy]];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{
@@ -256,12 +268,27 @@
 	return keystatsSandbox;
 }
 
+- (void)_startLogger{
+	__tasksCompleted ++;
+	if (__tasksCompleted > 4){
+		[_mainLogger startLogging];
+		__tasksCompleted = 0;
+		[_window performSelectorOnMainThread:@selector(setTitle:) withObject:@"Keystats" waitUntilDone:NO];
+	}
+}
+
 - (void)computeBufferValuesAndUpdateLabels{
+	[_mainLogger stopLogging];
+	[_window performSelectorOnMainThread:@selector(setTitle:) withObject:@"Keystats (loading ...)" waitUntilDone:NO];
+
 	// set the labels
 	[dataManager getTotalCount:^(NSString *result) {
 		[[_summaryView totalCountLabel] setStringValue:result];
 		_totalCountValue = [[result stringByReplacingOccurrencesOfString:@","
 															  withString:@""] longLongValue];
+		[self performSelectorOnMainThread:@selector(_startLogger)
+							   withObject:nil
+							waitUntilDone:NO];
 #ifdef DEBUG
 		NSLog(@"The value of total %lld", _totalCountValue);
 #endif
@@ -270,6 +297,9 @@
 		[[_summaryView todayCountLabel] setStringValue:result];
 		_todayCountValue = [[result stringByReplacingOccurrencesOfString:@","
 															  withString:@""] longLongValue];
+		[self performSelectorOnMainThread:@selector(_startLogger)
+							   withObject:nil
+							waitUntilDone:NO];
 #ifdef DEBUG
 		NSLog(@"The value of today %lld", _todayCountValue);
 #endif
@@ -278,6 +308,9 @@
 		[[_summaryView lastSevenDaysCountLabel] setStringValue:result];
 		_weeklyCountValue = [[result stringByReplacingOccurrencesOfString:@","
 															   withString:@""] longLongValue];
+		[self performSelectorOnMainThread:@selector(_startLogger)
+							   withObject:nil
+							waitUntilDone:NO];
 #ifdef DEBUG
 		NSLog(@"The value of this week %lld", _weeklyCountValue);
 #endif
@@ -286,6 +319,9 @@
 		[[_summaryView lastThirtyDaysCountLabel] setStringValue:result];
 		_monthlyCountValue = [[result stringByReplacingOccurrencesOfString:@","
 																withString:@""] longLongValue];
+		[self performSelectorOnMainThread:@selector(_startLogger)
+							   withObject:nil
+							waitUntilDone:NO];
 #ifdef DEBUG
 		NSLog(@"The value of this month %lld", _monthlyCountValue);
 #endif
@@ -299,16 +335,24 @@
 			_knowsEarliestDate = YES;
 
 			if (!result) {
-				dateString = @"No data has been collected yet";
+				dateString = @"";
 			}
 			else{
 				dateString = [NSString stringWithFormat:@"Keystrokes collected since %@", result];
 			}
 			[[_summaryView earliestDateLabel] setStringValue:dateString];
+			[self performSelectorOnMainThread:@selector(_startLogger)
+								   withObject:nil
+								waitUntilDone:NO];
 #ifdef DEBUG
 			NSLog(@"Collecting since: %@", dateString);
 #endif
 		}];
+	}
+	else{
+		[self performSelectorOnMainThread:@selector(_startLogger)
+							   withObject:nil
+							waitUntilDone:NO];
 	}
 
 }

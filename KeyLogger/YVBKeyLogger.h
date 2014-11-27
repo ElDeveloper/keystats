@@ -22,6 +22,10 @@ extern NSString *YVBKeyLoggerPerishedByUserChangeNotification;
 @interface YVBKeyLogger : NSObject{
 	YVBKeyPressed keyPressedHandler;
 	BOOL isLogging;
+
+	@private
+	CFMachPortRef __event;
+	CFRunLoopRef __rl;
 }
 
 +(BOOL)accessibilityIsEnabled;

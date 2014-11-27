@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5003AF021A212ADE00361A19 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A316318164C9F00BE4841 /* libsqlite3.dylib */; };
+		5003AF031A212AF900361A19 /* YVBKeyLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E323C181D530000FD6CDF /* YVBKeyLogger.m */; };
+		5003AF041A212AF900361A19 /* YVBKeystrokesDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50937AAB18223755000F1685 /* YVBKeystrokesDataManager.m */; };
+		5003AF051A212AF900361A19 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A312A18164C0400BE4841 /* AppDelegate.m */; };
+		5003AF061A212AF900361A19 /* YVBDailyExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A5F17F186EA7C600C9A994 /* YVBDailyExecutor.m */; };
+		5003AF071A212AF900361A19 /* YVBKeystrokesSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9A0C7187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m */; };
+		5003AF081A212AF900361A19 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A314D18164C3500BE4841 /* FMDatabase.m */; };
+		5003AF091A212AF900361A19 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A314F18164C3500BE4841 /* FMDatabaseAdditions.m */; };
+		5003AF0A1A212AF900361A19 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315118164C3500BE4841 /* FMDatabasePool.m */; };
+		5003AF0B1A212AF900361A19 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315318164C3500BE4841 /* FMDatabaseQueue.m */; };
+		5003AF0C1A212AF900361A19 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315518164C3500BE4841 /* FMResultSet.m */; };
 		5039F2F81870D65200D73FBB /* YVBKeystrokesDataManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5039F2F71870D65200D73FBB /* YVBKeystrokesDataManagerTests.m */; };
 		5039F2FA1870DB3000D73FBB /* test-keystrokes in Resources */ = {isa = PBXBuildFile; fileRef = 5039F2F91870DB3000D73FBB /* test-keystrokes */; };
 		504A311818164C0400BE4841 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A311718164C0400BE4841 /* Cocoa.framework */; };
@@ -16,7 +27,6 @@
 		504A312B18164C0400BE4841 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A312A18164C0400BE4841 /* AppDelegate.m */; };
 		504A312E18164C0400BE4841 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 504A312C18164C0400BE4841 /* MainMenu.xib */; };
 		504A313018164C0400BE4841 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504A312F18164C0400BE4841 /* Images.xcassets */; };
-		504A313718164C0400BE4841 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A313618164C0400BE4841 /* XCTest.framework */; };
 		504A313818164C0400BE4841 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A311718164C0400BE4841 /* Cocoa.framework */; };
 		504A314018164C0400BE4841 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 504A313E18164C0400BE4841 /* InfoPlist.strings */; };
 		504A314218164C0400BE4841 /* KeystatsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A314118164C0400BE4841 /* KeystatsTests.m */; };
@@ -108,8 +118,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5003AF021A212ADE00361A19 /* libsqlite3.dylib in Frameworks */,
 				504A313818164C0400BE4841 /* Cocoa.framework in Frameworks */,
-				504A313718164C0400BE4841 /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,6 +393,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5003AF031A212AF900361A19 /* YVBKeyLogger.m in Sources */,
+				5003AF041A212AF900361A19 /* YVBKeystrokesDataManager.m in Sources */,
+				5003AF051A212AF900361A19 /* AppDelegate.m in Sources */,
+				5003AF061A212AF900361A19 /* YVBDailyExecutor.m in Sources */,
+				5003AF071A212AF900361A19 /* YVBKeystrokesSummaryViewController.m in Sources */,
+				5003AF081A212AF900361A19 /* FMDatabase.m in Sources */,
+				5003AF091A212AF900361A19 /* FMDatabaseAdditions.m in Sources */,
+				5003AF0A1A212AF900361A19 /* FMDatabasePool.m in Sources */,
+				5003AF0B1A212AF900361A19 /* FMDatabaseQueue.m in Sources */,
+				5003AF0C1A212AF900361A19 /* FMResultSet.m in Sources */,
 				504A314218164C0400BE4841 /* KeystatsTests.m in Sources */,
 				5039F2F81870D65200D73FBB /* YVBKeystrokesDataManagerTests.m in Sources */,
 			);

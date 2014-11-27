@@ -3,5 +3,6 @@ before_install:
     - brew unlink xctool
     - brew update
     - brew install xctool
+    - brew link xctool
 script:
     - xctool -scheme KeystatsTests -sdk macosx10.9 -project Keystats.xcodeproj

@@ -7,7 +7,7 @@ A simple key logger for OS X.
 
 ### Features
 
-- Logs every keystroke into an `sqlite3` database.
+- Logs every keystroke into a `sqlite3` database.
 - Shows total number of registered keystrokes in the database.
 - Shows daily, weekly and monthly stats.
 - Shows the date of the earliest registered keystroke.

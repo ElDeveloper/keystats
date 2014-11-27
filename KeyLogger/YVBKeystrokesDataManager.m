@@ -64,15 +64,15 @@ NSString *YVBDataManagerErrored = @"YVBDataManagerErrored";
 }
 
 -(void)getTodayCount:(YVBResult)handler{
-	[self _getCountForQuery:@"SELECT COUNT(*) FROM keystrokes WHERE timestamp >= strftime('%Y-%m-%d 00:00:00', 'now', 'localtime');" andHandler:handler];
+	[self _getCountForQuery:@"SELECT COUNT(*) FROM keystrokes WHERE timestamp BETWEEN strftime('%Y-%m-%d', 'now', 'localtime') AND strftime('%Y-%m-%d', 'now', '+1 day', 'localtime');" andHandler:handler];
 }
 
 -(void)getWeeklyCount:(YVBResult)handler{
-	[self _getCountForQuery:@"SELECT COUNT(*) FROM keystrokes WHERE timestamp >= strftime('%Y-%m-%d 00:00:00', 'now', '-7 day', 'localtime');" andHandler:handler];
+	[self _getCountForQuery:@"SELECT COUNT(*) FROM keystrokes WHERE timestamp BETWEEN strftime('%Y-%m-%d', 'now', '-7 day', 'localtime') AND strftime('%Y-%m-%d', 'now', '+1 day', 'localtime');" andHandler:handler];
 }
 
 -(void)getMonthlyCount:(YVBResult)handler{
-	[self _getCountForQuery:@"SELECT COUNT(*) FROM keystrokes WHERE timestamp >= strftime('%Y-%m-%d 00:00:00', 'now', '-30 day', 'localtime');" andHandler:handler];
+	[self _getCountForQuery:@"SELECT COUNT(*) FROM keystrokes WHERE timestamp BETWEEN strftime('%Y-%m-%d', 'now', '-30 day', 'localtime') AND strftime('%Y-%m-%d', 'now', '+1 day', 'localtime');" andHandler:handler];
 }
 
 -(void)getEarliestDate:(YVBResult)handler{
