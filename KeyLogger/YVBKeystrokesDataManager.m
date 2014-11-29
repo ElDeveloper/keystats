@@ -102,7 +102,7 @@ NSString *YVBDataManagerErrored = @"YVBDataManagerErrored";
 			[dateFormat setDateFormat:@"yyyy-MM-dd"];
 			[db setDateFormat:dateFormat];
 
-			FMResultSet *result = [db executeQuery:@"SELECT DATE(timestamp), COUNT(*) FROM keystrokes GROUP BY date(timestamp) ORDER BY timestamp DESC;"];
+			FMResultSet *result = [db executeQuery:@"SELECT SUBSTR(timestamp, 0, 11), COUNT(*) FROM keystrokes WHERE timestamp BETWEEN strftime('%Y-%m-%d', 'now', '-30 day', 'localtime') AND strftime('%Y-%m-%d', 'now', '+1 day', 'localtime') GROUP BY CAST(JULIANDAY(timestamp) as int) ORDER BY timestamp ASC LIMIT 30;"];
 			while ([result next]) {
 				[x addObject:[result dateForColumnIndex:0]];
 				[y addObject:[NSNumber numberWithUnsignedLongLong:[result unsignedLongLongIntForColumnIndex:1]]];
