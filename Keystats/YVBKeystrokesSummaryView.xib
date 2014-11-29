@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="YVBKeystrokesSummaryViewController">
             <connections>
+                <outlet property="dailyKeystrokesLabel" destination="xBA-KZ-bLy" id="5X5-IC-Ojm"/>
                 <outlet property="dailyKeystrokesView" destination="mjP-zq-qSZ" id="Pj8-lx-mdH"/>
                 <outlet property="earliestDateLabel" destination="bhf-uK-YRR" id="W2f-Eb-PjF"/>
                 <outlet property="lastSevenDaysCountLabel" destination="i7Y-Ih-gEs" id="FEJ-Hb-MLz"/>
@@ -94,6 +95,16 @@
                             </textField>
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mjP-zq-qSZ" customClass="CPTGraphHostingView">
                                 <rect key="frame" x="18" y="8" width="434" height="179"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xBA-KZ-bLy">
+                                        <rect key="frame" x="18" y="75" width="398" height="29"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Loading Keystrokes Per Day" id="lwh-G6-bSb">
+                                            <font key="font" metaFont="system" size="18"/>
+                                            <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
                             </customView>
                         </subviews>
                     </view>

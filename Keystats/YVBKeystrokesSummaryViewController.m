@@ -16,6 +16,7 @@
 @synthesize lastThirtyDaysCountLabel = _lastThirtyDaysCountLabel;
 @synthesize earliestDateLabel = _earliestDateLabel;
 @synthesize dailyKeystrokesView = _dailyKeystrokesView;
+@synthesize dailyKeystrokesLabel = _dailyKeystrokesLabel;
 
 -(id)init{
 	if (self = [super initWithNibName:@"YVBKeystrokesSummaryView"
@@ -41,7 +42,13 @@
 	__datesData = [[data objectAtIndex:0] copy];
 	__keystrokesData = [[data objectAtIndex:1]  copy];
 
-	[self _updatePlot];
+	if ([__datesData count] > 5) {
+		[_dailyKeystrokesLabel setStringValue:@""];
+		[self _updatePlot];
+	}
+	else{
+		[_dailyKeystrokesLabel setStringValue:@"Not Enough Data To Display Plot"];
+	}
 }
 
 -(void)_updatePlot{

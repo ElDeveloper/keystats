@@ -16,6 +16,7 @@
 	IBOutlet NSTextField * __weak lastThirtyDaysCountLabel;
 	IBOutlet NSTextField * __weak earliestDateLabel;
 	IBOutlet CPTGraphHostingView * __weak dailyKeystrokesView;
+	IBOutlet NSTextField * __weak dailyKeystrokesLabel;
 
 	@private
 	NSArray *__datesData;
@@ -29,6 +30,7 @@
 @property (nonatomic, weak) IBOutlet NSTextField * lastThirtyDaysCountLabel;
 @property (nonatomic, weak) IBOutlet NSTextField * earliestDateLabel;
 @property (nonatomic, weak) IBOutlet CPTGraphHostingView * dailyKeystrokesView;
+@property (nonatomic, weak) IBOutlet NSTextField * dailyKeystrokesLabel;
 
 -(id)init;
 -(void)updateWithTotalValue:(NSString *)total todayValue:(NSString *)today
