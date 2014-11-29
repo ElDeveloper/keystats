@@ -87,7 +87,7 @@
 
 	[[__graph plotAreaFrame] setPaddingLeft:45];
 	[[__graph plotAreaFrame] setPaddingTop:15];
-	[[__graph plotAreaFrame] setPaddingRight:15];
+	[[__graph plotAreaFrame] setPaddingRight:20];
 	[[__graph plotAreaFrame] setPaddingBottom:20];
 
 	[__graph setTitle:@"Keystrokes Per Day"];
@@ -103,23 +103,30 @@
 	plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(totalDateRange)];
 	plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(maxKeystrokes)];
 
-	CPTMutableLineStyle* gridLineStyle = [[CPTMutableLineStyle alloc] init];
-	[gridLineStyle setLineWidth:1];
-	[gridLineStyle setLineColor:[CPTColor lightGrayColor]];
+	CPTMutableLineStyle *minorGridLineStyle = [[CPTMutableLineStyle alloc] init];
+	[minorGridLineStyle setLineWidth:0.5];
+	[minorGridLineStyle setLineColor:[CPTColor lightGrayColor]];
+
+	CPTMutableLineStyle *majorGridLineStyle = [[CPTMutableLineStyle alloc] init];
+	[majorGridLineStyle setLineWidth:1.5];
+	[majorGridLineStyle setLineColor:[CPTColor lightGrayColor]];
 
 	// the x axis has dates
 	NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
-	[dateFormatter setDateFormat:@"MM/dd/yyyy"];
+	[dateFormatter setDateFormat:@"MMM dd"];
 
 	CPTXYAxisSet *axisSet = (CPTXYAxisSet *)__graph.axisSet;
 	CPTXYAxis *x = [axisSet xAxis];
-	[x setMajorGridLineStyle:gridLineStyle];
+	[x setMajorGridLineStyle:majorGridLineStyle];
+	[x setMajorTickLineStyle:majorGridLineStyle];
+	[x setMinorTickLineStyle:minorGridLineStyle];
 	[x setMajorIntervalLength:CPTDecimalFromFloat(totalDateRange/4)];
 	[x setOrthogonalCoordinateDecimal:CPTDecimalFromDouble(0)];
 	CPTTimeFormatter *timeFormatter = [[CPTTimeFormatter alloc] initWithDateFormatter:dateFormatter];
 	[timeFormatter setReferenceDate:refDate];
 	[x setLabelFormatter:timeFormatter];
 	[x setLabelTextStyle:textStyle];
+	[x setLabelAlignment:CPTAlignmentMiddle];
 
 	// the y axis has keystrokes per day
 	NSNumberFormatter *keystrokesFormatter = [[NSNumberFormatter alloc] init];
@@ -127,7 +134,9 @@
 	[keystrokesFormatter setUsesGroupingSeparator:YES];
 
 	CPTXYAxis *y = [axisSet yAxis];
-	[y setMajorGridLineStyle:gridLineStyle];
+	[y setMajorGridLineStyle:majorGridLineStyle];
+	[y setMajorTickLineStyle:majorGridLineStyle];
+	[y setMinorTickLineStyle:minorGridLineStyle];
 	// the padding added when maxKeystrokes created is used by this value which
 	// is rounded down so we can guarantee that all the lines will fit
 	[y setMajorIntervalLength:CPTDecimalFromDouble(floor(maxKeystrokes/6))];
