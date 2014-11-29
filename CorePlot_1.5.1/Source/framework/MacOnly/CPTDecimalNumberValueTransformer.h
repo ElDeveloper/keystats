@@ -1,0 +1,4 @@
+@interface CPTDecimalNumberValueTransformer : NSValueTransformer {
+}
+
+@end
