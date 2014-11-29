@@ -19,7 +19,6 @@
 		5003AF0B1A212AF900361A19 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315318164C3500BE4841 /* FMDatabaseQueue.m */; };
 		5003AF0C1A212AF900361A19 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315518164C3500BE4841 /* FMResultSet.m */; };
 		501FF8F51A27A3960013493A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501FF8F41A27A3960013493A /* QuartzCore.framework */; };
-		501FF9031A27A6B70013493A /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501FF8FE1A27A66A0013493A /* CorePlot.framework */; };
 		501FF91F1A2903090013493A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501FF8F41A27A3960013493A /* QuartzCore.framework */; };
 		501FF9221A29030D0013493A /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501FF8FE1A27A66A0013493A /* CorePlot.framework */; };
 		5039F2F81870D65200D73FBB /* YVBKeystrokesDataManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5039F2F71870D65200D73FBB /* YVBKeystrokesDataManagerTests.m */; };
@@ -42,6 +41,8 @@
 		504A316218164C9700BE4841 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A316118164C9700BE4841 /* Carbon.framework */; };
 		504A316418164C9F00BE4841 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A316318164C9F00BE4841 /* libsqlite3.dylib */; };
 		505E323D181D530000FD6CDF /* YVBKeyLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E323C181D530000FD6CDF /* YVBKeyLogger.m */; };
+		506022601A2A5DED0006C9F9 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501FF8FE1A27A66A0013493A /* CorePlot.framework */; };
+		506022621A2A5EB60006C9F9 /* CorePlot.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 501FF8FE1A27A66A0013493A /* CorePlot.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		50937AAC18223755000F1685 /* YVBKeystrokesDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50937AAB18223755000F1685 /* YVBKeystrokesDataManager.m */; };
 		50A5F180186EA7C600C9A994 /* YVBDailyExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A5F17F186EA7C600C9A994 /* YVBDailyExecutor.m */; };
 		50E73464186F76F80031095F /* Keystats.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 50E73463186F76F80031095F /* Keystats.iconset */; };
@@ -79,6 +80,19 @@
 			remoteInfo = Keystats;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		506022611A2A5EA40006C9F9 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				506022621A2A5EB60006C9F9 /* CorePlot.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		501FF8F41A27A3960013493A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -132,7 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				501FF9031A27A6B70013493A /* CorePlot.framework in Frameworks */,
+				506022601A2A5DED0006C9F9 /* CorePlot.framework in Frameworks */,
 				501FF8F51A27A3960013493A /* QuartzCore.framework in Frameworks */,
 				504A316418164C9F00BE4841 /* libsqlite3.dylib in Frameworks */,
 				504A316218164C9700BE4841 /* Carbon.framework in Frameworks */,
@@ -304,6 +318,7 @@
 				504A311118164C0400BE4841 /* Frameworks */,
 				504A311218164C0400BE4841 /* Resources */,
 				5039F2FB1871126A00D73FBB /* ShellScript */,
+				506022611A2A5EA40006C9F9 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -595,6 +610,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Keystats-dkavtkgpljrrjzftadevfnmjgbtj/Build/Products/Release",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Keystats/Keystats-Prefix.pch";
@@ -613,6 +629,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Keystats-dkavtkgpljrrjzftadevfnmjgbtj/Build/Products/Release",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Keystats/Keystats-Prefix.pch";
