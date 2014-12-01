@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 
 #import "YVBKeyLogger.h"
-#import "FMDatabase.h"
+#import "FMDB.h"
 #import "YVBKeystrokesDataManager.h"
 #import "YVBDailyExecutor.h"
 #import "YVBKeystrokesSummaryViewController.h"
@@ -204,6 +204,20 @@
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{
     return YES;
+}
+
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender{
+#if DEBUG
+	NSLog(@"Application is terminating, closing the datamanager now");
+#endif
+	/*
+		FIXME: It's fine for now but if the datamanager received a call to
+		execute a statement, it would error out because the database would
+		be closed. However this should not happen as the return value is
+		NSTerminateNow.
+	 */
+	[[dataManager queue] close];
+	return NSTerminateNow;
 }
 
 
