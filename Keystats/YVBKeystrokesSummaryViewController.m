@@ -137,7 +137,7 @@
 	[y setMajorGridLineStyle:majorGridLineStyle];
 	[y setMajorTickLineStyle:majorGridLineStyle];
 	[y setMinorTickLineStyle:minorGridLineStyle];
-	// the padding added when maxKeystrokes created is used by this value which
+	// the padding added when maxKeystrokes is created is used by this value which
 	// is rounded down so we can guarantee that all the lines will fit
 	[y setMajorIntervalLength:CPTDecimalFromDouble(floor(maxKeystrokes/6))];
 	[y setOrthogonalCoordinateDecimal:CPTDecimalFromFloat(0.0f)];
@@ -188,7 +188,6 @@
 			dataPoint = [NSNumber numberWithDouble:[end timeIntervalSinceDate:start]];
 			break;
 		case CPTScatterPlotFieldY:
-			// we could reverse the data or just do this
 			dataPoint = [__keystrokesData objectAtIndex:index];
 			break;
 		default:
