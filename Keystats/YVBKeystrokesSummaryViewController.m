@@ -121,6 +121,7 @@
 	[x setMajorTickLineStyle:majorGridLineStyle];
 	[x setMinorTickLineStyle:minorGridLineStyle];
 	[x setMajorIntervalLength:CPTDecimalFromFloat(totalDateRange/4)];
+	[x setMinorTicksPerInterval:6];
 	[x setOrthogonalCoordinateDecimal:CPTDecimalFromDouble(0)];
 	CPTTimeFormatter *timeFormatter = [[CPTTimeFormatter alloc] initWithDateFormatter:dateFormatter];
 	[timeFormatter setReferenceDate:refDate];
