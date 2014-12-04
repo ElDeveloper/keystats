@@ -20,8 +20,13 @@
 
 	@private
 	NSArray *__datesData;
-	NSArray *__keystrokesData;
+	NSMutableArray *__keystrokesData;
 	CPTXYGraph *__graph;
+	NSInteger __previous;
+	NSInteger __knownMax;
+	NSNumberFormatter *__formatter;
+	BOOL __canDrawPlot;
+
 }
 
 @property (nonatomic, weak) IBOutlet NSTextField * totalCountLabel;

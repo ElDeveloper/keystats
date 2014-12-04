@@ -22,7 +22,19 @@
 	if (self = [super initWithNibName:@"YVBKeystrokesSummaryView"
 							   bundle:[NSBundle bundleForClass:[self class]]]) {
 		// any other custom initializations should go here
+		__previous = 0;
+		__knownMax = 0;
 
+		__formatter = [[NSNumberFormatter alloc] init];
+		[__formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+		[__formatter setGroupingSize:3];
+		[__formatter setHasThousandSeparators:YES];
+		[__formatter setThousandSeparator:@","];
+
+		__datesData = nil;
+		__keystrokesData = nil;
+
+		__canDrawPlot = NO;
 	}
 	return self;
 }
@@ -30,21 +42,51 @@
 -(void)updateWithTotalValue:(NSString *)total todayValue:(NSString *)today
 		 lastSevenDaysValue:(NSString *)lastSevenDaysValue
 	 andLastThirtyDaysValue:(NSString *)lastThirtyDaysValue{
+	NSNumber *todayNumber = [__formatter numberFromString:today];
+	NSInteger current = [todayNumber integerValue];
+
+	// we pretend the latest point is up to date by retrieving the current
+	// value of the todayCountLabel
+	[__keystrokesData replaceObjectAtIndex:[__keystrokesData count]-1
+								withObject:todayNumber];
 
 	// update the values of the labels
 	[_totalCountLabel setStringValue:total];
 	[_todayCountLable setStringValue:today];
 	[_lastSevenDaysCountLabel setStringValue:lastSevenDaysValue];
 	[_lastThirtyDaysCountLabel setStringValue:lastThirtyDaysValue];
+
+	// check whether or not we need to update the plot
+	if (__canDrawPlot) {
+		if (current > __knownMax) {
+			[self _updatePlot];
+			__previous = current;
+		}
+		// guarantee that we are updating at least every 30 keystrokes
+		if (current-__previous > (__knownMax*0.01 > 30 ? __knownMax*0.01 : 30) ) {
+			[__graph reloadData];
+			__previous = current;
+		}
+	}
 }
 
 -(void)updateDailyKeystrokesPlot:(NSArray *)data{
 	__datesData = [[data objectAtIndex:0] copy];
-	__keystrokesData = [[data objectAtIndex:1]  copy];
+	__keystrokesData = [NSMutableArray arrayWithArray:[[data objectAtIndex:1] copy]];
 
-	if ([__datesData count] > 5) {
+	// convenience variable to check in other places whether
+	// or not we are drawing the keystrokes per day plot
+	__canDrawPlot = [__datesData count] > 5;
+
+	if (__canDrawPlot) {
 		[_dailyKeystrokesLabel setStringValue:@""];
 		[self _updatePlot];
+
+		// reload the data every 20 minutes
+		[NSTimer timerWithTimeInterval:1200 target:__graph
+							  selector:@selector(reloadData)
+							  userInfo:nil
+							   repeats:YES];
 	}
 	else{
 		[_dailyKeystrokesLabel setStringValue:@"Not Enough Data To Display Plot"];
@@ -59,6 +101,9 @@
 
 	// we use ceil here to create a number with a small "padding"
 	maxKeystrokes = ceil(maxKeystrokes + (0.11*maxKeystrokes));
+
+	// __knownMax sets when we have to reload the full plot
+	__knownMax = maxKeystrokes;
 
 	CPTColor *dataColor = [CPTColor colorWithComponentRed:CPTFloat(93.0f/255.0f)
 													green:CPTFloat(130.0f/255.0f)
@@ -100,8 +145,12 @@
 
 	// Setup scatter plot space
 	CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)__graph.defaultPlotSpace;
-	plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(totalDateRange)];
-	plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(maxKeystrokes)];
+
+	CPTMutablePlotRange *xPlotRange = [CPTMutablePlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(totalDateRange)];
+	[xPlotRange expandRangeByFactor:CPTDecimalFromDouble(1.02)];
+
+	[plotSpace setXRange:xPlotRange];
+	[plotSpace setYRange:[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(maxKeystrokes)]];
 
 	CPTMutableLineStyle *minorGridLineStyle = [[CPTMutableLineStyle alloc] init];
 	[minorGridLineStyle setLineWidth:0.5];
