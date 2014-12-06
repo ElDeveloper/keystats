@@ -1,3 +1,0 @@
-@interface PiNumberFormatter : NSNumberFormatter
-
-@end

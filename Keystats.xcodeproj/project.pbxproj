@@ -20,7 +20,6 @@
 		5003AF0C1A212AF900361A19 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315518164C3500BE4841 /* FMResultSet.m */; };
 		501FF8F51A27A3960013493A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501FF8F41A27A3960013493A /* QuartzCore.framework */; };
 		501FF91F1A2903090013493A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501FF8F41A27A3960013493A /* QuartzCore.framework */; };
-		501FF9221A29030D0013493A /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501FF8FE1A27A66A0013493A /* CorePlot.framework */; };
 		5039F2F81870D65200D73FBB /* YVBKeystrokesDataManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5039F2F71870D65200D73FBB /* YVBKeystrokesDataManagerTests.m */; };
 		504A311818164C0400BE4841 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A311718164C0400BE4841 /* Cocoa.framework */; };
 		504A312218164C0400BE4841 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 504A312018164C0400BE4841 /* InfoPlist.strings */; };
@@ -41,9 +40,10 @@
 		504A316218164C9700BE4841 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A316118164C9700BE4841 /* Carbon.framework */; };
 		504A316418164C9F00BE4841 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A316318164C9F00BE4841 /* libsqlite3.dylib */; };
 		505E323D181D530000FD6CDF /* YVBKeyLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E323C181D530000FD6CDF /* YVBKeyLogger.m */; };
-		506022601A2A5DED0006C9F9 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501FF8FE1A27A66A0013493A /* CorePlot.framework */; };
-		506022621A2A5EB60006C9F9 /* CorePlot.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 501FF8FE1A27A66A0013493A /* CorePlot.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		50937AAC18223755000F1685 /* YVBKeystrokesDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50937AAB18223755000F1685 /* YVBKeystrokesDataManager.m */; };
+		509B2CED1A32DF100054AFF9 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509B2CEC1A32DF100054AFF9 /* CorePlot.framework */; };
+		509B2CEE1A32DF100054AFF9 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509B2CEC1A32DF100054AFF9 /* CorePlot.framework */; };
+		509B2CEF1A32DFE40054AFF9 /* CorePlot.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 509B2CEC1A32DF100054AFF9 /* CorePlot.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		50A5F180186EA7C600C9A994 /* YVBDailyExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A5F17F186EA7C600C9A994 /* YVBDailyExecutor.m */; };
 		50E73464186F76F80031095F /* Keystats.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 50E73463186F76F80031095F /* Keystats.iconset */; };
 		50E9A0C8187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9A0C7187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m */; };
@@ -51,27 +51,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		501FF8FD1A27A66A0013493A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 501FF8F71A27A66A0013493A /* CorePlot.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
-			remoteInfo = CorePlot;
-		};
-		501FF8FF1A27A66A0013493A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 501FF8F71A27A66A0013493A /* CorePlot.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0730F600109492D800E95162;
-			remoteInfo = UnitTests;
-		};
-		501FF9011A27A68F0013493A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 501FF8F71A27A66A0013493A /* CorePlot.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
-			remoteInfo = CorePlot;
-		};
 		504A313918164C0400BE4841 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 504A310C18164C0400BE4841 /* Project object */;
@@ -88,7 +67,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				506022621A2A5EB60006C9F9 /* CorePlot.framework in CopyFiles */,
+				509B2CEF1A32DFE40054AFF9 /* CorePlot.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,7 +75,6 @@
 
 /* Begin PBXFileReference section */
 		501FF8F41A27A3960013493A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		501FF8F71A27A66A0013493A /* CorePlot.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CorePlot.xcodeproj; path = CorePlot_1.5.1/Source/framework/CorePlot.xcodeproj; sourceTree = "<group>"; };
 		5039F2F71870D65200D73FBB /* YVBKeystrokesDataManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBKeystrokesDataManagerTests.m; sourceTree = "<group>"; };
 		504A311418164C0400BE4841 /* Keystats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keystats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		504A311718164C0400BE4841 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -134,6 +112,7 @@
 		505E323C181D530000FD6CDF /* YVBKeyLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBKeyLogger.m; sourceTree = "<group>"; };
 		50937AAA18223755000F1685 /* YVBKeystrokesDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVBKeystrokesDataManager.h; sourceTree = "<group>"; };
 		50937AAB18223755000F1685 /* YVBKeystrokesDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBKeystrokesDataManager.m; sourceTree = "<group>"; };
+		509B2CEC1A32DF100054AFF9 /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = "<group>"; };
 		50A5F17E186EA7C600C9A994 /* YVBDailyExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVBDailyExecutor.h; sourceTree = "<group>"; };
 		50A5F17F186EA7C600C9A994 /* YVBDailyExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBDailyExecutor.m; sourceTree = "<group>"; };
 		50E73463186F76F80031095F /* Keystats.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = Keystats.iconset; sourceTree = "<group>"; };
@@ -147,10 +126,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				506022601A2A5DED0006C9F9 /* CorePlot.framework in Frameworks */,
 				501FF8F51A27A3960013493A /* QuartzCore.framework in Frameworks */,
 				504A316418164C9F00BE4841 /* libsqlite3.dylib in Frameworks */,
 				504A316218164C9700BE4841 /* Carbon.framework in Frameworks */,
+				509B2CED1A32DF100054AFF9 /* CorePlot.framework in Frameworks */,
 				504A311818164C0400BE4841 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -159,9 +138,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				501FF9221A29030D0013493A /* CorePlot.framework in Frameworks */,
 				501FF91F1A2903090013493A /* QuartzCore.framework in Frameworks */,
 				5003AF021A212ADE00361A19 /* libsqlite3.dylib in Frameworks */,
+				509B2CEE1A32DF100054AFF9 /* CorePlot.framework in Frameworks */,
 				504A313818164C0400BE4841 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -169,19 +148,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		501FF8F81A27A66A0013493A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				501FF8FE1A27A66A0013493A /* CorePlot.framework */,
-				501FF9001A27A66A0013493A /* UnitTests.octest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		504A310B18164C0400BE4841 = {
 			isa = PBXGroup;
 			children = (
-				501FF8F71A27A66A0013493A /* CorePlot.xcodeproj */,
 				504A315B18164C6100BE4841 /* KeyLogger */,
 				504A311D18164C0400BE4841 /* Keystats */,
 				504A314B18164C3500BE4841 /* FMDB */,
@@ -203,6 +172,7 @@
 		504A311618164C0400BE4841 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				509B2CEA1A32DF100054AFF9 /* Vendor */,
 				501FF8F41A27A3960013493A /* QuartzCore.framework */,
 				504A316318164C9F00BE4841 /* libsqlite3.dylib */,
 				504A316118164C9700BE4841 /* Carbon.framework */,
@@ -301,6 +271,22 @@
 			path = KeyLogger;
 			sourceTree = "<group>";
 		};
+		509B2CEA1A32DF100054AFF9 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				509B2CEB1A32DF100054AFF9 /* CorePlot */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		509B2CEB1A32DF100054AFF9 /* CorePlot */ = {
+			isa = PBXGroup;
+			children = (
+				509B2CEC1A32DF100054AFF9 /* CorePlot.framework */,
+			);
+			path = CorePlot;
+			sourceTree = "<group>";
+		};
 		50D46E05186D5B820049F333 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
@@ -325,7 +311,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				501FF9021A27A68F0013493A /* PBXTargetDependency */,
 			);
 			name = Keystats;
 			productName = Keystats;
@@ -375,12 +360,6 @@
 			mainGroup = 504A310B18164C0400BE4841;
 			productRefGroup = 504A311518164C0400BE4841 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 501FF8F81A27A66A0013493A /* Products */;
-					ProjectRef = 501FF8F71A27A66A0013493A /* CorePlot.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				504A311318164C0400BE4841 /* Keystats */,
@@ -388,23 +367,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		501FF8FE1A27A66A0013493A /* CorePlot.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CorePlot.framework;
-			remoteRef = 501FF8FD1A27A66A0013493A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		501FF9001A27A66A0013493A /* UnitTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = UnitTests.octest;
-			remoteRef = 501FF8FF1A27A66A0013493A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		504A311218164C0400BE4841 /* Resources */ = {
@@ -488,11 +450,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		501FF9021A27A68F0013493A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = CorePlot;
-			targetProxy = 501FF9011A27A68F0013493A /* PBXContainerItemProxy */;
-		};
 		504A313A18164C0400BE4841 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 504A311318164C0400BE4841 /* Keystats */;
@@ -613,6 +570,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Keystats-dkavtkgpljrrjzftadevfnmjgbtj/Build/Products/Release",
+					"$(PROJECT_DIR)/Vendor/CorePlot",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Keystats/Keystats-Prefix.pch";
@@ -632,6 +590,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Keystats-dkavtkgpljrrjzftadevfnmjgbtj/Build/Products/Release",
+					"$(PROJECT_DIR)/Vendor/CorePlot",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Keystats/Keystats-Prefix.pch";
@@ -650,6 +609,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/CorePlot",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Keystats/Keystats-Prefix.pch";
@@ -672,6 +632,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/CorePlot",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Keystats/Keystats-Prefix.pch";
