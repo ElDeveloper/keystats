@@ -63,7 +63,7 @@
 			__previous = current;
 		}
 		// guarantee that we are updating at least every 30 keystrokes
-		if (current-__previous > (__knownMax*0.01 > 30 ? __knownMax*0.01 : 30) ) {
+		if (current-__previous > (__knownMax*0.033 > 30 ? __knownMax*0.033 : 30) ) {
 			[__graph reloadData];
 			__previous = current;
 		}
