@@ -156,9 +156,8 @@
 	// Setup scatter plot space
 	CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)__graph.defaultPlotSpace;
 
-	CPTMutablePlotRange *xPlotRange = [CPTMutablePlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(totalDateRange)];
-	[xPlotRange expandRangeByFactor:CPTDecimalFromDouble(1.05f)];
-	[xPlotRange setLocation:CPTDecimalFromDouble(0)];
+	float padding = totalDateRange/[__datesData count];
+	CPTMutablePlotRange *xPlotRange = [CPTMutablePlotRange plotRangeWithLocation:CPTDecimalFromDouble(-padding*0.6) length:CPTDecimalFromDouble(totalDateRange+(1.2*padding))];
 
 	[plotSpace setXRange:xPlotRange];
 	[plotSpace setYRange:[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(maxKeystrokes)]];
@@ -201,7 +200,7 @@
 	// the padding added when maxKeystrokes is created is used by this value which
 	// is rounded down so we can guarantee that all the lines will fit
 	[y setMajorIntervalLength:CPTDecimalFromDouble(floor(maxKeystrokes/6))];
-	[y setOrthogonalCoordinateDecimal:CPTDecimalFromFloat(0.0f)];
+	[y setOrthogonalCoordinateDecimal:CPTDecimalFromFloat(-padding*0.6)];
 	[y setLabelFormatter:keystrokesFormatter];
 	[y setLabelTextStyle:textStyle];
 	[y setLabelOffset:-2];
@@ -222,9 +221,7 @@
 	CPTBarPlot *barPlot = [CPTBarPlot tubularBarPlotWithColor:fillingColor horizontalBars:NO];
 	[barPlot setIdentifier:@"Keystrokes Plot"];
 	[barPlot setDelegate:self];
-	[barPlot setBarWidthsAreInViewCoordinates:YES];
-	[barPlot setBarWidth:CPTDecimalFromCGFloat(10.0f)];
-	[barPlot setBarOffset:CPTDecimalFromCGFloat(5.0f)];
+	[barPlot setBarWidth:CPTDecimalFromCGFloat(padding*0.8)];
 	[barPlot setFill:[CPTFill fillWithColor:fillingColor]];
 	[barPlot setBarCornerRadius:0];
 
