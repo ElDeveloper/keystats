@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import <CorePlot/CorePlot.h>
 
-@interface YVBKeystrokesSummaryViewController : NSViewController<CPTPlotDataSource, CPTScatterPlotDelegate>{
+@interface YVBKeystrokesSummaryViewController : NSViewController<CPTPlotDataSource, CPTBarPlotDelegate>{
 	IBOutlet NSTextField * __weak totalCountLabel;
 	IBOutlet NSTextField * __weak todayCountLabel;
 	IBOutlet NSTextField * __weak lastSevenDaysCountLabel;

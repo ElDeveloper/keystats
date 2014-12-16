@@ -157,7 +157,8 @@
 	CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)__graph.defaultPlotSpace;
 
 	CPTMutablePlotRange *xPlotRange = [CPTMutablePlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(totalDateRange)];
-	[xPlotRange expandRangeByFactor:CPTDecimalFromDouble(1.02)];
+	[xPlotRange expandRangeByFactor:CPTDecimalFromDouble(1.05f)];
+	[xPlotRange setLocation:CPTDecimalFromDouble(0)];
 
 	[plotSpace setXRange:xPlotRange];
 	[plotSpace setYRange:[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(maxKeystrokes)]];
@@ -213,21 +214,24 @@
 	[symbol setFill:[CPTFill fillWithColor:dataColor]];
 	[symbol setLineStyle:symbolLineStyle];
 
-	// set the datasource
-	CPTScatterPlot *dataSourceLinePlot = [[CPTScatterPlot alloc] init];
-	[dataSourceLinePlot setIdentifier:@"Keystrokes Plot"];
-	[dataSourceLinePlot setPlotSymbol:symbol];
-	[dataSourceLinePlot setAreaFill:[CPTFill fillWithColor:fillingColor]];
-	[dataSourceLinePlot setAreaBaseValue:CPTDecimalFromInt(0)];
-	[dataSourceLinePlot setDelegate:self];
-	[dataSourceLinePlot	setPlotSymbolMarginForHitDetection:5];
-
-	CPTMutableLineStyle *lineStyle = [[dataSourceLinePlot dataLineStyle] mutableCopy];
+	CPTMutableLineStyle *lineStyle = [CPTMutableLineStyle lineStyle];
 	[lineStyle setLineWidth:1.5];
 	[lineStyle setLineColor:dataColor];
-	[dataSourceLinePlot setDataLineStyle:lineStyle];
-	[dataSourceLinePlot setDataSource:self];
-	[__graph addPlot:dataSourceLinePlot];
+
+	// set the datasource
+	CPTBarPlot *barPlot = [CPTBarPlot tubularBarPlotWithColor:fillingColor horizontalBars:NO];
+	[barPlot setIdentifier:@"Keystrokes Plot"];
+	[barPlot setDelegate:self];
+	[barPlot setBarWidthsAreInViewCoordinates:YES];
+	[barPlot setBarWidth:CPTDecimalFromCGFloat(10.0f)];
+	[barPlot setBarOffset:CPTDecimalFromCGFloat(5.0f)];
+	[barPlot setFill:[CPTFill fillWithColor:fillingColor]];
+	[barPlot setBarCornerRadius:0];
+
+	[barPlot setLineStyle:symbolLineStyle];
+	[barPlot setDataSource:self];
+
+	[__graph addPlot:barPlot];
 }
 
 #pragma mark -
@@ -258,8 +262,8 @@
 	return dataPoint;
 }
 
-#pragma mark - CPTScatterPlotDelegate
--(void)scatterPlot:(CPTScatterPlot *)plot plotSymbolWasSelectedAtRecordIndex:(NSUInteger)index{
+#pragma mark - CPTBarPlotDelegate
+-(void)barPlot:(CPTBarPlot *)plot barTouchDownAtRecordIndex:(NSUInteger)idx{
 
 	// let's make sure this doesn't happen, otherwise it would error out
 	if (__keystrokesData == nil || __datesData == nil) {
@@ -280,11 +284,11 @@
 	[keystrokesFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
 	[keystrokesFormatter setUsesGroupingSeparator:YES];
 
-	NSString *annotationText = [NSString stringWithFormat:@"%@ - %@", [dateFormatter stringFromDate:[__datesData objectAtIndex:index] ] ,
-																	   [keystrokesFormatter stringFromNumber:[__keystrokesData objectAtIndex:index]]];
+	NSString *annotationText = [NSString stringWithFormat:@"%@ - %@", [dateFormatter stringFromDate:[__datesData objectAtIndex:idx] ] ,
+																	   [keystrokesFormatter stringFromNumber:[__keystrokesData objectAtIndex:idx]]];
 
 	[__graph setTitle:annotationText];
-	[__graph performSelector:@selector(setTitle:) withObject:@"Keystrokes Per Day" afterDelay:1.5];
+	[__graph performSelector:@selector(setTitle:) withObject:@"Keystrokes Per Day" afterDelay:2.0];
 
 }
 
