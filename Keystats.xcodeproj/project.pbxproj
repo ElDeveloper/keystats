@@ -26,7 +26,6 @@
 		504A312418164C0400BE4841 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A312318164C0400BE4841 /* main.m */; };
 		504A312818164C0400BE4841 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 504A312618164C0400BE4841 /* Credits.rtf */; };
 		504A312B18164C0400BE4841 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A312A18164C0400BE4841 /* AppDelegate.m */; };
-		504A312E18164C0400BE4841 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 504A312C18164C0400BE4841 /* MainMenu.xib */; };
 		504A313018164C0400BE4841 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504A312F18164C0400BE4841 /* Images.xcassets */; };
 		504A313818164C0400BE4841 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A311718164C0400BE4841 /* Cocoa.framework */; };
 		504A314018164C0400BE4841 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 504A313E18164C0400BE4841 /* InfoPlist.strings */; };
@@ -44,6 +43,7 @@
 		509B2CED1A32DF100054AFF9 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509B2CEC1A32DF100054AFF9 /* CorePlot.framework */; };
 		509B2CEE1A32DF100054AFF9 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509B2CEC1A32DF100054AFF9 /* CorePlot.framework */; };
 		509B2CEF1A32DFE40054AFF9 /* CorePlot.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 509B2CEC1A32DF100054AFF9 /* CorePlot.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		509B87721A33114D00CEE098 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 504A312C18164C0400BE4841 /* MainMenu.xib */; };
 		50A5F180186EA7C600C9A994 /* YVBDailyExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A5F17F186EA7C600C9A994 /* YVBDailyExecutor.m */; };
 		50E73464186F76F80031095F /* Keystats.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 50E73463186F76F80031095F /* Keystats.iconset */; };
 		50E9A0C8187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9A0C7187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m */; };
@@ -373,12 +373,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				509B87721A33114D00CEE098 /* MainMenu.xib in Resources */,
 				504A316018164C7200BE4841 /* keystrokes in Resources */,
 				50E73464186F76F80031095F /* Keystats.iconset in Resources */,
 				504A312218164C0400BE4841 /* InfoPlist.strings in Resources */,
 				504A313018164C0400BE4841 /* Images.xcassets in Resources */,
 				504A312818164C0400BE4841 /* Credits.rtf in Resources */,
-				504A312E18164C0400BE4841 /* MainMenu.xib in Resources */,
 				50E9A0CA187D25F70085ECBB /* YVBKeystrokesSummaryView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

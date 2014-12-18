@@ -35,6 +35,14 @@
 		__keystrokesData = nil;
 
 		__canDrawPlot = NO;
+
+		// we will reload the data every 20 minutes if this gets
+		// fired, meaning if there's enough data to be plotted
+		__plotTimer = [NSTimer timerWithTimeInterval:1200
+											  target:__graph
+											selector:@selector(reloadData)
+											userInfo:nil
+											 repeats:YES];
 	}
 	return self;
 }
@@ -73,20 +81,22 @@
 -(void)updateDailyKeystrokesPlot:(NSArray *)data{
 	__datesData = [[data objectAtIndex:0] copy];
 	__keystrokesData = [NSMutableArray arrayWithArray:[[data objectAtIndex:1] copy]];
+	
+	// every time we are asked to update the values let's force a hard restart
+	__previous = 0;
 
 	// convenience variable to check in other places whether
 	// or not we are drawing the keystrokes per day plot
 	__canDrawPlot = [__datesData count] > 5;
 
 	if (__canDrawPlot) {
+		// remove the "loading" label
 		[_dailyKeystrokesLabel setStringValue:@""];
 		[self _updatePlot];
 
-		// reload the data every 20 minutes
-		[NSTimer timerWithTimeInterval:1200 target:__graph
-							  selector:@selector(reloadData)
-							  userInfo:nil
-							   repeats:YES];
+		if (![__plotTimer isValid]){
+			[__plotTimer fire];
+		}
 	}
 	else{
 		[_dailyKeystrokesLabel setStringValue:@"Not Enough Data To Display Plot"];

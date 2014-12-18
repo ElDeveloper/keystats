@@ -26,6 +26,7 @@
 	NSInteger __knownMax;
 	NSNumberFormatter *__formatter;
 	BOOL __canDrawPlot;
+	NSTimer *__plotTimer;
 
 }
 
