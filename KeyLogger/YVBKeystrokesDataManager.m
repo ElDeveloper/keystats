@@ -7,8 +7,7 @@
 //
 
 #import "YVBKeystrokesDataManager.h"
-#import "FMDatabase.h"
-#import "FMDatabaseQueue.h"
+#import "FMDB.h"
 
 @implementation YVBKeystrokesDataManager
 @synthesize queue = _queue;
@@ -89,6 +88,29 @@ NSString *YVBDataManagerErrored = @"YVBDataManagerErrored";
 			handler(value);
 		}];
 	});
+}
+
+-(void)getKeystrokesPerDay:(YVBResultSeries)handler{
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,
+											 (unsigned long)NULL), ^(void) {
+		[_queue inDatabase:^(FMDatabase *db) {
+			NSMutableArray *x=[[NSMutableArray alloc] init], *y=[[NSMutableArray alloc] init];
+
+			// otherwise we get epoch dates
+			NSDateFormatter * dateFormat = [[NSDateFormatter alloc] init];
+			[dateFormat setDateFormat:@"yyyy-MM-dd"];
+			[db setDateFormat:dateFormat];
+
+			FMResultSet *result = [db executeQuery:@"SELECT SUBSTR(timestamp, 0, 11), COUNT(*) FROM keystrokes WHERE timestamp BETWEEN strftime('%Y-%m-%d', 'now', '-28 day', 'localtime') AND strftime('%Y-%m-%d', 'now', '+1 day', 'localtime') GROUP BY SUBSTR(timestamp, 0, 11) ORDER BY timestamp ASC LIMIT 29;"];
+			while ([result next]) {
+				[x addObject:[result dateForColumnIndex:0]];
+				[y addObject:[NSNumber numberWithUnsignedLongLong:[result unsignedLongLongIntForColumnIndex:1]]];
+			}
+			[result close];
+			handler(x, y);
+		}];
+	});
+
 }
 
 -(void)addKeystrokeWithTimeStamp:(NSString *)timestamp string:(NSString *)stringValue keycode:(long long)keyCode eventType:(CGEventType)eventType andApplicationBundleIdentifier:(NSString *)bid{

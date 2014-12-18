@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6245"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="YVBKeystrokesSummaryViewController">
             <connections>
+                <outlet property="dailyKeystrokesLabel" destination="xBA-KZ-bLy" id="5X5-IC-Ojm"/>
+                <outlet property="dailyKeystrokesView" destination="mjP-zq-qSZ" id="Pj8-lx-mdH"/>
                 <outlet property="earliestDateLabel" destination="bhf-uK-YRR" id="W2f-Eb-PjF"/>
                 <outlet property="lastSevenDaysCountLabel" destination="i7Y-Ih-gEs" id="FEJ-Hb-MLz"/>
                 <outlet property="lastThirtyDaysCountLabel" destination="elQ-DR-QH8" id="qC2-Uh-R8K"/>
@@ -17,17 +20,17 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="1">
-            <rect key="frame" x="0.0" y="0.0" width="466" height="350"/>
+            <rect key="frame" x="0.0" y="0.0" width="466" height="373"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <box autoresizesSubviews="NO" fixedFrame="YES" title="Summary" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="mKi-9p-O1T">
-                    <rect key="frame" x="-3" y="1" width="472" height="349"/>
+                    <rect key="frame" x="-3" y="16" width="472" height="357"/>
                     <view key="contentView">
-                        <rect key="frame" x="1" y="1" width="470" height="333"/>
+                        <rect key="frame" x="1" y="1" width="470" height="341"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i7Y-Ih-gEs">
-                                <rect key="frame" x="175" y="226" width="279" height="29"/>
+                                <rect key="frame" x="175" y="234" width="279" height="29"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="NaN" id="TH6-Bq-M4Q">
                                     <font key="font" metaFont="system" size="24"/>
                                     <color key="textColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
@@ -35,7 +38,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="elQ-DR-QH8">
-                                <rect key="frame" x="175" y="187" width="279" height="29"/>
+                                <rect key="frame" x="175" y="195" width="279" height="29"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="NaN" id="TI0-V9-IpO">
                                     <font key="font" metaFont="system" size="24"/>
                                     <color key="textColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
@@ -43,7 +46,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g5L-2E-HuE">
-                                <rect key="frame" x="175" y="263" width="279" height="29"/>
+                                <rect key="frame" x="175" y="271" width="279" height="29"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="NaN" id="EeV-6w-8dW">
                                     <font key="font" metaFont="system" size="24"/>
                                     <color key="textColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
@@ -51,7 +54,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RBu-uI-nFm">
-                                <rect key="frame" x="175" y="300" width="279" height="29"/>
+                                <rect key="frame" x="175" y="308" width="279" height="29"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="NaN" id="CZa-g9-t6x">
                                     <font key="font" metaFont="system" size="24"/>
                                     <color key="textColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
@@ -59,7 +62,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ijm-EG-vPW">
-                                <rect key="frame" x="16" y="300" width="62" height="29"/>
+                                <rect key="frame" x="16" y="308" width="62" height="29"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Total" id="Kpc-s0-OhG">
                                     <font key="font" metaFont="system" size="24"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -67,7 +70,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="opK-Pm-j4M">
-                                <rect key="frame" x="16" y="263" width="73" height="29"/>
+                                <rect key="frame" x="16" y="271" width="73" height="29"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Today" id="Gwu-sv-G5H">
                                     <font key="font" metaFont="system" size="24"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -75,7 +78,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Snp-uA-Ch0">
-                                <rect key="frame" x="16" y="226" width="136" height="29"/>
+                                <rect key="frame" x="16" y="234" width="136" height="29"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Past 7 Days" id="yV2-xr-AlK">
                                     <font key="font" metaFont="system" size="24"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -83,28 +86,41 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bpb-1X-u6V">
-                                <rect key="frame" x="16" y="187" width="151" height="29"/>
+                                <rect key="frame" x="16" y="195" width="151" height="29"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Past 30 Days" id="A9T-kd-owS">
                                     <font key="font" metaFont="system" size="24"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bhf-uK-YRR">
-                                <rect key="frame" x="16" y="8" width="438" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Loading Data" id="bwU-It-DXV">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mjP-zq-qSZ" customClass="CPTGraphHostingView">
+                                <rect key="frame" x="18" y="8" width="434" height="179"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xBA-KZ-bLy">
+                                        <rect key="frame" x="18" y="75" width="398" height="29"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Loading Keystrokes Per Day" id="lwh-G6-bSb">
+                                            <font key="font" metaFont="system" size="18"/>
+                                            <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                            </customView>
                         </subviews>
                     </view>
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </box>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bhf-uK-YRR">
+                    <rect key="frame" x="14" y="3" width="438" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Loading Data" id="bwU-It-DXV">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
-            <point key="canvasLocation" x="408" y="268"/>
+            <point key="canvasLocation" x="408" y="279.5"/>
         </customView>
     </objects>
 </document>

@@ -24,31 +24,9 @@
 - (void)setUp{
     [super setUp];
     // Put setup code here; it will be run once, before the first test case.
-	NSError *error=nil;
-
-	// retrieve the filepath of the database that we are going to be using
-	NSURL *testDatabase = [[NSBundle bundleForClass:[self class]] URLForResource:@"test-keystrokes"
-																   withExtension:@""];
-	
 	temporaryDatabasePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"/test-keystrokes"];
 	writableDatabasePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"/test-keystrokes-writable"];
 	writableDatabasePathSpecial = [NSTemporaryDirectory() stringByAppendingPathComponent:@"/test-keystrokes-writable-special"];
-
-	[[NSFileManager defaultManager]	copyItemAtPath:[testDatabase path]
-											toPath:temporaryDatabasePath
-											 error:&error];
-	XCTAssertNil(error, @"Cannot copy readable database ... cannot continue");
-	error = nil;
-
-	[[NSFileManager defaultManager]	copyItemAtPath:[testDatabase path]
-											toPath:writableDatabasePath
-											 error:&error];
-	XCTAssertNil(error, @"Cannot copy writable database ... cannot continue");
-
-	[[NSFileManager defaultManager]	copyItemAtPath:[testDatabase path]
-											toPath:writableDatabasePathSpecial
-											 error:&error];
-	XCTAssertNil(error, @"Cannot copy special writable database ... cannot continue");
 
 	FMDatabase *database = [FMDatabase databaseWithPath:temporaryDatabasePath];
 	[database open];
@@ -57,8 +35,9 @@
 	FMDatabase *writableDatabaseSpecial = [FMDatabase databaseWithPath:writableDatabasePathSpecial];
 	[writableDatabaseSpecial open];
 
-	NSInteger days[13] = {0,0,0,-1,-1,-2,-2,-3,-3,-4,-11,-33,-46};
-	NSArray *insertStatements = @[@"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', '10', '47', '.', 'com.dev.Mutt');",
+	NSInteger days[14] = {0,0,0,-1,-1,-2,-2,-3,-3,-4,-11,-33,-46, -48};
+	NSArray *insertStatements = @[@"CREATE TABLE keystrokes(id INTEGER PRIMARY KEY, timestamp DATETIME, type INTEGER, keycode INTEGER, ascii VARCHAR(1), bundle_id VARCHAR(64));",
+								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', '10', '47', '.', 'com.dev.Mutt');",
 								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', '10', '83', '1', 'com.dev.Mutt');",
 								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', '10', '83', '1', 'com.dev.Mutt');",
 								  @"INSERT INTO keystrokes (timestamp, type, keycode, ascii, bundle_id) VALUES('%@', '10', '87', '5', 'com.dev.Mutt');",
@@ -84,7 +63,6 @@
 	for (int i=0; i<[insertStatements count]; i++) {
 		[dayComponent setDay:days[i]];
 		dateForInsertion = [dateFormat stringFromDate:[theCalendar dateByAddingComponents:dayComponent toDate:currentDate options:0]];
-
 		[database executeUpdate:[NSString stringWithFormat:[insertStatements objectAtIndex:i], dateForInsertion]];
 		[writableDatabase executeUpdate:[NSString stringWithFormat:[insertStatements objectAtIndex:i], dateForInsertion]];
 		[writableDatabaseSpecial executeUpdate:[NSString stringWithFormat:[insertStatements objectAtIndex:i], dateForInsertion]];
@@ -181,6 +159,28 @@
 	YVBKeystrokesDataManager *manager = [[YVBKeystrokesDataManager alloc] initWithFilePath:temporaryDatabasePath];
 	[manager getEarliestDate:^(NSString *result){
 		XCTAssert([@"2014-08-13 21:33:27" isEqualToString:result], @"The earliest known date query is wrong");
+	}];
+}
+
+- (void)testGetKeystrokesPerDay{
+	YVBKeystrokesDataManager *manager = [[YVBKeystrokesDataManager alloc] initWithFilePath:temporaryDatabasePath];
+	[manager getKeystrokesPerDay:^(NSArray *x, NSArray *y){
+		XCTAssert([x count] == 9, @"Array size of x is incorrect");
+		XCTAssert([y count] == 9, @"Array size of y is incorrect");
+		XCTAssert([x count] == [y count], @"Array sizes are not equal");
+
+		unsigned long long array[9] = {2, 2, 2, 2, 1, 1, 1, 1, 1};
+		NSArray *datesArray = @[@"2014-11-27", @"2014-11-26", @"2014-11-25",
+								@"2014-11-24", @"2014-11-23", @"2014-11-16",
+								@"2014-10-25", @"2014-10-12", @"2014-10-10"];
+		NSDateFormatter * dateFormat = [[NSDateFormatter alloc] init];
+		[dateFormat setDateFormat:@"yyyy-MM-dd"];
+
+
+		for (char i; i<9; i++) {
+			XCTAssert([x objectAtIndex:i] == [NSNumber numberWithUnsignedLongLong:array[i]], @"Values are incorrectly retrieved from x");
+			XCTAssert([y objectAtIndex:i] == [datesArray objectAtIndex:i], @"Values are incorrectly retrieved from x");
+		}
 	}];
 }
 

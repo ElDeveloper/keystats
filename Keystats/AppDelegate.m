@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 
 #import "YVBKeyLogger.h"
-#import "FMDatabase.h"
+#import "FMDB.h"
 #import "YVBKeystrokesDataManager.h"
 #import "YVBDailyExecutor.h"
 #import "YVBKeystrokesSummaryViewController.h"
@@ -55,7 +55,7 @@
 	CGSize currentSize;
 	_summaryView = [[YVBKeystrokesSummaryViewController alloc] init];
 	currentSize = [[_summaryView view] frame].size;
-	[[_summaryView view] setFrame:CGRectMake(7, 5, currentSize.width,
+	[[_summaryView view] setFrame:CGRectMake(7, 0, currentSize.width,
 											 currentSize.height)];
 	[[[self window] contentView] addSubview:[_summaryView view]];
 
@@ -206,6 +206,20 @@
     return YES;
 }
 
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender{
+#if DEBUG
+	NSLog(@"Application is terminating, closing the datamanager now");
+#endif
+	/*
+		FIXME: It's fine for now but if the datamanager received a call to
+		execute a statement, it would error out because the database would
+		be closed. However this should not happen as the return value is
+		NSTerminateNow.
+	 */
+	[[dataManager queue] close];
+	return NSTerminateNow;
+}
+
 
 - (void)copyDatabase{
 	NSFileManager *defaultManager = [NSFileManager defaultManager];
@@ -270,7 +284,7 @@
 
 - (void)_startLogger{
 	__tasksCompleted ++;
-	if (__tasksCompleted > 4){
+	if (__tasksCompleted > 5){
 		[_mainLogger startLogging];
 		__tasksCompleted = 0;
 		[_window performSelectorOnMainThread:@selector(setTitle:) withObject:@"Keystats" waitUntilDone:NO];
@@ -324,6 +338,18 @@
 							waitUntilDone:NO];
 #ifdef DEBUG
 		NSLog(@"The value of this month %lld", _monthlyCountValue);
+#endif
+	}];
+	[dataManager getKeystrokesPerDay:^(NSArray *x, NSArray *y){
+		[self performSelectorOnMainThread:@selector(_startLogger)
+							   withObject:nil
+							waitUntilDone:NO];
+		[_summaryView performSelectorOnMainThread:@selector(updateDailyKeystrokesPlot:)
+									   withObject:@[x, y]
+									waitUntilDone:NO];
+#ifdef DEBUG
+		NSLog(@"Size of x: %lu size of y: %lu", [x count], [y count]);
+		NSLog(@"x: %@, y: %@", x, y);
 #endif
 	}];
 

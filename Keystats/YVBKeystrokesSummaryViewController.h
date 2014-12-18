@@ -7,13 +7,27 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <CorePlot/CorePlot.h>
 
-@interface YVBKeystrokesSummaryViewController : NSViewController{
+@interface YVBKeystrokesSummaryViewController : NSViewController<CPTPlotDataSource, CPTBarPlotDelegate>{
 	IBOutlet NSTextField * __weak totalCountLabel;
 	IBOutlet NSTextField * __weak todayCountLabel;
 	IBOutlet NSTextField * __weak lastSevenDaysCountLabel;
 	IBOutlet NSTextField * __weak lastThirtyDaysCountLabel;
 	IBOutlet NSTextField * __weak earliestDateLabel;
+	IBOutlet CPTGraphHostingView * __weak dailyKeystrokesView;
+	IBOutlet NSTextField * __weak dailyKeystrokesLabel;
+
+	@private
+	NSArray *__datesData;
+	NSMutableArray *__keystrokesData;
+	CPTXYGraph *__graph;
+	NSInteger __previous;
+	NSInteger __knownMax;
+	NSNumberFormatter *__formatter;
+	BOOL __canDrawPlot;
+	NSTimer *__plotTimer;
+
 }
 
 @property (nonatomic, weak) IBOutlet NSTextField * totalCountLabel;
@@ -21,10 +35,13 @@
 @property (nonatomic, weak) IBOutlet NSTextField * lastSevenDaysCountLabel;
 @property (nonatomic, weak) IBOutlet NSTextField * lastThirtyDaysCountLabel;
 @property (nonatomic, weak) IBOutlet NSTextField * earliestDateLabel;
+@property (nonatomic, weak) IBOutlet CPTGraphHostingView * dailyKeystrokesView;
+@property (nonatomic, weak) IBOutlet NSTextField * dailyKeystrokesLabel;
 
 -(id)init;
 -(void)updateWithTotalValue:(NSString *)total todayValue:(NSString *)today
 		 lastSevenDaysValue:(NSString *)lastSevenDaysValue
 	 andLastThirtyDaysValue:(NSString *)lastThirtyDaysValue;
+-(void)updateDailyKeystrokesPlot:(NSArray *)data;
 
 @end
