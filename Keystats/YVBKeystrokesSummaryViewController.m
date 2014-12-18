@@ -128,6 +128,10 @@
 	[textStyle setFontSize:12.0f];
 	[textStyle setColor:[CPTColor darkGrayColor]];
 
+	CPTMutableLineStyle *lineStyle = [CPTMutableLineStyle lineStyle];
+	[lineStyle setLineWidth:1.5];
+	[lineStyle setLineColor:dataColor];
+
 	// Create graph from theme
 	__graph = [(CPTXYGraph *)[CPTXYGraph alloc] initWithFrame:CGRectZero];
 	[__graph applyTheme:[CPTTheme themeNamed:kCPTPlainWhiteTheme]];
@@ -176,7 +180,6 @@
 
 	CPTXYAxisSet *axisSet = (CPTXYAxisSet *)__graph.axisSet;
 	CPTXYAxis *x = [axisSet xAxis];
-	[x setMajorGridLineStyle:majorGridLineStyle];
 	[x setMajorTickLineStyle:majorGridLineStyle];
 	[x setMinorTickLineStyle:minorGridLineStyle];
 	[x setMajorIntervalLength:CPTDecimalFromFloat(totalDateRange/4)];
@@ -193,17 +196,31 @@
 	[keystrokesFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
 	[keystrokesFormatter setUsesGroupingSeparator:YES];
 
-	CPTXYAxis *y = [axisSet yAxis];
-	[y setMajorGridLineStyle:majorGridLineStyle];
-	[y setMajorTickLineStyle:majorGridLineStyle];
-	[y setMinorTickLineStyle:minorGridLineStyle];
+	CPTXYAxis *yLeft = [axisSet yAxis];
+	[yLeft setMajorGridLineStyle:majorGridLineStyle];
+	[yLeft setMajorTickLineStyle:majorGridLineStyle];
+	[yLeft setMinorTickLineStyle:minorGridLineStyle];
 	// the padding added when maxKeystrokes is created is used by this value which
 	// is rounded down so we can guarantee that all the lines will fit
-	[y setMajorIntervalLength:CPTDecimalFromDouble(floor(maxKeystrokes/6))];
-	[y setOrthogonalCoordinateDecimal:CPTDecimalFromFloat(-padding*0.6)];
-	[y setLabelFormatter:keystrokesFormatter];
-	[y setLabelTextStyle:textStyle];
-	[y setLabelOffset:-2];
+	[yLeft setMajorIntervalLength:CPTDecimalFromDouble(floor(maxKeystrokes/6))];
+	[yLeft setOrthogonalCoordinateDecimal:CPTDecimalFromFloat(-padding*0.6)];
+	[yLeft setLabelFormatter:keystrokesFormatter];
+	[yLeft setLabelTextStyle:textStyle];
+	[yLeft setLabelOffset:-2];
+
+	// We need a right axis to make the poot look symmetrical
+	CPTXYAxis *yRight = [[CPTXYAxis alloc] init];
+	[yRight setPlotSpace:plotSpace];
+	[yRight setMajorTickLineStyle:majorGridLineStyle];
+	[yRight setMinorTickLineStyle:minorGridLineStyle];
+	[yRight setMinorTicksPerInterval:4];
+	[yRight setMajorIntervalLength:CPTDecimalFromDouble(floor(maxKeystrokes/6))];
+	[yRight setOrthogonalCoordinateDecimal:CPTDecimalFromFloat(totalDateRange+(padding*0.6))];
+	[yRight setLabelFormatter:nil];
+	[yRight setCoordinate:CPTCoordinateY];
+	[yRight setAxisLineStyle:majorGridLineStyle];
+
+	[[__graph axisSet] setAxes:@[x, yLeft, yRight]];
 
 	CPTMutableLineStyle *symbolLineStyle = [CPTMutableLineStyle lineStyle];
 	[symbolLineStyle setLineColor:dataColor];
@@ -212,10 +229,6 @@
 	[symbol setSize:CGSizeMake(5, 5)];
 	[symbol setFill:[CPTFill fillWithColor:dataColor]];
 	[symbol setLineStyle:symbolLineStyle];
-
-	CPTMutableLineStyle *lineStyle = [CPTMutableLineStyle lineStyle];
-	[lineStyle setLineWidth:1.5];
-	[lineStyle setLineColor:dataColor];
 
 	// set the datasource
 	CPTBarPlot *barPlot = [CPTBarPlot tubularBarPlotWithColor:fillingColor horizontalBars:NO];
