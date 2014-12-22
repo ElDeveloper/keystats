@@ -64,6 +64,7 @@
 	[_lastSevenDaysCountLabel setStringValue:lastSevenDaysValue];
 	[_lastThirtyDaysCountLabel setStringValue:lastThirtyDaysValue];
 
+	// plotting logic:
 	// check whether or not we need to update the plot
 	if (__canDrawPlot) {
 		if (current > __knownMax) {
@@ -79,11 +80,35 @@
 }
 
 -(void)updateDailyKeystrokesPlot:(NSArray *)data{
-	__datesData = [[data objectAtIndex:0] copy];
+	__datesData = [NSMutableArray arrayWithArray:[[data objectAtIndex:0] copy]];
 	__keystrokesData = [NSMutableArray arrayWithArray:[[data objectAtIndex:1] copy]];
 	
 	// every time we are asked to update the values let's force a hard restart
 	__previous = 0;
+
+	// HT: http://stackoverflow.com/a/1857392/379593
+	NSUInteger today = [[NSCalendar currentCalendar] ordinalityOfUnit:NSDayCalendarUnit inUnit:NSEraCalendarUnit forDate:[NSDate date]];
+
+	// ensure that the series we are ploitting include information for the current day
+	NSUInteger indexOfToday = [__datesData indexOfObjectPassingTest:
+	 ^BOOL(id obj, NSUInteger idx, BOOL *stop){
+		 NSUInteger dayToCompare = [[NSCalendar currentCalendar] ordinalityOfUnit:NSDayCalendarUnit inUnit:NSEraCalendarUnit forDate:obj];
+		 if (today == dayToCompare) {
+			 return YES;
+		 }
+		 return NO;
+	 }];
+
+	// if today's date is not in the date data, an index larger
+	// than the number of elements in the array will be returned
+	if(indexOfToday > [__datesData count]){
+		[__datesData addObject:[NSDate date]];
+		[__keystrokesData addObject:[NSNumber numberWithLongLong:0]];
+
+		// be consistent and remove the extra object
+		[__datesData removeObjectAtIndex:0];
+		[__keystrokesData removeObjectAtIndex:0];
+	}
 
 	// convenience variable to check in other places whether
 	// or not we are drawing the keystrokes per day plot

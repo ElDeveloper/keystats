@@ -19,7 +19,7 @@
 	IBOutlet NSTextField * __weak dailyKeystrokesLabel;
 
 	@private
-	NSArray *__datesData;
+	NSMutableArray *__datesData;
 	NSMutableArray *__keystrokesData;
 	CPTXYGraph *__graph;
 	NSInteger __previous;
