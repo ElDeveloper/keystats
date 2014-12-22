@@ -128,6 +128,10 @@
 	[textStyle setFontSize:12.0f];
 	[textStyle setColor:[CPTColor darkGrayColor]];
 
+	CPTMutableTextStyle *smallTextStyle = [CPTMutableTextStyle textStyle];
+	[smallTextStyle setFontSize:10.0f];
+	[smallTextStyle setColor:[CPTColor darkGrayColor]];
+
 	CPTMutableLineStyle *lineStyle = [CPTMutableLineStyle lineStyle];
 	[lineStyle setLineWidth:1.5];
 	[lineStyle setLineColor:dataColor];
@@ -146,7 +150,7 @@
 
 	[[__graph plotAreaFrame] setPaddingLeft:45];
 	[[__graph plotAreaFrame] setPaddingTop:15];
-	[[__graph plotAreaFrame] setPaddingRight:20];
+	[[__graph plotAreaFrame] setPaddingRight:2];
 	[[__graph plotAreaFrame] setPaddingBottom:20];
 
 	[__graph setTitle:@"Keystrokes Per Day"];
@@ -177,6 +181,9 @@
 	// the x axis has dates
 	NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateFormat:@"MMM dd"];
+
+	NSDateFormatter * dayOfWeekFormatter = [[NSDateFormatter alloc] init];
+	[dayOfWeekFormatter setDateFormat:@"EEEEE"];
 
 	CPTXYAxisSet *axisSet = (CPTXYAxisSet *)__graph.axisSet;
 	CPTXYAxis *x = [axisSet xAxis];
@@ -220,7 +227,22 @@
 	[yRight setCoordinate:CPTCoordinateY];
 	[yRight setAxisLineStyle:majorGridLineStyle];
 
-	[[__graph axisSet] setAxes:@[x, yLeft, yRight]];
+	CPTXYAxis *xTop = [[CPTXYAxis alloc] init];
+	[xTop setPlotSpace:plotSpace];
+	[xTop setMajorTickLineStyle:majorGridLineStyle];
+	[xTop setMinorTickLineStyle:minorGridLineStyle];
+	[xTop setMajorIntervalLength:CPTDecimalFromDouble(totalDateRange/[__datesData count])];
+	[xTop setOrthogonalCoordinateDecimal:CPTDecimalFromFloat(0)];
+	[xTop setCoordinate:CPTCoordinateX];
+	[xTop setAxisLineStyle:majorGridLineStyle];
+	CPTTimeFormatter *timeFormatter2 = [[CPTTimeFormatter alloc] initWithDateFormatter:dayOfWeekFormatter];
+	[timeFormatter2 setReferenceDate:refDate];
+	[xTop setLabelFormatter:timeFormatter2];
+	[xTop setLabelTextStyle:textStyle];
+	[xTop setLabelOffset:-5];
+	[xTop setLabelAlignment:CPTAlignmentMiddle];
+
+	[[__graph axisSet] setAxes:@[yLeft, yRight, xTop]];
 
 	CPTMutableLineStyle *symbolLineStyle = [CPTMutableLineStyle lineStyle];
 	[symbolLineStyle setLineColor:dataColor];
