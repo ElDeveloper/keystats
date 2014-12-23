@@ -298,8 +298,11 @@
 																	   [keystrokesFormatter stringFromNumber:[__keystrokesData objectAtIndex:idx]]];
 
 	[__graph setTitle:annotationText];
-	[__graph performSelector:@selector(setTitle:) withObject:@"Keystrokes Per Day" afterDelay:2.0];
 
+}
+
+-(void)barPlot:(CPTBarPlot *)plot barTouchUpAtRecordIndex:(NSUInteger)idx{
+	[__graph setTitle:@"Keystrokes Per Day"];
 }
 
 
