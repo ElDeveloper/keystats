@@ -99,9 +99,9 @@
 		 return NO;
 	 }];
 
-	// if today's date is not in the date data, an index larger
-	// than the number of elements in the array will be returned
-	if(indexOfToday > [__datesData count]){
+	// add an empty entry if today's date is not saved already
+	// this way the plot updating routine will work seamlessly
+	if(indexOfToday == NSNotFound){
 		[__datesData addObject:[NSDate date]];
 		[__keystrokesData addObject:[NSNumber numberWithLongLong:0]];
 
@@ -323,8 +323,11 @@
 																	   [keystrokesFormatter stringFromNumber:[__keystrokesData objectAtIndex:idx]]];
 
 	[__graph setTitle:annotationText];
-	[__graph performSelector:@selector(setTitle:) withObject:@"Keystrokes Per Day" afterDelay:2.0];
 
+}
+
+-(void)barPlot:(CPTBarPlot *)plot barTouchUpAtRecordIndex:(NSUInteger)idx{
+	[__graph setTitle:@"Keystrokes Per Day"];
 }
 
 
