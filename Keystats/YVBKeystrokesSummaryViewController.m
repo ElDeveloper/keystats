@@ -134,6 +134,13 @@
 	NSTimeInterval totalDateRange = [[__datesData objectAtIndex:[__datesData count]-1] timeIntervalSinceDate:refDate];
 	double maxKeystrokes = [[__keystrokesData valueForKeyPath:@"@max.intValue"] doubleValue];
 
+	// divide the total number of seconds by the number of seconds in a day
+	NSUInteger numberOfDaysToDisplay = totalDateRange/(86400);
+
+	// determines the spacing between bars, we need this information in several
+	// places to correctly fit the plot and have nice spacing
+	float padding = totalDateRange/numberOfDaysToDisplay;
+
 	// we use ceil here to create a number with a small "padding"
 	maxKeystrokes = ceil(maxKeystrokes + (0.11*maxKeystrokes));
 
@@ -189,7 +196,6 @@
 	// Setup scatter plot space
 	CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)__graph.defaultPlotSpace;
 
-	float padding = totalDateRange/[__datesData count];
 	CPTMutablePlotRange *xPlotRange = [CPTMutablePlotRange plotRangeWithLocation:CPTDecimalFromDouble(-padding*0.6) length:CPTDecimalFromDouble(totalDateRange+(1.2*padding))];
 
 	[plotSpace setXRange:xPlotRange];
@@ -244,7 +250,7 @@
 	[xBottom setPlotSpace:plotSpace];
 	[xBottom setMajorTickLineStyle:majorGridLineStyle];
 	[xBottom setMinorTickLineStyle:minorGridLineStyle];
-	[xBottom setMajorIntervalLength:CPTDecimalFromDouble(totalDateRange/[__datesData count])];
+	[xBottom setMajorIntervalLength:CPTDecimalFromDouble(padding)];
 	[xBottom setOrthogonalCoordinateDecimal:CPTDecimalFromFloat(0)];
 	[xBottom setCoordinate:CPTCoordinateX];
 	[xBottom setAxisLineStyle:majorGridLineStyle];
