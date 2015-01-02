@@ -153,6 +153,10 @@
 	[textStyle setFontSize:12.0f];
 	[textStyle setColor:[CPTColor darkGrayColor]];
 
+	CPTMutableTextStyle *smallTextStyle = [CPTMutableTextStyle textStyle];
+	[smallTextStyle setFontSize:10.0f];
+	[smallTextStyle setColor:[CPTColor darkGrayColor]];
+
 	CPTMutableLineStyle *lineStyle = [CPTMutableLineStyle lineStyle];
 	[lineStyle setLineWidth:1.5];
 	[lineStyle setLineColor:dataColor];
@@ -171,7 +175,7 @@
 
 	[[__graph plotAreaFrame] setPaddingLeft:45];
 	[[__graph plotAreaFrame] setPaddingTop:15];
-	[[__graph plotAreaFrame] setPaddingRight:20];
+	[[__graph plotAreaFrame] setPaddingRight:2];
 	[[__graph plotAreaFrame] setPaddingBottom:20];
 
 	[__graph setTitle:@"Keystrokes Per Day"];
@@ -199,22 +203,13 @@
 	[majorGridLineStyle setLineWidth:1.5];
 	[majorGridLineStyle setLineColor:[CPTColor lightGrayColor]];
 
-	// the x axis has dates
-	NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
-	[dateFormatter setDateFormat:@"MMM dd"];
+	// the x axis formats the first letter of the day of the week
+	NSDateFormatter * dayOfWeekFormatter = [[NSDateFormatter alloc] init];
+	[dayOfWeekFormatter setDateFormat:@"EEEEE"];
+	CPTTimeFormatter *timeFormatter = [[CPTTimeFormatter alloc] initWithDateFormatter:dayOfWeekFormatter];
+	[timeFormatter setReferenceDate:refDate];
 
 	CPTXYAxisSet *axisSet = (CPTXYAxisSet *)__graph.axisSet;
-	CPTXYAxis *x = [axisSet xAxis];
-	[x setMajorTickLineStyle:majorGridLineStyle];
-	[x setMinorTickLineStyle:minorGridLineStyle];
-	[x setMajorIntervalLength:CPTDecimalFromFloat(totalDateRange/4)];
-	[x setMinorTicksPerInterval:6];
-	[x setOrthogonalCoordinateDecimal:CPTDecimalFromDouble(0)];
-	CPTTimeFormatter *timeFormatter = [[CPTTimeFormatter alloc] initWithDateFormatter:dateFormatter];
-	[timeFormatter setReferenceDate:refDate];
-	[x setLabelFormatter:timeFormatter];
-	[x setLabelTextStyle:textStyle];
-	[x setLabelAlignment:CPTAlignmentMiddle];
 
 	// the y axis has keystrokes per day
 	NSNumberFormatter *keystrokesFormatter = [[NSNumberFormatter alloc] init];
@@ -245,7 +240,20 @@
 	[yRight setCoordinate:CPTCoordinateY];
 	[yRight setAxisLineStyle:majorGridLineStyle];
 
-	[[__graph axisSet] setAxes:@[x, yLeft, yRight]];
+	CPTXYAxis *xBottom = [[CPTXYAxis alloc] init];
+	[xBottom setPlotSpace:plotSpace];
+	[xBottom setMajorTickLineStyle:majorGridLineStyle];
+	[xBottom setMinorTickLineStyle:minorGridLineStyle];
+	[xBottom setMajorIntervalLength:CPTDecimalFromDouble(totalDateRange/[__datesData count])];
+	[xBottom setOrthogonalCoordinateDecimal:CPTDecimalFromFloat(0)];
+	[xBottom setCoordinate:CPTCoordinateX];
+	[xBottom setAxisLineStyle:majorGridLineStyle];
+	[xBottom setLabelFormatter:timeFormatter];
+	[xBottom setLabelTextStyle:textStyle];
+	[xBottom setLabelOffset:-5];
+	[xBottom setLabelAlignment:CPTAlignmentMiddle];
+
+	[[__graph axisSet] setAxes:@[yLeft, yRight, xBottom]];
 
 	CPTMutableLineStyle *symbolLineStyle = [CPTMutableLineStyle lineStyle];
 	[symbolLineStyle setLineColor:dataColor];
