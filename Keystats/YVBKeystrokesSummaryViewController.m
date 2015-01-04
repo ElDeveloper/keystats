@@ -68,7 +68,7 @@
 	// check whether or not we need to update the plot
 	if (__canDrawPlot) {
 		if (current > __knownMax) {
-			[self _updatePlot];
+			[self _createPlot];
 			__previous = current;
 		}
 		// guarantee that we are updating at least every 30 keystrokes
@@ -117,7 +117,7 @@
 	if (__canDrawPlot) {
 		// remove the "loading" label
 		[_dailyKeystrokesLabel setStringValue:@""];
-		[self _updatePlot];
+		[self _createPlot];
 
 		if (![__plotTimer isValid]){
 			[__plotTimer fire];
@@ -128,11 +128,18 @@
 	}
 }
 
--(void)_updatePlot{
+-(void)_createPlot{
 	// this code was based in the DatePlot example from CorePlot
 	NSDate *refDate = [__datesData objectAtIndex:0];
 	NSTimeInterval totalDateRange = [[__datesData objectAtIndex:[__datesData count]-1] timeIntervalSinceDate:refDate];
 	double maxKeystrokes = [[__keystrokesData valueForKeyPath:@"@max.intValue"] doubleValue];
+
+	// divide the total number of seconds by the number of seconds in a day
+	NSUInteger numberOfDaysToDisplay = totalDateRange/(86400);
+
+	// determines the spacing between bars, we need this information in several
+	// places to correctly fit the plot and have nice spacing
+	float padding = totalDateRange/numberOfDaysToDisplay;
 
 	// we use ceil here to create a number with a small "padding"
 	maxKeystrokes = ceil(maxKeystrokes + (0.11*maxKeystrokes));
@@ -154,24 +161,26 @@
 	[textStyle setColor:[CPTColor darkGrayColor]];
 
 	CPTMutableLineStyle *lineStyle = [CPTMutableLineStyle lineStyle];
-	[lineStyle setLineWidth:1.5];
+	[lineStyle setLineWidth:1.0f];
 	[lineStyle setLineColor:dataColor];
 
-	// Create graph from theme
 	__graph = [(CPTXYGraph *)[CPTXYGraph alloc] initWithFrame:CGRectZero];
 	[__graph applyTheme:[CPTTheme themeNamed:kCPTPlainWhiteTheme]];
 	[__graph setFill:[CPTFill fillWithColor:[CPTColor clearColor]]];
 	[[__graph plotAreaFrame] setFill:[CPTFill fillWithColor:[CPTColor clearColor]]];
 	[[__graph plotAreaFrame] setBorderLineStyle:nil];
 
+	// make it so the graph uses exactly the same space as the view it is
+	// contained in
 	[__graph setPaddingLeft:0];
 	[__graph setPaddingTop:0];
 	[__graph setPaddingBottom:0];
 	[__graph setPaddingRight:0];
 
+	// we need these paddings to make the labels fit nicely
 	[[__graph plotAreaFrame] setPaddingLeft:45];
 	[[__graph plotAreaFrame] setPaddingTop:15];
-	[[__graph plotAreaFrame] setPaddingRight:20];
+	[[__graph plotAreaFrame] setPaddingRight:2];
 	[[__graph plotAreaFrame] setPaddingBottom:20];
 
 	[__graph setTitle:@"Keystrokes Per Day"];
@@ -182,13 +191,11 @@
 
 	[_dailyKeystrokesView setHostedGraph:__graph];
 
-	// Setup scatter plot space
 	CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)__graph.defaultPlotSpace;
 
-	float padding = totalDateRange/[__datesData count];
-	CPTMutablePlotRange *xPlotRange = [CPTMutablePlotRange plotRangeWithLocation:CPTDecimalFromDouble(-padding*0.6) length:CPTDecimalFromDouble(totalDateRange+(1.2*padding))];
-
-	[plotSpace setXRange:xPlotRange];
+	// we need to fit the bars in the plot space, thus we have to add padding to the total range
+	[plotSpace setXRange:[CPTMutablePlotRange plotRangeWithLocation:CPTDecimalFromDouble(-padding*0.6)
+															 length:CPTDecimalFromDouble(totalDateRange+(1.2*padding))]];
 	[plotSpace setYRange:[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(maxKeystrokes)]];
 
 	CPTMutableLineStyle *minorGridLineStyle = [[CPTMutableLineStyle alloc] init];
@@ -199,22 +206,13 @@
 	[majorGridLineStyle setLineWidth:1.5];
 	[majorGridLineStyle setLineColor:[CPTColor lightGrayColor]];
 
-	// the x axis has dates
-	NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
-	[dateFormatter setDateFormat:@"MMM dd"];
+	// the x axis formats the first letter of the day of the week
+	NSDateFormatter * dayOfWeekFormatter = [[NSDateFormatter alloc] init];
+	[dayOfWeekFormatter setDateFormat:@"EEEEE"];
+	CPTTimeFormatter *timeFormatter = [[CPTTimeFormatter alloc] initWithDateFormatter:dayOfWeekFormatter];
+	[timeFormatter setReferenceDate:refDate];
 
 	CPTXYAxisSet *axisSet = (CPTXYAxisSet *)__graph.axisSet;
-	CPTXYAxis *x = [axisSet xAxis];
-	[x setMajorTickLineStyle:majorGridLineStyle];
-	[x setMinorTickLineStyle:minorGridLineStyle];
-	[x setMajorIntervalLength:CPTDecimalFromFloat(totalDateRange/4)];
-	[x setMinorTicksPerInterval:6];
-	[x setOrthogonalCoordinateDecimal:CPTDecimalFromDouble(0)];
-	CPTTimeFormatter *timeFormatter = [[CPTTimeFormatter alloc] initWithDateFormatter:dateFormatter];
-	[timeFormatter setReferenceDate:refDate];
-	[x setLabelFormatter:timeFormatter];
-	[x setLabelTextStyle:textStyle];
-	[x setLabelAlignment:CPTAlignmentMiddle];
 
 	// the y axis has keystrokes per day
 	NSNumberFormatter *keystrokesFormatter = [[NSNumberFormatter alloc] init];
@@ -225,15 +223,14 @@
 	[yLeft setMajorGridLineStyle:majorGridLineStyle];
 	[yLeft setMajorTickLineStyle:majorGridLineStyle];
 	[yLeft setMinorTickLineStyle:minorGridLineStyle];
-	// the padding added when maxKeystrokes is created is used by this value which
-	// is rounded down so we can guarantee that all the lines will fit
 	[yLeft setMajorIntervalLength:CPTDecimalFromDouble(floor(maxKeystrokes/6))];
 	[yLeft setOrthogonalCoordinateDecimal:CPTDecimalFromFloat(-padding*0.6)];
 	[yLeft setLabelFormatter:keystrokesFormatter];
 	[yLeft setLabelTextStyle:textStyle];
 	[yLeft setLabelOffset:-2];
 
-	// We need a right axis to make the poot look symmetrical
+	// We need a right axis to make the plot look symmetrical, it's essentially
+	// the same as the left Y axis but with no labels
 	CPTXYAxis *yRight = [[CPTXYAxis alloc] init];
 	[yRight setPlotSpace:plotSpace];
 	[yRight setMajorTickLineStyle:majorGridLineStyle];
@@ -245,25 +242,28 @@
 	[yRight setCoordinate:CPTCoordinateY];
 	[yRight setAxisLineStyle:majorGridLineStyle];
 
-	[[__graph axisSet] setAxes:@[x, yLeft, yRight]];
+	CPTXYAxis *xBottom = [[CPTXYAxis alloc] init];
+	[xBottom setPlotSpace:plotSpace];
+	[xBottom setMajorTickLineStyle:majorGridLineStyle];
+	[xBottom setMinorTickLineStyle:minorGridLineStyle];
+	[xBottom setMajorIntervalLength:CPTDecimalFromDouble(padding)];
+	[xBottom setOrthogonalCoordinateDecimal:CPTDecimalFromFloat(0)];
+	[xBottom setCoordinate:CPTCoordinateX];
+	[xBottom setAxisLineStyle:majorGridLineStyle];
+	[xBottom setLabelFormatter:timeFormatter];
+	[xBottom setLabelTextStyle:textStyle];
+	[xBottom setLabelOffset:-5];
+	[xBottom setLabelAlignment:CPTAlignmentMiddle];
 
-	CPTMutableLineStyle *symbolLineStyle = [CPTMutableLineStyle lineStyle];
-	[symbolLineStyle setLineColor:dataColor];
+	[[__graph axisSet] setAxes:@[yLeft, yRight, xBottom]];
 
-	CPTPlotSymbol *symbol = [CPTPlotSymbol ellipsePlotSymbol];
-	[symbol setSize:CGSizeMake(5, 5)];
-	[symbol setFill:[CPTFill fillWithColor:dataColor]];
-	[symbol setLineStyle:symbolLineStyle];
-
-	// set the datasource
 	CPTBarPlot *barPlot = [CPTBarPlot tubularBarPlotWithColor:fillingColor horizontalBars:NO];
 	[barPlot setIdentifier:@"Keystrokes Plot"];
 	[barPlot setDelegate:self];
 	[barPlot setBarWidth:CPTDecimalFromCGFloat(padding*0.8)];
 	[barPlot setFill:[CPTFill fillWithColor:fillingColor]];
 	[barPlot setBarCornerRadius:0];
-
-	[barPlot setLineStyle:symbolLineStyle];
+	[barPlot setLineStyle:lineStyle];
 	[barPlot setDataSource:self];
 
 	[__graph addPlot:barPlot];
@@ -303,13 +303,6 @@
 	// let's make sure this doesn't happen, otherwise it would error out
 	if (__keystrokesData == nil || __datesData == nil) {
 		return;
-	}
-
-	static CPTPlotSpaceAnnotation *symbolTextAnnotation;
-
-	if ( symbolTextAnnotation ) {
-		[__graph.plotAreaFrame.plotArea removeAnnotation:symbolTextAnnotation];
-		symbolTextAnnotation=nil;
 	}
 
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
