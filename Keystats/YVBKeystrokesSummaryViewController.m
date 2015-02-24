@@ -86,16 +86,25 @@
 	// every time we are asked to update the values let's force a hard restart
 	__previous = 0;
 
-	// HT: http://stackoverflow.com/a/1857392/379593
-	NSUInteger today = [[NSCalendar currentCalendar] ordinalityOfUnit:NSDayCalendarUnit inUnit:NSEraCalendarUnit forDate:[NSDate date]];
+	// check if the series we are ploitting includes information for the current day
+	// HT: http://stackoverflow.com/a/2331151/379593
+	NSCalendar *calendar = [NSCalendar currentCalendar];
+	NSCalendarUnit calendarUnits = NSEraCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit;
+	NSDateComponents *components = [calendar components:calendarUnits fromDate:[NSDate date]];
+	NSDate *today = [calendar dateFromComponents:components];
 
-	// ensure that the series we are ploitting include information for the current day
+	__block NSDate *otherDate = nil;
+
+	// we check all dates just in case (it's a small array)
 	NSUInteger indexOfToday = [__datesData indexOfObjectPassingTest:
 	 ^BOOL(id obj, NSUInteger idx, BOOL *stop){
-		 NSUInteger dayToCompare = [[NSCalendar currentCalendar] ordinalityOfUnit:NSDayCalendarUnit inUnit:NSEraCalendarUnit forDate:obj];
-		 if (today == dayToCompare) {
+		 // create a date with only the components that 'today' has and check equality
+		 otherDate = [calendar dateFromComponents:[calendar components:calendarUnits fromDate:(NSDate *)obj]];
+
+		 if([today isEqualToDate:otherDate]) {
 			 return YES;
 		 }
+
 		 return NO;
 	 }];
 
