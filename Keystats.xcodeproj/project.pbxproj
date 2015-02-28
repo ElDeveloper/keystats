@@ -39,6 +39,8 @@
 		504A316218164C9700BE4841 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A316118164C9700BE4841 /* Carbon.framework */; };
 		504A316418164C9F00BE4841 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A316318164C9F00BE4841 /* libsqlite3.dylib */; };
 		505E323D181D530000FD6CDF /* YVBKeyLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E323C181D530000FD6CDF /* YVBKeyLogger.m */; };
+		508A3FC31AA19FA600EC872F /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 508A3FC21AA19FA600EC872F /* NSDate+Utilities.m */; };
+		508A3FC41AA19FA600EC872F /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 508A3FC21AA19FA600EC872F /* NSDate+Utilities.m */; };
 		50937AAC18223755000F1685 /* YVBKeystrokesDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50937AAB18223755000F1685 /* YVBKeystrokesDataManager.m */; };
 		509B2CED1A32DF100054AFF9 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509B2CEC1A32DF100054AFF9 /* CorePlot.framework */; };
 		509B2CEE1A32DF100054AFF9 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509B2CEC1A32DF100054AFF9 /* CorePlot.framework */; };
@@ -110,6 +112,8 @@
 		504C0D2E1A2B02C8008AF66A /* FMDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		505E323B181D530000FD6CDF /* YVBKeyLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVBKeyLogger.h; sourceTree = "<group>"; };
 		505E323C181D530000FD6CDF /* YVBKeyLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBKeyLogger.m; sourceTree = "<group>"; };
+		508A3FC11AA19FA600EC872F /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utilities.h"; sourceTree = "<group>"; };
+		508A3FC21AA19FA600EC872F /* NSDate+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utilities.m"; sourceTree = "<group>"; };
 		50937AAA18223755000F1685 /* YVBKeystrokesDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVBKeystrokesDataManager.h; sourceTree = "<group>"; };
 		50937AAB18223755000F1685 /* YVBKeystrokesDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBKeystrokesDataManager.m; sourceTree = "<group>"; };
 		509B2CEC1A32DF100054AFF9 /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = "<group>"; };
@@ -201,6 +205,8 @@
 				50A5F17F186EA7C600C9A994 /* YVBDailyExecutor.m */,
 				50E9A0C6187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.h */,
 				50E9A0C7187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m */,
+				508A3FC11AA19FA600EC872F /* NSDate+Utilities.h */,
+				508A3FC21AA19FA600EC872F /* NSDate+Utilities.m */,
 				50E9A0C9187D25F70085ECBB /* YVBKeystrokesSummaryView.xib */,
 				504A312C18164C0400BE4841 /* MainMenu.xib */,
 				504A312F18164C0400BE4841 /* Images.xcassets */,
@@ -421,6 +427,7 @@
 				50A5F180186EA7C600C9A994 /* YVBDailyExecutor.m in Sources */,
 				50937AAC18223755000F1685 /* YVBKeystrokesDataManager.m in Sources */,
 				504A312418164C0400BE4841 /* main.m in Sources */,
+				508A3FC31AA19FA600EC872F /* NSDate+Utilities.m in Sources */,
 				504A315718164C3500BE4841 /* FMDatabaseAdditions.m in Sources */,
 				505E323D181D530000FD6CDF /* YVBKeyLogger.m in Sources */,
 				50E9A0C8187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m in Sources */,
@@ -439,6 +446,7 @@
 				5003AF071A212AF900361A19 /* YVBKeystrokesSummaryViewController.m in Sources */,
 				5003AF081A212AF900361A19 /* FMDatabase.m in Sources */,
 				5003AF091A212AF900361A19 /* FMDatabaseAdditions.m in Sources */,
+				508A3FC41AA19FA600EC872F /* NSDate+Utilities.m in Sources */,
 				5003AF0A1A212AF900361A19 /* FMDatabasePool.m in Sources */,
 				5003AF0B1A212AF900361A19 /* FMDatabaseQueue.m in Sources */,
 				5003AF0C1A212AF900361A19 /* FMResultSet.m in Sources */,
