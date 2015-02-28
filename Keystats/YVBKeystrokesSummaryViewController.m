@@ -8,6 +8,8 @@
 
 #import "YVBKeystrokesSummaryViewController.h"
 
+#import "NSDate+Utilities.h"
+
 @implementation YVBKeystrokesSummaryViewController
 
 @synthesize totalCountLabel = _totalCountLabel;
@@ -86,29 +88,13 @@
 	// every time we are asked to update the values let's force a hard restart
 	__previous = 0;
 
-	// check if the series we are ploitting includes information for the current day
-	// HT: http://stackoverflow.com/a/2331151/379593
-	NSCalendar *calendar = [NSCalendar currentCalendar];
-	NSCalendarUnit calendarUnits = NSEraCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit;
-	NSDateComponents *components = [calendar components:calendarUnits fromDate:[NSDate date]];
-	NSDate *today = [calendar dateFromComponents:components];
-
-	__block NSDate *otherDate = nil;
-
-	// we check all dates just in case (it's a small array)
+	// figure out if we have today in the array
 	NSUInteger indexOfToday = [__datesData indexOfObjectPassingTest:
 	 ^BOOL(id obj, NSUInteger idx, BOOL *stop){
-		 // create a date with only the components that 'today' has and check equality
-		 otherDate = [calendar dateFromComponents:[calendar components:calendarUnits fromDate:(NSDate *)obj]];
-
-		 if([today isEqualToDate:otherDate]) {
-			 return YES;
-		 }
-
-		 return NO;
+		 return [(NSDate *)obj isToday];
 	 }];
 
-	// add an empty entry if today's date is not saved already
+	// add an empty entry if today's date is not saved already,
 	// this way the plot updating routine will work seamlessly
 	if(indexOfToday == NSNotFound){
 		[__datesData addObject:[NSDate date]];
@@ -144,7 +130,7 @@
 	double maxKeystrokes = [[__keystrokesData valueForKeyPath:@"@max.intValue"] doubleValue];
 
 	// divide the total number of seconds by the number of seconds in a day
-	NSUInteger numberOfDaysToDisplay = totalDateRange/(86400);
+	NSUInteger numberOfDaysToDisplay = totalDateRange/(D_DAY);
 
 	// determines the spacing between bars, we need this information in several
 	// places to correctly fit the plot and have nice spacing
