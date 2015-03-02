@@ -21,6 +21,7 @@
 	@private
 	NSMutableArray *__datesData;
 	NSMutableArray *__keystrokesData;
+	NSArray *__averageData;
 	CPTXYGraph *__graph;
 	NSInteger __previous;
 	NSInteger __knownMax;
