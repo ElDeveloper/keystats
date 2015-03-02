@@ -7,29 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5003AF021A212ADE00361A19 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A316318164C9F00BE4841 /* libsqlite3.dylib */; };
-		5003AF031A212AF900361A19 /* YVBKeyLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E323C181D530000FD6CDF /* YVBKeyLogger.m */; };
-		5003AF041A212AF900361A19 /* YVBKeystrokesDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50937AAB18223755000F1685 /* YVBKeystrokesDataManager.m */; };
-		5003AF051A212AF900361A19 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A312A18164C0400BE4841 /* AppDelegate.m */; };
-		5003AF061A212AF900361A19 /* YVBDailyExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A5F17F186EA7C600C9A994 /* YVBDailyExecutor.m */; };
-		5003AF071A212AF900361A19 /* YVBKeystrokesSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9A0C7187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m */; };
-		5003AF081A212AF900361A19 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A314D18164C3500BE4841 /* FMDatabase.m */; };
-		5003AF091A212AF900361A19 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A314F18164C3500BE4841 /* FMDatabaseAdditions.m */; };
-		5003AF0A1A212AF900361A19 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315118164C3500BE4841 /* FMDatabasePool.m */; };
-		5003AF0B1A212AF900361A19 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315318164C3500BE4841 /* FMDatabaseQueue.m */; };
-		5003AF0C1A212AF900361A19 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315518164C3500BE4841 /* FMResultSet.m */; };
 		501FF8F51A27A3960013493A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501FF8F41A27A3960013493A /* QuartzCore.framework */; };
-		501FF91F1A2903090013493A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501FF8F41A27A3960013493A /* QuartzCore.framework */; };
-		5039F2F81870D65200D73FBB /* YVBKeystrokesDataManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5039F2F71870D65200D73FBB /* YVBKeystrokesDataManagerTests.m */; };
 		504A311818164C0400BE4841 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A311718164C0400BE4841 /* Cocoa.framework */; };
 		504A312218164C0400BE4841 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 504A312018164C0400BE4841 /* InfoPlist.strings */; };
 		504A312418164C0400BE4841 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A312318164C0400BE4841 /* main.m */; };
 		504A312818164C0400BE4841 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 504A312618164C0400BE4841 /* Credits.rtf */; };
 		504A312B18164C0400BE4841 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A312A18164C0400BE4841 /* AppDelegate.m */; };
 		504A313018164C0400BE4841 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504A312F18164C0400BE4841 /* Images.xcassets */; };
-		504A313818164C0400BE4841 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A311718164C0400BE4841 /* Cocoa.framework */; };
-		504A314018164C0400BE4841 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 504A313E18164C0400BE4841 /* InfoPlist.strings */; };
-		504A314218164C0400BE4841 /* KeystatsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A314118164C0400BE4841 /* KeystatsTests.m */; };
 		504A315618164C3500BE4841 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A314D18164C3500BE4841 /* FMDatabase.m */; };
 		504A315718164C3500BE4841 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A314F18164C3500BE4841 /* FMDatabaseAdditions.m */; };
 		504A315818164C3500BE4841 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315118164C3500BE4841 /* FMDatabasePool.m */; };
@@ -40,10 +24,8 @@
 		504A316418164C9F00BE4841 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A316318164C9F00BE4841 /* libsqlite3.dylib */; };
 		505E323D181D530000FD6CDF /* YVBKeyLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E323C181D530000FD6CDF /* YVBKeyLogger.m */; };
 		508A3FC31AA19FA600EC872F /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 508A3FC21AA19FA600EC872F /* NSDate+Utilities.m */; };
-		508A3FC41AA19FA600EC872F /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 508A3FC21AA19FA600EC872F /* NSDate+Utilities.m */; };
 		50937AAC18223755000F1685 /* YVBKeystrokesDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50937AAB18223755000F1685 /* YVBKeystrokesDataManager.m */; };
 		509B2CED1A32DF100054AFF9 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509B2CEC1A32DF100054AFF9 /* CorePlot.framework */; };
-		509B2CEE1A32DF100054AFF9 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509B2CEC1A32DF100054AFF9 /* CorePlot.framework */; };
 		509B2CEF1A32DFE40054AFF9 /* CorePlot.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 509B2CEC1A32DF100054AFF9 /* CorePlot.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		509B87721A33114D00CEE098 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 504A312C18164C0400BE4841 /* MainMenu.xib */; };
 		50A5F180186EA7C600C9A994 /* YVBDailyExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A5F17F186EA7C600C9A994 /* YVBDailyExecutor.m */; };
@@ -51,16 +33,6 @@
 		50E9A0C8187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9A0C7187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m */; };
 		50E9A0CA187D25F70085ECBB /* YVBKeystrokesSummaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50E9A0C9187D25F70085ECBB /* YVBKeystrokesSummaryView.xib */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		504A313918164C0400BE4841 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 504A310C18164C0400BE4841 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 504A311318164C0400BE4841;
-			remoteInfo = Keystats;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		506022611A2A5EA40006C9F9 /* CopyFiles */ = {
@@ -92,7 +64,6 @@
 		504A312A18164C0400BE4841 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		504A312D18164C0400BE4841 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		504A312F18164C0400BE4841 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		504A313518164C0400BE4841 /* KeystatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeystatsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		504A313D18164C0400BE4841 /* KeystatsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KeystatsTests-Info.plist"; sourceTree = "<group>"; };
 		504A313F18164C0400BE4841 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		504A314118164C0400BE4841 /* KeystatsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeystatsTests.m; sourceTree = "<group>"; };
@@ -138,17 +109,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		504A313218164C0400BE4841 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				501FF91F1A2903090013493A /* QuartzCore.framework in Frameworks */,
-				5003AF021A212ADE00361A19 /* libsqlite3.dylib in Frameworks */,
-				509B2CEE1A32DF100054AFF9 /* CorePlot.framework in Frameworks */,
-				504A313818164C0400BE4841 /* Cocoa.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -168,7 +128,6 @@
 			isa = PBXGroup;
 			children = (
 				504A311418164C0400BE4841 /* Keystats.app */,
-				504A313518164C0400BE4841 /* KeystatsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -323,24 +282,6 @@
 			productReference = 504A311418164C0400BE4841 /* Keystats.app */;
 			productType = "com.apple.product-type.application";
 		};
-		504A313418164C0400BE4841 /* KeystatsTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 504A314818164C0400BE4841 /* Build configuration list for PBXNativeTarget "KeystatsTests" */;
-			buildPhases = (
-				504A313118164C0400BE4841 /* Sources */,
-				504A313218164C0400BE4841 /* Frameworks */,
-				504A313318164C0400BE4841 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				504A313A18164C0400BE4841 /* PBXTargetDependency */,
-			);
-			name = KeystatsTests;
-			productName = KeystatsTests;
-			productReference = 504A313518164C0400BE4841 /* KeystatsTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -349,11 +290,6 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Yoshiki Vázquez Baeza";
-				TargetAttributes = {
-					504A313418164C0400BE4841 = {
-						TestTargetID = 504A311318164C0400BE4841;
-					};
-				};
 			};
 			buildConfigurationList = 504A310F18164C0400BE4841 /* Build configuration list for PBXProject "Keystats" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -369,7 +305,6 @@
 			projectRoot = "";
 			targets = (
 				504A311318164C0400BE4841 /* Keystats */,
-				504A313418164C0400BE4841 /* KeystatsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -386,14 +321,6 @@
 				504A313018164C0400BE4841 /* Images.xcassets in Resources */,
 				504A312818164C0400BE4841 /* Credits.rtf in Resources */,
 				50E9A0CA187D25F70085ECBB /* YVBKeystrokesSummaryView.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		504A313318164C0400BE4841 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				504A314018164C0400BE4841 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,35 +362,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		504A313118164C0400BE4841 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5003AF031A212AF900361A19 /* YVBKeyLogger.m in Sources */,
-				5003AF041A212AF900361A19 /* YVBKeystrokesDataManager.m in Sources */,
-				5003AF051A212AF900361A19 /* AppDelegate.m in Sources */,
-				5003AF061A212AF900361A19 /* YVBDailyExecutor.m in Sources */,
-				5003AF071A212AF900361A19 /* YVBKeystrokesSummaryViewController.m in Sources */,
-				5003AF081A212AF900361A19 /* FMDatabase.m in Sources */,
-				5003AF091A212AF900361A19 /* FMDatabaseAdditions.m in Sources */,
-				508A3FC41AA19FA600EC872F /* NSDate+Utilities.m in Sources */,
-				5003AF0A1A212AF900361A19 /* FMDatabasePool.m in Sources */,
-				5003AF0B1A212AF900361A19 /* FMDatabaseQueue.m in Sources */,
-				5003AF0C1A212AF900361A19 /* FMResultSet.m in Sources */,
-				504A314218164C0400BE4841 /* KeystatsTests.m in Sources */,
-				5039F2F81870D65200D73FBB /* YVBKeystrokesDataManagerTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		504A313A18164C0400BE4841 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 504A311318164C0400BE4841 /* Keystats */;
-			targetProxy = 504A313918164C0400BE4841 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		504A312018164C0400BE4841 /* InfoPlist.strings */ = {
@@ -611,48 +510,6 @@
 			};
 			name = Release;
 		};
-		504A314918164C0400BE4841 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Keystats.app/Contents/MacOS/Keystats";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-					"$(PROJECT_DIR)/Vendor/CorePlot",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Keystats/Keystats-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "KeystatsTests/KeystatsTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		504A314A18164C0400BE4841 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Keystats.app/Contents/MacOS/Keystats";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-					"$(PROJECT_DIR)/Vendor/CorePlot",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Keystats/Keystats-Prefix.pch";
-				INFOPLIST_FILE = "KeystatsTests/KeystatsTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -670,15 +527,6 @@
 			buildConfigurations = (
 				504A314618164C0400BE4841 /* Debug */,
 				504A314718164C0400BE4841 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		504A314818164C0400BE4841 /* Build configuration list for PBXNativeTarget "KeystatsTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				504A314918164C0400BE4841 /* Debug */,
-				504A314A18164C0400BE4841 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
