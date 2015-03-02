@@ -31,6 +31,16 @@
 		50A5F180186EA7C600C9A994 /* YVBDailyExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A5F17F186EA7C600C9A994 /* YVBDailyExecutor.m */; };
 		50C386F71AA4164E001497B3 /* KeystatsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C386F61AA4164E001497B3 /* KeystatsTests.m */; };
 		50C386FD1AA4166A001497B3 /* YVBKeystrokesDataManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5039F2F71870D65200D73FBB /* YVBKeystrokesDataManagerTests.m */; };
+		50C386FF1AA41816001497B3 /* YVBUtilitesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C386FE1AA41816001497B3 /* YVBUtilitesTests.m */; };
+		50C387021AA41875001497B3 /* YVBUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C387011AA41875001497B3 /* YVBUtilities.m */; };
+		50C387031AA45269001497B3 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A314D18164C3500BE4841 /* FMDatabase.m */; };
+		50C387041AA45269001497B3 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A314F18164C3500BE4841 /* FMDatabaseAdditions.m */; };
+		50C387051AA45269001497B3 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315118164C3500BE4841 /* FMDatabasePool.m */; };
+		50C387061AA45269001497B3 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315318164C3500BE4841 /* FMDatabaseQueue.m */; };
+		50C387071AA45269001497B3 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315518164C3500BE4841 /* FMResultSet.m */; };
+		50C387091AA4527A001497B3 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 50C387081AA4527A001497B3 /* libsqlite3.0.dylib */; };
+		50C3870A1AA45286001497B3 /* YVBUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C387011AA41875001497B3 /* YVBUtilities.m */; };
+		50C3870B1AA45294001497B3 /* YVBKeystrokesDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50937AAB18223755000F1685 /* YVBKeystrokesDataManager.m */; };
 		50E73464186F76F80031095F /* Keystats.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 50E73463186F76F80031095F /* Keystats.iconset */; };
 		50E9A0C8187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9A0C7187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m */; };
 		50E9A0CA187D25F70085ECBB /* YVBKeystrokesSummaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50E9A0C9187D25F70085ECBB /* YVBKeystrokesSummaryView.xib */; };
@@ -102,6 +112,10 @@
 		50C386F21AA4164E001497B3 /* KeystatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeystatsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		50C386F51AA4164E001497B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50C386F61AA4164E001497B3 /* KeystatsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeystatsTests.m; sourceTree = "<group>"; };
+		50C386FE1AA41816001497B3 /* YVBUtilitesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBUtilitesTests.m; sourceTree = "<group>"; };
+		50C387001AA41875001497B3 /* YVBUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVBUtilities.h; sourceTree = "<group>"; };
+		50C387011AA41875001497B3 /* YVBUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBUtilities.m; sourceTree = "<group>"; };
+		50C387081AA4527A001497B3 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		50E73463186F76F80031095F /* Keystats.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = Keystats.iconset; sourceTree = "<group>"; };
 		50E9A0C6187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVBKeystrokesSummaryViewController.h; sourceTree = "<group>"; };
 		50E9A0C7187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBKeystrokesSummaryViewController.m; sourceTree = "<group>"; };
@@ -125,6 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50C387091AA4527A001497B3 /* libsqlite3.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +170,7 @@
 		504A311618164C0400BE4841 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				50C387081AA4527A001497B3 /* libsqlite3.0.dylib */,
 				509B2CEA1A32DF100054AFF9 /* Vendor */,
 				501FF8F41A27A3960013493A /* QuartzCore.framework */,
 				504A316318164C9F00BE4841 /* libsqlite3.dylib */,
@@ -186,6 +202,8 @@
 				50E9A0C7187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m */,
 				508A3FC11AA19FA600EC872F /* NSDate+Utilities.h */,
 				508A3FC21AA19FA600EC872F /* NSDate+Utilities.m */,
+				50C387001AA41875001497B3 /* YVBUtilities.h */,
+				50C387011AA41875001497B3 /* YVBUtilities.m */,
 				50E9A0C9187D25F70085ECBB /* YVBKeystrokesSummaryView.xib */,
 				504A312C18164C0400BE4841 /* MainMenu.xib */,
 				504A312F18164C0400BE4841 /* Images.xcassets */,
@@ -257,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				5039F2F71870D65200D73FBB /* YVBKeystrokesDataManagerTests.m */,
+				50C386FE1AA41816001497B3 /* YVBUtilitesTests.m */,
 				50C386F61AA4164E001497B3 /* KeystatsTests.m */,
 				50C386F41AA4164E001497B3 /* Supporting Files */,
 			);
@@ -404,6 +423,7 @@
 				504A315818164C3500BE4841 /* FMDatabasePool.m in Sources */,
 				50A5F180186EA7C600C9A994 /* YVBDailyExecutor.m in Sources */,
 				50937AAC18223755000F1685 /* YVBKeystrokesDataManager.m in Sources */,
+				50C387021AA41875001497B3 /* YVBUtilities.m in Sources */,
 				504A312418164C0400BE4841 /* main.m in Sources */,
 				508A3FC31AA19FA600EC872F /* NSDate+Utilities.m in Sources */,
 				504A315718164C3500BE4841 /* FMDatabaseAdditions.m in Sources */,
@@ -417,8 +437,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50C3870B1AA45294001497B3 /* YVBKeystrokesDataManager.m in Sources */,
+				50C3870A1AA45286001497B3 /* YVBUtilities.m in Sources */,
+				50C387031AA45269001497B3 /* FMDatabase.m in Sources */,
+				50C387041AA45269001497B3 /* FMDatabaseAdditions.m in Sources */,
+				50C387051AA45269001497B3 /* FMDatabasePool.m in Sources */,
+				50C387061AA45269001497B3 /* FMDatabaseQueue.m in Sources */,
+				50C387071AA45269001497B3 /* FMResultSet.m in Sources */,
 				50C386FD1AA4166A001497B3 /* YVBKeystrokesDataManagerTests.m in Sources */,
 				50C386F71AA4164E001497B3 /* KeystatsTests.m in Sources */,
+				50C386FF1AA41816001497B3 /* YVBUtilitesTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -646,6 +674,7 @@
 				50C386FB1AA4164E001497B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
