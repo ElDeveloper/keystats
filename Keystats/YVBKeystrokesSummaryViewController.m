@@ -278,10 +278,11 @@
 	[linePlot setDataLineStyle:dashedLineStyle];
 	[linePlot setIdentifier:@"Keystrokes Average Plot"];
 	[linePlot setDataSource:self];
-	[linePlot	setInterpolation:CPTScatterPlotInterpolationHistogram];
+	[linePlot setDelegate:self];
+	[linePlot setInterpolation:CPTScatterPlotInterpolationHistogram];
 
 	[__graph addPlot:barPlot];
-	[__graph addPlot:linePlot toPlotSpace:plotSpace];
+	[__graph addPlot:linePlot];
 }
 
 #pragma mark -
@@ -362,5 +363,25 @@
 	[__graph setTitle:@"Keystrokes Per Day"];
 }
 
+-(void)scatterPlot:(CPTScatterPlot *)plot dataLineTouchDownWithEvent:(CPTNativeEvent *)event{
+	double plotPoint[2];
+	[[__graph defaultPlotSpace] doublePrecisionPlotPoint:plotPoint numberOfCoordinates:2 forEvent:event];
+
+	NSNumberFormatter *keystrokesFormatter = [[NSNumberFormatter alloc] init];
+	[keystrokesFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+	[keystrokesFormatter setUsesGroupingSeparator:YES];
+	[keystrokesFormatter setMinimumFractionDigits:2];
+	[keystrokesFormatter setMaximumFractionDigits:2];
+
+	NSNumber *average = [NSNumber numberWithDouble:plotPoint[1]];
+	NSString *averageString = [keystrokesFormatter stringFromNumber:average];
+
+	NSString *annotationText = [NSString stringWithFormat:@"Average Keystrokes For Selected Week: %@", averageString];
+	[__graph setTitle:annotationText];
+}
+
+-(void)scatterPlot:(CPTScatterPlot *)plot dataLineTouchUpWithEvent:(NSEvent *)event{
+	[__graph setTitle:@"Keystrokes Per Day"];
+}
 
 @end
