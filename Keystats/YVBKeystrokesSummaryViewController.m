@@ -289,7 +289,20 @@
 #pragma mark Plot Data Source Methods
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot{
-	return [__keystrokesData count];
+	NSString *identifier = (NSString *)[plot identifier];
+	NSUInteger count;
+
+	if ([identifier isEqualToString:@"Keystrokes Plot"]) {
+		count = [__keystrokesData count];
+	}
+	else if ([identifier isEqualToString:@"Keystrokes Average Plot"]){
+		count = [__averageData count];
+	}
+	else{
+		count = 0; // harness case
+	}
+
+	return count;
 }
 
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index{
