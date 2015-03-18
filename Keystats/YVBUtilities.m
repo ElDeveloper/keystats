@@ -13,7 +13,6 @@
 @implementation YVBUtilities
 
 +(NSArray *)weeklyAverageForData:(NSArray *)dataArray perDate:(NSArray *)dateArray{
-	
 	float bufferData = 0.0, average = 0.0;
 	BOOL isSameWeek = NO;
 
@@ -36,7 +35,7 @@
 			daysFound ++;
 		}
 
-		// check if it's the last element, because otherwise it won't
+		// check if it's the last element, because otherwise
 		// the average for that week will not be added to the output
 		if (!isSameWeek || i==[dataArray count]-1) {
 			average = bufferData/daysFound;
@@ -47,11 +46,23 @@
 				daysFound --;
 			}
 
-			beginningDate = currentDate;
-			bufferData = [[dataArray objectAtIndex:i] longLongValue];
-			daysFound = 1;
+			// if the last element is in a separate week
+			// just add the value to the averages array
+			if (i < [dataArray count]-1) {
+				beginningDate = currentDate;
+				bufferData = [[dataArray objectAtIndex:i] longLongValue];
+				daysFound = 1;
+			}
+			else if (!isSameWeek){
+				[averages addObject:[NSNumber numberWithFloat:[[dataArray objectAtIndex:i] longLongValue]]];
+			}
 		}
 	}
+	// add some sort of assertion
+	NSAssert([averages count] == [dataArray count] &&
+			 [averages count] == [dateArray count],
+			 @"Input data and averages must have the same shape averages:%lu dates:%lu data:%lu",
+			 [averages count], [dateArray count], [dataArray count]);
 
 	return (NSArray *)averages;
 }
