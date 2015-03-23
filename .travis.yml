@@ -4,5 +4,8 @@ before_install:
     - brew update
     - brew install xctool
     - brew link xctool
+env:
+    - OSX_VERSION="10.10"
+    - OSX_VERSION="10.9"
 script:
-    - xctool -scheme KeystatsTests -sdk macosx10.9 -project Keystats.xcodeproj
+    - xctool -project Keystats.xcodeproj -scheme Keystats -sdk macosx${OSX_VERSION} test
