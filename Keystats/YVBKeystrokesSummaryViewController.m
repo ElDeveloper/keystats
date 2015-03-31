@@ -101,7 +101,7 @@
 	// add an empty entry if today's date is not saved already,
 	// this way the plot updating routine will work seamlessly
 	if(indexOfToday == NSNotFound){
-		[__datesData addObject:[NSDate date]];
+		[__datesData addObject:[NSDate todayWithoutTime]];
 		[__keystrokesData addObject:[NSNumber numberWithLongLong:0]];
 
 		// be consistent and remove the extra object
@@ -147,6 +147,20 @@
 
 	// we use ceil here to create a number with a small "padding"
 	maxKeystrokes = ceil(maxKeystrokes + (0.11*maxKeystrokes));
+
+	// we set the tick locations manually because:
+	//  * we've found that daylight savings screw the location of each date
+	//  * cleaning date objects for them to be comparable didn't prove very reliable
+	//  * we can guarantee that ticks will be located at the center of every bar
+	//  * this is the cleanest way to guarantee the previous point
+	NSMutableSet *dateTicks = [[NSMutableSet alloc] init];
+	NSTimeInterval interval = 0;
+	for (NSUInteger t = 0; t < [__datesData count]; t++) {
+		// for more information on this rationale see:
+		// numberForPlot:field:recordIndex:
+		interval = [[__datesData objectAtIndex:t] timeIntervalSinceDate:refDate];
+		[dateTicks addObject:[NSDecimalNumber numberWithDouble:interval]];
+	}
 
 	// __knownMax sets when we have to reload the full plot
 	__knownMax = maxKeystrokes;
@@ -250,7 +264,8 @@
 	[xBottom setPlotSpace:plotSpace];
 	[xBottom setMajorTickLineStyle:majorGridLineStyle];
 	[xBottom setMinorTickLineStyle:minorGridLineStyle];
-	[xBottom setMajorIntervalLength:CPTDecimalFromDouble(padding)];
+	[xBottom setLabelingPolicy:CPTAxisLabelingPolicyLocationsProvided];
+	[xBottom setMajorTickLocations:dateTicks];
 	[xBottom setOrthogonalCoordinateDecimal:CPTDecimalFromFloat(0)];
 	[xBottom setCoordinate:CPTCoordinateX];
 	[xBottom setAxisLineStyle:majorGridLineStyle];

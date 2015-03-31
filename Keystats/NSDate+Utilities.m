@@ -81,6 +81,19 @@ static const unsigned componentFlags = (NSYearCalendarUnit| NSMonthCalendarUnit 
 	return newDate;		
 }
 
++ (NSDate *) todayWithoutTime{
+	// get today's date without hour/minute/second components
+	// http://stackoverflow.com/a/24345334/379593
+	NSCalendar *cal = [NSDate currentCalendar];
+	NSDateComponents *comps = [cal components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:[NSDate date]];
+
+	[comps setHour:0];
+	[comps setMinute:0];
+	[comps setSecond:0];
+
+	return [cal dateFromComponents:comps];
+}
+
 #pragma mark - String Properties
 - (NSString *) stringWithFormat: (NSString *) format
 {
