@@ -3,7 +3,7 @@ Keystats [![Build Status](https://travis-ci.org/ElDeveloper/keystats.svg?branch=
 
 A simple key logger for OS X.
 
-![Screenshot](http://i.imgur.com/if86zIn.gif)
+![Screenshot](http://i.imgur.com/QuNmEKg.gif)
 
 ### Features
 
@@ -15,6 +15,7 @@ A simple key logger for OS X.
 bundle identifier (`Safari` -> `com.apple.Safari`).
 - Shows a plot with the number of keystrokes per day in the past 29 days.
 - Click on the bars to get the full date it represents.
+- Shows a plot with the average number of keystrokes per week.
 
 ### Icon
 
