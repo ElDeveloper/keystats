@@ -88,7 +88,7 @@
 -(void)updateDailyKeystrokesPlot:(NSArray *)data{
 	__datesData = [NSMutableArray arrayWithArray:[[data objectAtIndex:0] copy]];
 	__keystrokesData = [NSMutableArray arrayWithArray:[[data objectAtIndex:1] copy]];
-	
+
 	// every time we are asked to update the values let's force a hard restart
 	__previous = 0;
 
@@ -305,16 +305,13 @@
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot{
 	NSString *identifier = (NSString *)[plot identifier];
-	NSUInteger count;
+	NSUInteger count = 0;
 
 	if ([identifier isEqualToString:@"Keystrokes Plot"]) {
 		count = [__keystrokesData count];
 	}
 	else if ([identifier isEqualToString:@"Keystrokes Average Plot"]){
 		count = [__averageData count];
-	}
-	else{
-		count = 0; // harness case
 	}
 
 	return count;

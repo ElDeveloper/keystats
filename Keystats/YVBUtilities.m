@@ -20,7 +20,7 @@
 	NSUInteger daysFound = 0, i = 0;
 
 	NSMutableArray *averages = [NSMutableArray arrayWithCapacity:[dataArray count]];
-	
+
 	for (i = 0; i < [dataArray count]; i++){
 		currentDate = [dateArray objectAtIndex:i];
 
@@ -58,7 +58,7 @@
 			}
 		}
 	}
-	// add some sort of assertion
+	// this would be an indicative of something going very wrong
 	NSAssert([averages count] == [dataArray count] &&
 			 [averages count] == [dateArray count],
 			 @"Input data and averages must have the same shape averages:%lu dates:%lu data:%lu",
