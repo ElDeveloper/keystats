@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "504A313418164C0400BE4841"
+               BlueprintIdentifier = "50C386F11AA4164E001497B3"
                BuildableName = "KeystatsTests.xctest"
                BlueprintName = "KeystatsTests"
                ReferencedContainer = "container:Keystats.xcodeproj">
@@ -46,7 +46,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "504A313418164C0400BE4841"
+               BlueprintIdentifier = "50C386F11AA4164E001497B3"
                BuildableName = "KeystatsTests.xctest"
                BlueprintName = "KeystatsTests"
                ReferencedContainer = "container:Keystats.xcodeproj">

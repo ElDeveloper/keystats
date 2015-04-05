@@ -9,6 +9,7 @@
 #import "YVBKeystrokesSummaryViewController.h"
 
 #import "NSDate+Utilities.h"
+#import "YVBUtilities.h"
 
 @implementation YVBKeystrokesSummaryViewController
 
@@ -69,6 +70,9 @@
 	// plotting logic:
 	// check whether or not we need to update the plot
 	if (__canDrawPlot) {
+		__averageData = [[YVBUtilities weeklyAverageForData:__keystrokesData
+													perDate:__datesData] copy];
+
 		if (current > __knownMax) {
 			[self _createPlot];
 			__previous = current;
@@ -84,7 +88,7 @@
 -(void)updateDailyKeystrokesPlot:(NSArray *)data{
 	__datesData = [NSMutableArray arrayWithArray:[[data objectAtIndex:0] copy]];
 	__keystrokesData = [NSMutableArray arrayWithArray:[[data objectAtIndex:1] copy]];
-	
+
 	// every time we are asked to update the values let's force a hard restart
 	__previous = 0;
 
@@ -104,6 +108,11 @@
 		[__datesData removeObjectAtIndex:0];
 		[__keystrokesData removeObjectAtIndex:0];
 	}
+
+	// calculate the average once we've settled in on the values
+	// we will use for the keystrokes and the dates
+	__averageData = [[YVBUtilities weeklyAverageForData:__keystrokesData
+												perDate:__datesData] copy];
 
 	// convenience variable to check in other places whether
 	// or not we are drawing the keystrokes per day plot
@@ -276,28 +285,74 @@
 	[barPlot setLineStyle:lineStyle];
 	[barPlot setDataSource:self];
 
+	CPTMutableLineStyle *dashedLineStyle = [lineStyle copy];
+	[dashedLineStyle setDashPattern:@[@3, @3]];
+	[dashedLineStyle setLineWidth:1.5f];
+
+	CPTScatterPlot *linePlot = [[CPTScatterPlot alloc] init];
+	[linePlot setDataLineStyle:dashedLineStyle];
+	[linePlot setIdentifier:@"Keystrokes Average Plot"];
+	[linePlot setDataSource:self];
+	[linePlot setDelegate:self];
+	[linePlot setInterpolation:CPTScatterPlotInterpolationHistogram];
+
 	[__graph addPlot:barPlot];
+	[__graph addPlot:linePlot];
 }
 
 #pragma mark -
 #pragma mark Plot Data Source Methods
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot{
-	return [__keystrokesData count];
+	NSString *identifier = (NSString *)[plot identifier];
+	NSUInteger count = 0;
+
+	if ([identifier isEqualToString:@"Keystrokes Plot"]) {
+		count = [__keystrokesData count];
+	}
+	else if ([identifier isEqualToString:@"Keystrokes Average Plot"]){
+		count = [__averageData count];
+	}
+
+	return count;
 }
 
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index{
 	NSNumber *dataPoint = @0;
 	NSDate *start, *end;
+	NSString *identifier = (NSString *)[plot identifier];
 
 	switch (fieldEnum) {
 		case CPTScatterPlotFieldX:
-			start = [__datesData objectAtIndex:0];
-			end = [__datesData objectAtIndex:index];
-			dataPoint = [NSNumber numberWithDouble:[end timeIntervalSinceDate:start]];
+			if ([identifier isEqualToString:@"Keystrokes Plot"]) {
+				start = [__datesData objectAtIndex:0];
+				end = [__datesData objectAtIndex:index];
+				dataPoint = [NSNumber numberWithDouble:[end timeIntervalSinceDate:start]];
+			}
+			else if ([identifier isEqualToString:@"Keystrokes Average Plot"]){
+				start = [__datesData objectAtIndex:0];
+				end = [__datesData objectAtIndex:index];
+
+				// deal with the fact that the bar plot appears on screen from half a day before
+				// the first day in the array and up to half a day after the last day in the array
+				if (index == 0) {
+					dataPoint = [NSNumber numberWithDouble:[end timeIntervalSinceDate:start]-(D_DAY/2)];
+				}
+				else if (index == [self numberOfRecordsForPlot:plot]-1) {
+					dataPoint = [NSNumber numberWithDouble:[end timeIntervalSinceDate:start]+(D_DAY/2)];
+				}
+				else {
+					dataPoint = [NSNumber numberWithDouble:[end timeIntervalSinceDate:start]];
+				}
+			}
 			break;
 		case CPTScatterPlotFieldY:
-			dataPoint = [__keystrokesData objectAtIndex:index];
+			if ([identifier isEqualToString:@"Keystrokes Plot"]) {
+				dataPoint = [__keystrokesData objectAtIndex:index];
+			}
+			else if ([identifier isEqualToString:@"Keystrokes Average Plot"]){
+				dataPoint = [__averageData objectAtIndex:index];
+			}
 			break;
 		default:
 			dataPoint = @0;
@@ -333,5 +388,25 @@
 	[__graph setTitle:@"Keystrokes Per Day"];
 }
 
+-(void)scatterPlot:(CPTScatterPlot *)plot dataLineTouchDownWithEvent:(CPTNativeEvent *)event{
+	double plotPoint[2];
+	[[__graph defaultPlotSpace] doublePrecisionPlotPoint:plotPoint numberOfCoordinates:2 forEvent:event];
+
+	NSNumberFormatter *keystrokesFormatter = [[NSNumberFormatter alloc] init];
+	[keystrokesFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+	[keystrokesFormatter setUsesGroupingSeparator:YES];
+	[keystrokesFormatter setMinimumFractionDigits:2];
+	[keystrokesFormatter setMaximumFractionDigits:2];
+
+	NSNumber *average = [NSNumber numberWithDouble:plotPoint[1]];
+	NSString *averageString = [keystrokesFormatter stringFromNumber:average];
+
+	NSString *annotationText = [NSString stringWithFormat:@"Average Keystrokes For Selected Week: %@", averageString];
+	[__graph setTitle:annotationText];
+}
+
+-(void)scatterPlot:(CPTScatterPlot *)plot dataLineTouchUpWithEvent:(NSEvent *)event{
+	[__graph setTitle:@"Keystrokes Per Day"];
+}
 
 @end
