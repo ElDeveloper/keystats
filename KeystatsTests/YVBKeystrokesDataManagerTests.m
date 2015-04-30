@@ -119,7 +119,7 @@
 - (void)testGetTodayCount{
 	YVBKeystrokesDataManager *manager = [[YVBKeystrokesDataManager alloc] initWithFilePath:temporaryDatabasePath];
 	[manager getTodayCount:^(NSString *result){
-		XCTAssert([@"3" isEqualToString:result], @"The daily count query is wrong");
+		XCTAssert([@"3" isEqualToString:result], @"The daily count query is wrong, result is %@", result);
 	}];
 }
 
@@ -133,7 +133,7 @@
 - (void)testGetMonthlyCount{
 	YVBKeystrokesDataManager *manager = [[YVBKeystrokesDataManager alloc] initWithFilePath:temporaryDatabasePath];
 	[manager getMonthlyCount:^(NSString *result){
-		XCTAssert([@"11" isEqualToString:result], @"The monthly count query is wrong");
+		XCTAssert([@"11" isEqualToString:result], @"The monthly count query is wrong, result is %@", result);
 	}];
 }
 
