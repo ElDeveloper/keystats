@@ -169,7 +169,7 @@
 		if (t != [__datesData count]-1){
 			distanceInDays = [currentDate distanceInDaysToDate:[__datesData objectAtIndex:t+1]];
 
-			if( distanceInDays != 1){
+			if(distanceInDays != 1){
 				for (int i = 1; i < [currentDate distanceInDaysToDate:[__datesData objectAtIndex:t+1]]; i++) {
 					[dateTicks addObject:[NSDecimalNumber numberWithDouble:interval + D_DAY*i]];
 				}
