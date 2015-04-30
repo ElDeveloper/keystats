@@ -155,11 +155,26 @@
 	//  * this is the cleanest way to guarantee the previous point
 	NSMutableSet *dateTicks = [[NSMutableSet alloc] init];
 	NSTimeInterval interval = 0;
+	NSDate *currentDate = nil;
+	NSInteger distanceInDays = 0;
 	for (NSUInteger t = 0; t < [__datesData count]; t++) {
+		currentDate = [__datesData objectAtIndex:t];
+
 		// for more information on this rationale see:
 		// numberForPlot:field:recordIndex:
-		interval = [[__datesData objectAtIndex:t] timeIntervalSinceDate:refDate];
+		interval = [currentDate timeIntervalSinceDate:refDate];
 		[dateTicks addObject:[NSDecimalNumber numberWithDouble:interval]];
+
+		// don't raise an exception for trying to acces size+1 in the dates array
+		if (t != [__datesData count]-1){
+			distanceInDays = [currentDate distanceInDaysToDate:[__datesData objectAtIndex:t+1]];
+
+			if( distanceInDays != 1){
+				for (int i = 1; i < [currentDate distanceInDaysToDate:[__datesData objectAtIndex:t+1]]; i++) {
+					[dateTicks addObject:[NSDecimalNumber numberWithDouble:interval + D_DAY*i]];
+				}
+			}
+		}
 	}
 
 	// __knownMax sets when we have to reload the full plot
