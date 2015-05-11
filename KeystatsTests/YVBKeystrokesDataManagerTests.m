@@ -158,7 +158,7 @@
 - (void)testGetEarliestDate{
 	YVBKeystrokesDataManager *manager = [[YVBKeystrokesDataManager alloc] initWithFilePath:temporaryDatabasePath];
 	[manager getEarliestDate:^(NSString *result){
-		XCTAssert([@"2014-08-13 21:33:27" isEqualToString:result], @"The earliest known date query is wrong");
+		XCTAssert([@"2014-08-13 21:33:27" isEqualToString:result], @"The earliest known date query is wrong: %@", result);
 	}];
 }
 
