@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="YVBKeystrokesSummaryViewController">
@@ -25,7 +26,7 @@
             <subviews>
                 <box autoresizesSubviews="NO" fixedFrame="YES" title="Summary" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="mKi-9p-O1T">
                     <rect key="frame" x="-3" y="16" width="472" height="357"/>
-                    <view key="contentView">
+                    <view key="contentView" id="b3o-iT-fa1">
                         <rect key="frame" x="1" y="1" width="470" height="341"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
