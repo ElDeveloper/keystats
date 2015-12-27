@@ -227,9 +227,10 @@
 	CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)__graph.defaultPlotSpace;
 
 	// we need to fit the bars in the plot space, thus we have to add padding to the total range
-	[plotSpace setXRange:[CPTMutablePlotRange plotRangeWithLocation:CPTDecimalFromDouble(-padding*0.6)
-															 length:CPTDecimalFromDouble(totalDateRange+(1.2*padding))]];
-	[plotSpace setYRange:[CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromDouble(maxKeystrokes)]];
+	[plotSpace setXRange:[CPTMutablePlotRange plotRangeWithLocation:[NSNumber numberWithFloat:(-padding*0.6)]
+															 length:[NSNumber numberWithFloat:(totalDateRange+(1.2*padding))]]];
+	[plotSpace setYRange:[CPTPlotRange plotRangeWithLocation:[NSNumber numberWithFloat:0.0]
+													  length:[NSNumber numberWithFloat:maxKeystrokes]]];
 
 	CPTMutableLineStyle *minorGridLineStyle = [[CPTMutableLineStyle alloc] init];
 	[minorGridLineStyle setLineWidth:0.5];
@@ -256,8 +257,8 @@
 	[yLeft setMajorGridLineStyle:majorGridLineStyle];
 	[yLeft setMajorTickLineStyle:majorGridLineStyle];
 	[yLeft setMinorTickLineStyle:minorGridLineStyle];
-	[yLeft setMajorIntervalLength:CPTDecimalFromDouble(floor(maxKeystrokes/6))];
-	[yLeft setOrthogonalCoordinateDecimal:CPTDecimalFromFloat(-padding*0.6)];
+	[yLeft setMajorIntervalLength:[NSNumber numberWithFloat:floor(maxKeystrokes/6)]];
+	[yLeft setOrthogonalPosition:[NSNumber numberWithFloat:(-padding*0.6)]];
 	[yLeft setLabelFormatter:keystrokesFormatter];
 	[yLeft setLabelTextStyle:textStyle];
 	[yLeft setLabelOffset:-2];
@@ -269,8 +270,8 @@
 	[yRight setMajorTickLineStyle:majorGridLineStyle];
 	[yRight setMinorTickLineStyle:minorGridLineStyle];
 	[yRight setMinorTicksPerInterval:4];
-	[yRight setMajorIntervalLength:CPTDecimalFromDouble(floor(maxKeystrokes/6))];
-	[yRight setOrthogonalCoordinateDecimal:CPTDecimalFromFloat(totalDateRange+(padding*0.6))];
+	[yRight setMajorIntervalLength:[NSNumber numberWithFloat:floor(maxKeystrokes/6)]];
+	[yRight setOrthogonalPosition:[NSNumber numberWithFloat:totalDateRange+(padding*0.6)]];
 	[yRight setLabelFormatter:nil];
 	[yRight setCoordinate:CPTCoordinateY];
 	[yRight setAxisLineStyle:majorGridLineStyle];
@@ -281,7 +282,7 @@
 	[xBottom setMinorTickLineStyle:minorGridLineStyle];
 	[xBottom setLabelingPolicy:CPTAxisLabelingPolicyLocationsProvided];
 	[xBottom setMajorTickLocations:dateTicks];
-	[xBottom setOrthogonalCoordinateDecimal:CPTDecimalFromFloat(0)];
+	[xBottom setOrthogonalPosition:[NSNumber numberWithFloat:0]];
 	[xBottom setCoordinate:CPTCoordinateX];
 	[xBottom setAxisLineStyle:majorGridLineStyle];
 	[xBottom setLabelFormatter:timeFormatter];
@@ -294,7 +295,7 @@
 	CPTBarPlot *barPlot = [CPTBarPlot tubularBarPlotWithColor:fillingColor horizontalBars:NO];
 	[barPlot setIdentifier:@"Keystrokes Plot"];
 	[barPlot setDelegate:self];
-	[barPlot setBarWidth:CPTDecimalFromCGFloat(padding*0.8)];
+	[barPlot setBarWidth:[NSNumber numberWithFloat:(padding * 0.8)]];
 	[barPlot setFill:[CPTFill fillWithColor:fillingColor]];
 	[barPlot setBarCornerRadius:0];
 	[barPlot setLineStyle:lineStyle];
