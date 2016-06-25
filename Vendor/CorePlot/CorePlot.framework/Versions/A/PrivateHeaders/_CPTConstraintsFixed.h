@@ -4,13 +4,14 @@
 
 /// @name Initialization
 /// @{
--(instancetype)initWithLowerOffset:(CGFloat)newOffset;
--(instancetype)initWithUpperOffset:(CGFloat)newOffset;
+-(nonnull instancetype)initWithLowerOffset:(CGFloat)newOffset NS_DESIGNATED_INITIALIZER;
+-(nonnull instancetype)initWithUpperOffset:(CGFloat)newOffset NS_DESIGNATED_INITIALIZER;
+-(nonnull instancetype)initWithCoder:(nonnull NSCoder *)decoder NS_DESIGNATED_INITIALIZER;
 /// @}
 
 /// @name Comparison
 /// @{
--(BOOL)isEqualToConstraint:(CPTConstraints *)otherConstraint;
+-(BOOL)isEqualToConstraint:(nullable CPTConstraints *)otherConstraint;
 /// @}
 
 /// @name Position

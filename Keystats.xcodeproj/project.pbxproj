@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5001CAC61C2FCC4C00461696 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5001CAC51C2FCC4C00461696 /* CorePlot.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		5001CAC71C2FCC4C00461696 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5001CAC51C2FCC4C00461696 /* CorePlot.framework */; };
+		5001CAC81C2FD13D00461696 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5001CAC51C2FCC4C00461696 /* CorePlot.framework */; };
+		5001CAC91C2FD13D00461696 /* CorePlot.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5001CAC51C2FCC4C00461696 /* CorePlot.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		501FF8F51A27A3960013493A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501FF8F41A27A3960013493A /* QuartzCore.framework */; };
-		504A311818164C0400BE4841 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A311718164C0400BE4841 /* Cocoa.framework */; };
+		504A311818164C0400BE4841 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A311718164C0400BE4841 /* Cocoa.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		504A312218164C0400BE4841 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 504A312018164C0400BE4841 /* InfoPlist.strings */; };
 		504A312418164C0400BE4841 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A312318164C0400BE4841 /* main.m */; };
 		504A312818164C0400BE4841 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 504A312618164C0400BE4841 /* Credits.rtf */; };
@@ -25,8 +29,6 @@
 		505E323D181D530000FD6CDF /* YVBKeyLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E323C181D530000FD6CDF /* YVBKeyLogger.m */; };
 		508A3FC31AA19FA600EC872F /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 508A3FC21AA19FA600EC872F /* NSDate+Utilities.m */; };
 		50937AAC18223755000F1685 /* YVBKeystrokesDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50937AAB18223755000F1685 /* YVBKeystrokesDataManager.m */; };
-		509B2CED1A32DF100054AFF9 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509B2CEC1A32DF100054AFF9 /* CorePlot.framework */; };
-		509B2CEF1A32DFE40054AFF9 /* CorePlot.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 509B2CEC1A32DF100054AFF9 /* CorePlot.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		509B87721A33114D00CEE098 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 504A312C18164C0400BE4841 /* MainMenu.xib */; };
 		50A5F180186EA7C600C9A994 /* YVBDailyExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A5F17F186EA7C600C9A994 /* YVBDailyExecutor.m */; };
 		50C386F71AA4164E001497B3 /* KeystatsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C386F61AA4164E001497B3 /* KeystatsTests.m */; };
@@ -63,13 +65,14 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				509B2CEF1A32DFE40054AFF9 /* CorePlot.framework in CopyFiles */,
+				5001CAC91C2FD13D00461696 /* CorePlot.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5001CAC51C2FCC4C00461696 /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = "<group>"; };
 		501FF8F41A27A3960013493A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5039F2F71870D65200D73FBB /* YVBKeystrokesDataManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBKeystrokesDataManagerTests.m; sourceTree = "<group>"; };
 		504A311418164C0400BE4841 /* Keystats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keystats.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,7 +109,6 @@
 		508A3FC21AA19FA600EC872F /* NSDate+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utilities.m"; sourceTree = "<group>"; };
 		50937AAA18223755000F1685 /* YVBKeystrokesDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVBKeystrokesDataManager.h; sourceTree = "<group>"; };
 		50937AAB18223755000F1685 /* YVBKeystrokesDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBKeystrokesDataManager.m; sourceTree = "<group>"; };
-		509B2CEC1A32DF100054AFF9 /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = "<group>"; };
 		50A5F17E186EA7C600C9A994 /* YVBDailyExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVBDailyExecutor.h; sourceTree = "<group>"; };
 		50A5F17F186EA7C600C9A994 /* YVBDailyExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBDailyExecutor.m; sourceTree = "<group>"; };
 		50C386F21AA4164E001497B3 /* KeystatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeystatsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,10 +129,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5001CAC81C2FD13D00461696 /* CorePlot.framework in Frameworks */,
 				501FF8F51A27A3960013493A /* QuartzCore.framework in Frameworks */,
 				504A316418164C9F00BE4841 /* libsqlite3.dylib in Frameworks */,
 				504A316218164C9700BE4841 /* Carbon.framework in Frameworks */,
-				509B2CED1A32DF100054AFF9 /* CorePlot.framework in Frameworks */,
+				5001CAC61C2FCC4C00461696 /* CorePlot.framework in Frameworks */,
 				504A311818164C0400BE4841 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,6 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5001CAC71C2FCC4C00461696 /* CorePlot.framework in Frameworks */,
 				50C387091AA4527A001497B3 /* libsqlite3.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,7 +270,7 @@
 		509B2CEB1A32DF100054AFF9 /* CorePlot */ = {
 			isa = PBXGroup;
 			children = (
-				509B2CEC1A32DF100054AFF9 /* CorePlot.framework */,
+				5001CAC51C2FCC4C00461696 /* CorePlot.framework */,
 			);
 			path = CorePlot;
 			sourceTree = "<group>";
@@ -344,7 +348,7 @@
 		504A310C18164C0400BE4841 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Yoshiki Vázquez Baeza";
 				TargetAttributes = {
 					50C386F11AA4164E001497B3 = {
@@ -504,6 +508,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -561,6 +566,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -570,8 +576,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Keystats/Keystats-Prefix.pch";
 				INFOPLIST_FILE = "Keystats/Keystats-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eldeveloper.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -582,6 +590,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -591,8 +600,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Keystats/Keystats-Prefix.pch";
 				INFOPLIST_FILE = "Keystats/Keystats-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eldeveloper.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -609,6 +620,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/CorePlot",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -619,6 +631,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eldeveloper.yoshiki.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Keystats.app/Contents/MacOS/Keystats";
 			};
@@ -635,12 +648,14 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/CorePlot",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = KeystatsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eldeveloper.yoshiki.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Keystats.app/Contents/MacOS/Keystats";
 			};
