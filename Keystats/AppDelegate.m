@@ -105,7 +105,7 @@
 
 	if (result == NSAlertFirstButtonReturn) {
 		// restart the keylogger and unlock this alert
-		[self applicationDidFinishLaunching:nil];
+		[self keystatsDidFinishLaunching];
 		[self setWaitingForConfirmation:NO];
 
 		return;
@@ -133,6 +133,10 @@
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification{
+	[self keystatsDidFinishLaunching];
+}
+
+- (void)keystatsDidFinishLaunching{
 	// Insert code here to initialize your application
 	NSString *databaseFilePath = [[self pathForApplicationDatabase] path];
 

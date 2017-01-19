@@ -35,7 +35,7 @@
 - (void)copyDatabase;
 - (NSURL *)pathForApplicationDatabase;
 - (void)computeBufferValuesAndUpdateLabels;
-
+- (void)keystatsDidFinishLaunching;
 - (void)keyLoggerPerishedNotification:(NSNotification *)aNotification;
 
 - (IBAction)showAboutWindow:(id)sender;
