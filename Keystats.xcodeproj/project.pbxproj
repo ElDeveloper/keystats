@@ -30,6 +30,7 @@
 		50937AAC18223755000F1685 /* YVBKeystrokesDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50937AAB18223755000F1685 /* YVBKeystrokesDataManager.m */; };
 		509B87721A33114D00CEE098 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 504A312C18164C0400BE4841 /* MainMenu.xib */; };
 		50A5F180186EA7C600C9A994 /* YVBDailyExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A5F17F186EA7C600C9A994 /* YVBDailyExecutor.m */; };
+		50AA782D1E30FAC90028421B /* CorePlot.framework in Resources */ = {isa = PBXBuildFile; fileRef = 5001CAC51C2FCC4C00461696 /* CorePlot.framework */; };
 		50C386F71AA4164E001497B3 /* KeystatsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C386F61AA4164E001497B3 /* KeystatsTests.m */; };
 		50C386FD1AA4166A001497B3 /* YVBKeystrokesDataManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5039F2F71870D65200D73FBB /* YVBKeystrokesDataManagerTests.m */; };
 		50C386FF1AA41816001497B3 /* YVBUtilitesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C386FE1AA41816001497B3 /* YVBUtilitesTests.m */; };
@@ -393,6 +394,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50AA782D1E30FAC90028421B /* CorePlot.framework in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
