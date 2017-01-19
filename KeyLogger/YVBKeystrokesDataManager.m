@@ -116,6 +116,11 @@ NSString *YVBDataManagerErrored = @"YVBDataManagerErrored";
 -(void)addKeystrokeWithTimeStamp:(NSString *)timestamp string:(NSString *)stringValue keycode:(long long)keyCode eventType:(CGEventType)eventType andApplicationBundleIdentifier:(NSString *)bid{
 	// SQL insert
 	[_queue inDatabase:^(FMDatabase *db) {
+
+		if (stringValue == nil || bid == nil) {
+			return;
+		}
+
 		NSDictionary *insertArgs = @{@"timestamp": timestamp,
 									@"type": [NSNumber numberWithInt:eventType],
 									@"keycode": [NSNumber numberWithLongLong:keyCode],
