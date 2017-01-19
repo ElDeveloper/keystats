@@ -9,5 +9,4 @@ env:
     - OSX_VERSION="10.11"
 script:
     # some tests fail stochastically otherwise
-    - xctool -project Keystats.xcodeproj -scheme Keystats clean
-    - xctool -project Keystats.xcodeproj -scheme Keystats -sdk macosx${OSX_VERSION} test
+    - xctool -project Keystats.xcodeproj -scheme Keystats -sdk macosx${OSX_VERSION} run-tests
