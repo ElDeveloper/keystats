@@ -52,6 +52,7 @@ NSString *YVBDataManagerErrored = @"YVBDataManagerErrored";
 			}
 			[countTotalResult close];
 
+			// TODO: Sometimes result can be nil, so we should add some error handling here
 			handler([_resultFormatter stringFromNumber:result]);
 		}];
 	});

@@ -15,6 +15,11 @@
 	NSString *temporaryDatabasePath;
 	NSString *writableDatabasePath;
 	NSString *writableDatabasePathSpecial;
+
+	NSString *oldestDate;
+
+	// needed to test getKeystrokesPerDay
+	NSArray *datesSummary;
 }
 
 @end
@@ -34,6 +39,8 @@
 	[writableDatabase open];
 	FMDatabase *writableDatabaseSpecial = [FMDatabase databaseWithPath:writableDatabasePathSpecial];
 	[writableDatabaseSpecial open];
+
+	datesSummary = [[NSMutableArray alloc] initWithCapacity:6];
 
 	NSInteger days[14] = {0,0,0,-1,-1,-2,-2,-3,-3,-4,-11,-33,-46, -48};
 	NSArray *insertStatements = @[@"CREATE TABLE keystrokes(id INTEGER PRIMARY KEY, timestamp DATETIME, type INTEGER, keycode INTEGER, ascii VARCHAR(1), bundle_id VARCHAR(64));",
@@ -59,10 +66,24 @@
 	NSCalendar *theCalendar = [NSCalendar currentCalendar];
 	NSString *dateForInsertion = nil;
 
+	// create an array of unique dates for the inserted test data
+	NSInteger uniqueDays[6] = {-11, -4, -3, -2, -1, 0};
+	NSMutableArray *tempArray = [[NSMutableArray alloc] initWithCapacity:6];
+	for (int i=0; i < 6; i++){
+		[dayComponent setDay:uniqueDays[i]];
+		[tempArray addObject:[theCalendar dateByAddingComponents:dayComponent toDate:currentDate options:0]];
+	}
+	datesSummary = [[NSArray alloc] initWithArray:tempArray];
 
 	for (int i=0; i<[insertStatements count]; i++) {
 		[dayComponent setDay:days[i]];
 		dateForInsertion = [dateFormat stringFromDate:[theCalendar dateByAddingComponents:dayComponent toDate:currentDate options:0]];
+
+		// the last date is the oldest date
+		if (i == ([insertStatements count] - 1)) {
+			oldestDate = [dateForInsertion copy];
+		}
+
 		[database executeUpdate:[NSString stringWithFormat:[insertStatements objectAtIndex:i], dateForInsertion]];
 		[writableDatabase executeUpdate:[NSString stringWithFormat:[insertStatements objectAtIndex:i], dateForInsertion]];
 		[writableDatabaseSpecial executeUpdate:[NSString stringWithFormat:[insertStatements objectAtIndex:i], dateForInsertion]];
@@ -110,76 +131,147 @@
 }
 
 - (void)testGetTotalCount{
+	XCTestExpectation *expectation = [self expectationWithDescription:@"testGetTotalCount"];
+
 	YVBKeystrokesDataManager *manager = [[YVBKeystrokesDataManager alloc] initWithFilePath:temporaryDatabasePath];
 	[manager getTotalCount:^(NSString *result){
-		XCTAssert([@"13" isEqualToString:result], @"The total count query is wrong");
+		XCTAssert([@"13" isEqualToString:result], @"The total count query is wrong %@", result);
+		[expectation fulfill];
+	}];
+
+	[self waitForExpectationsWithTimeout:2.0 handler:^(NSError *error) {
+		if (error) {
+			NSLog(@"Timeout Error: %@", error);
+		}
 	}];
 }
 
 - (void)testGetTodayCount{
+	XCTestExpectation *expectation = [self expectationWithDescription:@"testGetTodayCount"];
+
 	YVBKeystrokesDataManager *manager = [[YVBKeystrokesDataManager alloc] initWithFilePath:temporaryDatabasePath];
 	[manager getTodayCount:^(NSString *result){
-		XCTAssert([@"3" isEqualToString:result], @"The daily count query is wrong, result is %@", result);
+		XCTAssertEqualObjects(@"2", result);
+		[expectation fulfill];
+	}];
+
+	[self waitForExpectationsWithTimeout:2.0 handler:^(NSError *error) {
+		if (error) {
+			NSLog(@"Timeout Error: %@", error);
+		}
 	}];
 }
 
 - (void)testGetWeeklyCount{
+	XCTestExpectation *expectation = [self expectationWithDescription:@"testGetWeeklyCount"];
+
 	YVBKeystrokesDataManager *manager = [[YVBKeystrokesDataManager alloc] initWithFilePath:temporaryDatabasePath];
 	[manager getWeeklyCount:^(NSString *result){
-		XCTAssert([@"10" isEqualToString:result], @"The weekly count query is wrong");
+		XCTAssertEqualObjects(@"9", result);
+		[expectation fulfill];
+	}];
+
+	[self waitForExpectationsWithTimeout:2.0 handler:^(NSError *error) {
+		if (error) {
+			NSLog(@"Timeout Error: %@", error);
+		}
 	}];
 }
 
 - (void)testGetMonthlyCount{
+	XCTestExpectation *expectation = [self expectationWithDescription:@"testGetMonthlyCount"];
+
 	YVBKeystrokesDataManager *manager = [[YVBKeystrokesDataManager alloc] initWithFilePath:temporaryDatabasePath];
 	[manager getMonthlyCount:^(NSString *result){
-		XCTAssert([@"11" isEqualToString:result], @"The monthly count query is wrong, result is %@", result);
+		XCTAssertEqualObjects(@"10", result);
+		[expectation fulfill];
+	}];
+
+	[self waitForExpectationsWithTimeout:2.0 handler:^(NSError *error) {
+		if (error) {
+			NSLog(@"Timeout Error: %@", error);
+		}
 	}];
 }
 
 - (void)testAddKeystrokeRegularCharacter{
+	XCTestExpectation *expectation = [self expectationWithDescription:@"testAddKeystrokeSpecialCharacter"];
+
 	YVBKeystrokesDataManager *manager = [[YVBKeystrokesDataManager alloc] initWithFilePath:writableDatabasePath];
 	[manager addKeystrokeWithTimeStamp:@"2013-12-29 14:44:30" string:@"K" keycode:40 eventType:10 andApplicationBundleIdentifier:@"com.dev.Mutt"];
 	[manager getTotalCount:^(NSString *result){
 		XCTAssert([@"14" isEqualToString:result], @"The K keystroke was not added correctly");
+		[expectation fulfill];
 	}];
 
+	[self waitForExpectationsWithTimeout:2.0 handler:^(NSError *error) {
+		if (error) {
+			NSLog(@"Timeout Error: %@", error);
+		}
+	}];
 }
 
 - (void)testAddKeystrokeSpecialCharacter{
+	XCTestExpectation *expectation = [self expectationWithDescription:@"testAddKeystrokeSpecialCharacter"];
+
 	YVBKeystrokesDataManager *manager = [[YVBKeystrokesDataManager alloc] initWithFilePath:writableDatabasePathSpecial];
 	[manager addKeystrokeWithTimeStamp:@"2013-12-29 14:44:30" string:@"'" keycode:39 eventType:10 andApplicationBundleIdentifier:@"com.dev.Mutt"];
 	[manager getTotalCount:^(NSString *result){
 		XCTAssert([@"14" isEqualToString:result], @"The ' keystroke was not added correctly");
+		[expectation fulfill];
 	}];
 
+	[self waitForExpectationsWithTimeout:2.0 handler:^(NSError *error) {
+		if (error) {
+			NSLog(@"Timeout Error: %@", error);
+		}
+	}];
 }
 
 - (void)testGetEarliestDate{
+	XCTestExpectation *expectation = [self expectationWithDescription:@"testGetEarliestDate"];
+
 	YVBKeystrokesDataManager *manager = [[YVBKeystrokesDataManager alloc] initWithFilePath:temporaryDatabasePath];
 	[manager getEarliestDate:^(NSString *result){
-		XCTAssert([@"2014-08-13 21:33:27" isEqualToString:result], @"The earliest known date query is wrong: %@", result);
+		// see setUp
+		XCTAssertEqualObjects(oldestDate, result);
+		[expectation fulfill];
+	}];
+
+	[self waitForExpectationsWithTimeout:2.0 handler:^(NSError *error) {
+		if (error) {
+			NSLog(@"Timeout Error: %@", error);
+		}
 	}];
 }
 
+#define removeHour(X)\
+[[NSCalendar currentCalendar] dateFromComponents:[[NSCalendar currentCalendar] components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:X]]
+
 - (void)testGetKeystrokesPerDay{
+	XCTestExpectation *expectation = [self expectationWithDescription:@"testGetKeystrokesPerDay"];
+
 	YVBKeystrokesDataManager *manager = [[YVBKeystrokesDataManager alloc] initWithFilePath:temporaryDatabasePath];
 	[manager getKeystrokesPerDay:^(NSArray *x, NSArray *y){
-		XCTAssert([x count] == 9, @"Array size of x is incorrect");
-		XCTAssert([y count] == 9, @"Array size of y is incorrect");
-		XCTAssert([x count] == [y count], @"Array sizes are not equal");
+		XCTAssertEqual([x count], 6);
+		XCTAssertEqual([y count], 6);
+		XCTAssertEqual([x count], [y count]);
 
-		unsigned long long array[9] = {2, 2, 2, 2, 1, 1, 1, 1, 1};
-		NSArray *datesArray = @[@"2014-11-27", @"2014-11-26", @"2014-11-25",
-								@"2014-11-24", @"2014-11-23", @"2014-11-16",
-								@"2014-10-25", @"2014-10-12", @"2014-10-10"];
-		NSDateFormatter * dateFormat = [[NSDateFormatter alloc] init];
-		[dateFormat setDateFormat:@"yyyy-MM-dd"];
+		unsigned long long array[6] = {1, 1, 2, 2, 2, 2};
 
+		for (char i; i<6; i++) {
+			XCTAssertEqualObjects([y objectAtIndex:i], [NSNumber numberWithUnsignedLongLong:array[i]]);
 
-		for (char i; i<9; i++) {
-			XCTAssert([x objectAtIndex:i] == [NSNumber numberWithUnsignedLongLong:array[i]], @"Values are incorrectly retrieved from x");
-			XCTAssert([y objectAtIndex:i] == [datesArray objectAtIndex:i], @"Values are incorrectly retrieved from x");
+			// should only compare day, month and year
+			XCTAssertEqualObjects(removeHour([x objectAtIndex:i]),
+								  removeHour([datesSummary objectAtIndex:i]));
+		}
+		[expectation fulfill];
+	}];
+
+	[self waitForExpectationsWithTimeout:2.0 handler:^(NSError *error) {
+		if (error) {
+			NSLog(@"Timeout Error: %@", error);
 		}
 	}];
 }
