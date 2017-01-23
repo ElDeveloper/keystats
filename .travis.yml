@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode8
+osx_image: xcode8.2
 before_install:
     - brew unlink xctool
     - brew update
@@ -7,5 +7,5 @@ before_install:
     - brew link xctool
 script:
     # some tests fail stochastically otherwise
-    # - xctool -project Keystats.xcodeproj -scheme Keystats run-tests
-    - xcodebuild test -scheme Keystats
+    - xctool -project Keystats.xcodeproj -scheme Keystats run-tests
+    # - xcodebuild test -scheme Keystats
