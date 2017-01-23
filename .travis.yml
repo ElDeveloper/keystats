@@ -7,4 +7,4 @@ before_install:
     - brew link xctool
 script:
     # some tests fail stochastically otherwise
-    - xctool -project Keystats.xcodeproj -scheme Keystats -sdk macosx run-tests
+    - xctool -project Keystats.xcodeproj -scheme Keystats run-tests
