@@ -22,7 +22,7 @@
 
 - (void)awakeFromNib{
 	// now check that we have accessibility access
-	if (![YVBKeyLogger accessibilityIsEnabled]) {
+	if (![YVBKeyLogger accessibilityIsEnabled] && ![self applicationIsRunningTests] ) {
 		NSAlert *alert = [[NSAlert alloc] init];
 		[alert setMessageText:@"Keystats has not yet been allowed as an "
 		 "assistive application."];
@@ -113,6 +113,12 @@
 	else if (result == NSAlertSecondButtonReturn) {
 		[NSApp terminate:self];
 	}
+}
+
+- (bool)applicationIsRunningTests {
+	// https://stackoverflow.com/a/21140663
+	NSDictionary* environment = [[NSProcessInfo processInfo] environment];
+	return environment[@"XCInjectBundleInto"] != nil;
 }
 
 - (void)datamanagerErrored:(NSNotification *)aNotification{

@@ -1,11 +1,6 @@
 language: objective-c
-osx_image: xcode8.2
-before_install:
-    - brew unlink xctool
-    - brew update
-    - brew install xctool
-    - brew link xctool
+osx_image: xcode9.4
 script:
-    # some tests fail stochastically otherwise
-    - xctool -project Keystats.xcodeproj -scheme Keystats run-tests
-    # - xcodebuild test -scheme Keystats
+    - xcodebuild -project Keystats.xcodeproj -scheme Keystats clean
+    - xcodebuild -project Keystats.xcodeproj -scheme Keystats build-for-testing
+    - xcodebuild -project Keystats.xcodeproj -scheme Keystats test
