@@ -3,4 +3,5 @@ osx_image: xcode9.4
 script:
     - xcodebuild -project Keystats.xcodeproj -scheme Keystats clean
     - xcodebuild -project Keystats.xcodeproj -scheme Keystats build-for-testing
-    - xcodebuild -project Keystats.xcodeproj -scheme Keystats test
+    # see: https://github.com/ElDeveloper/keystats/issues/21
+    - xcodebuild -project Keystats.xcodeproj -scheme Keystats -sdk macosx test
