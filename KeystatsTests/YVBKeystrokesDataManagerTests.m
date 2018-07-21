@@ -234,7 +234,7 @@
 	YVBKeystrokesDataManager *manager = [[YVBKeystrokesDataManager alloc] initWithFilePath:temporaryDatabasePath];
 	[manager getEarliestDate:^(NSString *result){
 		// see setUp
-		XCTAssertEqualObjects(oldestDate, result);
+		XCTAssertEqualObjects(self->oldestDate, result);
 		[expectation fulfill];
 	}];
 
@@ -264,7 +264,7 @@
 
 			// should only compare day, month and year
 			XCTAssertEqualObjects(removeHour([x objectAtIndex:i]),
-								  removeHour([datesSummary objectAtIndex:i]));
+								  removeHour([self->datesSummary objectAtIndex:i]));
 		}
 		[expectation fulfill];
 	}];
