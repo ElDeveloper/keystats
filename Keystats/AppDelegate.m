@@ -307,7 +307,8 @@
 
 	// set the labels
 	[dataManager getTotalCount:^(NSString *result) {
-		[[self->_summaryView totalCountLabel] setStringValue:result];
+		[self->_summaryView.totalCountLabel performSelectorOnMainThread:@selector(setStringValue:) withObject:result waitUntilDone:NO modes:nil];
+
 		self->_totalCountValue = [[result stringByReplacingOccurrencesOfString:@","
 																	withString:@""] longLongValue];
 		[self performSelectorOnMainThread:@selector(_startLogger)
@@ -318,7 +319,8 @@
 #endif
 	}];
 	[dataManager getTodayCount:^(NSString *result) {
-		[[self->_summaryView todayCountLabel] setStringValue:result];
+		[self->_summaryView.todayCountLabel performSelectorOnMainThread:@selector(setStringValue:) withObject:result waitUntilDone:NO modes:nil];
+
 		self->_todayCountValue = [[result stringByReplacingOccurrencesOfString:@","
 																	withString:@""] longLongValue];
 		[self performSelectorOnMainThread:@selector(_startLogger)
@@ -329,7 +331,8 @@
 #endif
 	}];
 	[dataManager getWeeklyCount:^(NSString *result) {
-		[[self->_summaryView lastSevenDaysCountLabel] setStringValue:result];
+		[self->_summaryView.lastSevenDaysCountLabel performSelectorOnMainThread:@selector(setStringValue:) withObject:result waitUntilDone:NO modes:nil];
+
 		self->_weeklyCountValue = [[result stringByReplacingOccurrencesOfString:@","
 																	 withString:@""] longLongValue];
 		[self performSelectorOnMainThread:@selector(_startLogger)
@@ -340,7 +343,7 @@
 #endif
 	}];
 	[dataManager getMonthlyCount:^(NSString *result) {
-		[[self->_summaryView lastThirtyDaysCountLabel] setStringValue:result];
+		[self->_summaryView.lastThirtyDaysCountLabel performSelectorOnMainThread:@selector(setStringValue:) withObject:result waitUntilDone:NO modes:nil];
 		self->_monthlyCountValue = [[result stringByReplacingOccurrencesOfString:@","
 																	  withString:@""] longLongValue];
 		[self performSelectorOnMainThread:@selector(_startLogger)
@@ -376,7 +379,8 @@
 			else{
 				dateString = [NSString stringWithFormat:@"Keystrokes collected since %@", result];
 			}
-			[[self->_summaryView earliestDateLabel] setStringValue:dateString];
+
+			[self->_summaryView.earliestDateLabel performSelectorOnMainThread:@selector(setStringValue:) withObject:result waitUntilDone:NO modes:nil];
 			[self performSelectorOnMainThread:@selector(_startLogger)
 								   withObject:nil
 								waitUntilDone:NO];
