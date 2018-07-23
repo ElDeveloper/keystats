@@ -307,59 +307,59 @@
 
 	// set the labels
 	[dataManager getTotalCount:^(NSString *result) {
-		[self->_summaryView.totalCountLabel performSelectorOnMainThread:@selector(setStringValue:) withObject:result waitUntilDone:NO modes:nil];
 
+		dispatch_async(dispatch_get_main_queue(), ^(){
+			[[self->_summaryView totalCountLabel] setStringValue:result];
+			[self _startLogger];
+		});
 		self->_totalCountValue = [[result stringByReplacingOccurrencesOfString:@","
 																	withString:@""] longLongValue];
-		[self performSelectorOnMainThread:@selector(_startLogger)
-							   withObject:nil
-							waitUntilDone:NO];
 #ifdef DEBUG
-		NSLog(@"The value of total %lld", _totalCountValue);
+		NSLog(@"The value of total %lld", self->_totalCountValue);
 #endif
 	}];
 	[dataManager getTodayCount:^(NSString *result) {
-		[self->_summaryView.todayCountLabel performSelectorOnMainThread:@selector(setStringValue:) withObject:result waitUntilDone:NO modes:nil];
 
+		dispatch_async(dispatch_get_main_queue(), ^(){
+			[[self->_summaryView todayCountLabel] setStringValue:result];
+			[self _startLogger];
+		});
 		self->_todayCountValue = [[result stringByReplacingOccurrencesOfString:@","
 																	withString:@""] longLongValue];
-		[self performSelectorOnMainThread:@selector(_startLogger)
-							   withObject:nil
-							waitUntilDone:NO];
 #ifdef DEBUG
-		NSLog(@"The value of today %lld", _todayCountValue);
+		NSLog(@"The value of today %lld", self->_todayCountValue);
 #endif
 	}];
 	[dataManager getWeeklyCount:^(NSString *result) {
-		[self->_summaryView.lastSevenDaysCountLabel performSelectorOnMainThread:@selector(setStringValue:) withObject:result waitUntilDone:NO modes:nil];
 
+		dispatch_async(dispatch_get_main_queue(), ^(){
+			[[self->_summaryView lastSevenDaysCountLabel] setStringValue:result];
+			[self _startLogger];
+		});
 		self->_weeklyCountValue = [[result stringByReplacingOccurrencesOfString:@","
 																	 withString:@""] longLongValue];
-		[self performSelectorOnMainThread:@selector(_startLogger)
-							   withObject:nil
-							waitUntilDone:NO];
 #ifdef DEBUG
-		NSLog(@"The value of this week %lld", _weeklyCountValue);
+		NSLog(@"The value of this week %lld", self->_weeklyCountValue);
 #endif
 	}];
 	[dataManager getMonthlyCount:^(NSString *result) {
-		[self->_summaryView.lastThirtyDaysCountLabel performSelectorOnMainThread:@selector(setStringValue:) withObject:result waitUntilDone:NO modes:nil];
+
+		dispatch_async(dispatch_get_main_queue(), ^(){
+			[[self->_summaryView lastThirtyDaysCountLabel] setStringValue:result];
+			[self _startLogger];
+		});
 		self->_monthlyCountValue = [[result stringByReplacingOccurrencesOfString:@","
 																	  withString:@""] longLongValue];
-		[self performSelectorOnMainThread:@selector(_startLogger)
-							   withObject:nil
-							waitUntilDone:NO];
 #ifdef DEBUG
-		NSLog(@"The value of this month %lld", _monthlyCountValue);
+		NSLog(@"The value of this month %lld", self->_monthlyCountValue);
 #endif
 	}];
 	[dataManager getKeystrokesPerDay:^(NSArray *x, NSArray *y){
-		[self performSelectorOnMainThread:@selector(_startLogger)
-							   withObject:nil
-							waitUntilDone:NO];
-		[self->_summaryView performSelectorOnMainThread:@selector(updateDailyKeystrokesPlot:)
-									   withObject:@[x, y]
-									waitUntilDone:NO];
+
+		dispatch_async(dispatch_get_main_queue(), ^(){
+			[self->_summaryView updateDailyKeystrokesPlot:@[x, y]];
+			[self _startLogger];
+		});
 #ifdef DEBUG
 		NSLog(@"Size of x: %lu size of y: %lu", [x count], [y count]);
 		NSLog(@"x: %@, y: %@", x, y);
@@ -380,10 +380,10 @@
 				dateString = [NSString stringWithFormat:@"Keystrokes collected since %@", result];
 			}
 
-			[self->_summaryView.earliestDateLabel performSelectorOnMainThread:@selector(setStringValue:) withObject:result waitUntilDone:NO modes:nil];
-			[self performSelectorOnMainThread:@selector(_startLogger)
-								   withObject:nil
-								waitUntilDone:NO];
+			dispatch_async(dispatch_get_main_queue(), ^(){
+				[[self->_summaryView earliestDateLabel] setStringValue:dateString];
+				[self _startLogger];
+			});
 #ifdef DEBUG
 			NSLog(@"Collecting since: %@", dateString);
 #endif
