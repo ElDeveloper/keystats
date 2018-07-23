@@ -295,6 +295,7 @@
 - (void)_startLogger{
 	__tasksCompleted ++;
 	if (__tasksCompleted > 5){
+		[_mainLogger startLogging];
 		__tasksCompleted = 0;
 		[_window performSelectorOnMainThread:@selector(setTitle:) withObject:@"Keystats" waitUntilDone:NO];
 	}
