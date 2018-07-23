@@ -22,7 +22,7 @@
 
 - (void)awakeFromNib{
 	// now check that we have accessibility access
-	if (![YVBKeyLogger accessibilityIsEnabled]) {
+	if (![YVBKeyLogger accessibilityIsEnabled] && ![self applicationIsRunningTests] ) {
 		NSAlert *alert = [[NSAlert alloc] init];
 		[alert setMessageText:@"Keystats has not yet been allowed as an "
 		 "assistive application."];
@@ -105,7 +105,7 @@
 
 	if (result == NSAlertFirstButtonReturn) {
 		// restart the keylogger and unlock this alert
-		[self applicationDidFinishLaunching:nil];
+		[self keystatsDidFinishLaunching];
 		[self setWaitingForConfirmation:NO];
 
 		return;
@@ -113,6 +113,12 @@
 	else if (result == NSAlertSecondButtonReturn) {
 		[NSApp terminate:self];
 	}
+}
+
+- (bool)applicationIsRunningTests {
+	// https://stackoverflow.com/a/21140663
+	NSDictionary* environment = [[NSProcessInfo processInfo] environment];
+	return environment[@"XCInjectBundleInto"] != nil;
 }
 
 - (void)datamanagerErrored:(NSNotification *)aNotification{
@@ -133,6 +139,10 @@
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification{
+	[self keystatsDidFinishLaunching];
+}
+
+- (void)keystatsDidFinishLaunching{
 	// Insert code here to initialize your application
 	NSString *databaseFilePath = [[self pathForApplicationDatabase] path];
 
@@ -169,16 +179,16 @@
 
 	YVBKeyPressed handlerBlock = ^(NSString *string, long long keyCode, CGEventType eventType){
 		if (eventType == kCGEventKeyDown) {
-			_totalCountValue++;
-			_weeklyCountValue++;
-			_monthlyCountValue++;
-			_todayCountValue++;
+			self->_totalCountValue++;
+			self->_weeklyCountValue++;
+			self->_monthlyCountValue++;
+			self->_todayCountValue++;
 
 			// update from the count buffers
-			[_summaryView updateWithTotalValue:[[dataManager resultFormatter] stringFromNumber:[NSNumber numberWithLongLong:_totalCountValue]]
-									todayValue:[[dataManager resultFormatter] stringFromNumber:[NSNumber numberWithLongLong:_todayCountValue]]
-							lastSevenDaysValue:[[dataManager resultFormatter] stringFromNumber:[NSNumber numberWithLongLong:_weeklyCountValue]]
-						andLastThirtyDaysValue:[[dataManager resultFormatter] stringFromNumber:[NSNumber numberWithLongLong:_monthlyCountValue]]];
+			[self->_summaryView updateWithTotalValue:[[self->dataManager resultFormatter] stringFromNumber:[NSNumber numberWithLongLong:self->_totalCountValue]]
+										  todayValue:[[self->dataManager resultFormatter] stringFromNumber:[NSNumber numberWithLongLong:self->_todayCountValue]]
+								  lastSevenDaysValue:[[self->dataManager resultFormatter] stringFromNumber:[NSNumber numberWithLongLong:self->_weeklyCountValue]]
+							  andLastThirtyDaysValue:[[self->dataManager resultFormatter] stringFromNumber:[NSNumber numberWithLongLong:self->_monthlyCountValue]]];
 
 
 			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW,
@@ -190,11 +200,11 @@
 					bundleIdentifier = [[workspace frontmostApplication] bundleIdentifier];
 				});
 
-				[dataManager addKeystrokeWithTimeStamp:dateString
-												string:string
-											   keycode:keyCode
-											 eventType:eventType
-						andApplicationBundleIdentifier:bundleIdentifier];
+				[self->dataManager addKeystrokeWithTimeStamp:dateString
+													  string:string
+													 	keycode:keyCode
+												   eventType:eventType
+							  andApplicationBundleIdentifier:bundleIdentifier];
 			});
 		}
 	};
@@ -297,68 +307,71 @@
 
 	// set the labels
 	[dataManager getTotalCount:^(NSString *result) {
-		[[_summaryView totalCountLabel] setStringValue:result];
-		_totalCountValue = [[result stringByReplacingOccurrencesOfString:@","
-															  withString:@""] longLongValue];
-		[self performSelectorOnMainThread:@selector(_startLogger)
-							   withObject:nil
-							waitUntilDone:NO];
+
+		dispatch_async(dispatch_get_main_queue(), ^(){
+			[[self->_summaryView totalCountLabel] setStringValue:result];
+			[self _startLogger];
+		});
+		self->_totalCountValue = [[result stringByReplacingOccurrencesOfString:@","
+																	withString:@""] longLongValue];
 #ifdef DEBUG
-		NSLog(@"The value of total %lld", _totalCountValue);
+		NSLog(@"The value of total %lld", self->_totalCountValue);
 #endif
 	}];
 	[dataManager getTodayCount:^(NSString *result) {
-		[[_summaryView todayCountLabel] setStringValue:result];
-		_todayCountValue = [[result stringByReplacingOccurrencesOfString:@","
-															  withString:@""] longLongValue];
-		[self performSelectorOnMainThread:@selector(_startLogger)
-							   withObject:nil
-							waitUntilDone:NO];
+
+		dispatch_async(dispatch_get_main_queue(), ^(){
+			[[self->_summaryView todayCountLabel] setStringValue:result];
+			[self _startLogger];
+		});
+		self->_todayCountValue = [[result stringByReplacingOccurrencesOfString:@","
+																	withString:@""] longLongValue];
 #ifdef DEBUG
-		NSLog(@"The value of today %lld", _todayCountValue);
+		NSLog(@"The value of today %lld", self->_todayCountValue);
 #endif
 	}];
 	[dataManager getWeeklyCount:^(NSString *result) {
-		[[_summaryView lastSevenDaysCountLabel] setStringValue:result];
-		_weeklyCountValue = [[result stringByReplacingOccurrencesOfString:@","
-															   withString:@""] longLongValue];
-		[self performSelectorOnMainThread:@selector(_startLogger)
-							   withObject:nil
-							waitUntilDone:NO];
+
+		dispatch_async(dispatch_get_main_queue(), ^(){
+			[[self->_summaryView lastSevenDaysCountLabel] setStringValue:result];
+			[self _startLogger];
+		});
+		self->_weeklyCountValue = [[result stringByReplacingOccurrencesOfString:@","
+																	 withString:@""] longLongValue];
 #ifdef DEBUG
-		NSLog(@"The value of this week %lld", _weeklyCountValue);
+		NSLog(@"The value of this week %lld", self->_weeklyCountValue);
 #endif
 	}];
 	[dataManager getMonthlyCount:^(NSString *result) {
-		[[_summaryView lastThirtyDaysCountLabel] setStringValue:result];
-		_monthlyCountValue = [[result stringByReplacingOccurrencesOfString:@","
-																withString:@""] longLongValue];
-		[self performSelectorOnMainThread:@selector(_startLogger)
-							   withObject:nil
-							waitUntilDone:NO];
+
+		dispatch_async(dispatch_get_main_queue(), ^(){
+			[[self->_summaryView lastThirtyDaysCountLabel] setStringValue:result];
+			[self _startLogger];
+		});
+		self->_monthlyCountValue = [[result stringByReplacingOccurrencesOfString:@","
+																	  withString:@""] longLongValue];
 #ifdef DEBUG
-		NSLog(@"The value of this month %lld", _monthlyCountValue);
+		NSLog(@"The value of this month %lld", self->_monthlyCountValue);
 #endif
 	}];
 	[dataManager getKeystrokesPerDay:^(NSArray *x, NSArray *y){
-		[self performSelectorOnMainThread:@selector(_startLogger)
-							   withObject:nil
-							waitUntilDone:NO];
-		[_summaryView performSelectorOnMainThread:@selector(updateDailyKeystrokesPlot:)
-									   withObject:@[x, y]
-									waitUntilDone:NO];
+
+		dispatch_async(dispatch_get_main_queue(), ^(){
+			[self->_summaryView updateDailyKeystrokesPlot:@[x, y]];
+			[self _startLogger];
+		});
 #ifdef DEBUG
 		NSLog(@"Size of x: %lu size of y: %lu", [x count], [y count]);
 		NSLog(@"x: %@, y: %@", x, y);
 #endif
 	}];
 
-	if (!_knowsEarliestDate){
+	if (!self->_knowsEarliestDate){
 		[dataManager getEarliestDate:^(NSString *result) {
 			NSString *dateString;
 
 			// we only need to compute the earliest date one time
-			_knowsEarliestDate = YES;
+			self->_knowsEarliestDate = YES;
 
 			if (!result) {
 				dateString = @"";
@@ -366,10 +379,11 @@
 			else{
 				dateString = [NSString stringWithFormat:@"Keystrokes collected since %@", result];
 			}
-			[[_summaryView earliestDateLabel] setStringValue:dateString];
-			[self performSelectorOnMainThread:@selector(_startLogger)
-								   withObject:nil
-								waitUntilDone:NO];
+
+			dispatch_async(dispatch_get_main_queue(), ^(){
+				[[self->_summaryView earliestDateLabel] setStringValue:dateString];
+				[self _startLogger];
+			});
 #ifdef DEBUG
 			NSLog(@"Collecting since: %@", dateString);
 #endif

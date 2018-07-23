@@ -84,8 +84,12 @@ CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 
 -(void)startLogging{
 	[self stopLogging];
-	isLogging = YES;
-	[self _addKeyEventListener];
+
+	// if accessibility is not enabled, don't try to start the keylogger
+	if ([YVBKeyLogger accessibilityIsEnabled]){
+		isLogging = YES;
+		[self _addKeyEventListener];
+	}
 }
 
 -(void)stopLogging{

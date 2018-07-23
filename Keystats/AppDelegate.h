@@ -35,7 +35,8 @@
 - (void)copyDatabase;
 - (NSURL *)pathForApplicationDatabase;
 - (void)computeBufferValuesAndUpdateLabels;
-
+- (bool)applicationIsRunningTests;
+- (void)keystatsDidFinishLaunching;
 - (void)keyLoggerPerishedNotification:(NSNotification *)aNotification;
 
 - (IBAction)showAboutWindow:(id)sender;

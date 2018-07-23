@@ -44,7 +44,7 @@ NSString *YVBDataManagerErrored = @"YVBDataManagerErrored";
 
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,
 											 (unsigned long)NULL), ^(void) {
-		[_queue inDatabase:^(FMDatabase *db) {
+		[self.queue inDatabase:^(FMDatabase *db) {
 			NSNumber *result;
 			FMResultSet *countTotalResult = [db executeQuery:query];
 			if ([countTotalResult next]) {
@@ -52,7 +52,8 @@ NSString *YVBDataManagerErrored = @"YVBDataManagerErrored";
 			}
 			[countTotalResult close];
 
-			handler([_resultFormatter stringFromNumber:result]);
+			// TODO: Sometimes result can be nil, so we should add some error handling here
+			handler([self.resultFormatter stringFromNumber:result]);
 		}];
 	});
 
@@ -77,7 +78,7 @@ NSString *YVBDataManagerErrored = @"YVBDataManagerErrored";
 -(void)getEarliestDate:(YVBResult)handler{
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,
 											 (unsigned long)NULL), ^(void) {
-		[_queue inDatabase:^(FMDatabase *db) {
+		[self.queue inDatabase:^(FMDatabase *db) {
 			NSString *value;
 			FMResultSet *result = [db executeQuery:@"SELECT MIN(timestamp) FROM keystrokes;"];
 			if ([result next]) {
@@ -93,7 +94,7 @@ NSString *YVBDataManagerErrored = @"YVBDataManagerErrored";
 -(void)getKeystrokesPerDay:(YVBResultSeries)handler{
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,
 											 (unsigned long)NULL), ^(void) {
-		[_queue inDatabase:^(FMDatabase *db) {
+		[self.queue inDatabase:^(FMDatabase *db) {
 			NSMutableArray *x=[[NSMutableArray alloc] init], *y=[[NSMutableArray alloc] init];
 
 			// otherwise we get epoch dates
@@ -115,7 +116,12 @@ NSString *YVBDataManagerErrored = @"YVBDataManagerErrored";
 
 -(void)addKeystrokeWithTimeStamp:(NSString *)timestamp string:(NSString *)stringValue keycode:(long long)keyCode eventType:(CGEventType)eventType andApplicationBundleIdentifier:(NSString *)bid{
 	// SQL insert
-	[_queue inDatabase:^(FMDatabase *db) {
+	[self.queue inDatabase:^(FMDatabase *db) {
+
+		if (stringValue == nil || bid == nil) {
+			return;
+		}
+
 		NSDictionary *insertArgs = @{@"timestamp": timestamp,
 									@"type": [NSNumber numberWithInt:eventType],
 									@"keycode": [NSNumber numberWithLongLong:keyCode],

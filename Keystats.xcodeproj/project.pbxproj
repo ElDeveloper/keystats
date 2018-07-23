@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5001CAC61C2FCC4C00461696 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5001CAC51C2FCC4C00461696 /* CorePlot.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		5001CAC71C2FCC4C00461696 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5001CAC51C2FCC4C00461696 /* CorePlot.framework */; };
 		5001CAC81C2FD13D00461696 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5001CAC51C2FCC4C00461696 /* CorePlot.framework */; };
 		5001CAC91C2FD13D00461696 /* CorePlot.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5001CAC51C2FCC4C00461696 /* CorePlot.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -31,6 +30,7 @@
 		50937AAC18223755000F1685 /* YVBKeystrokesDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50937AAB18223755000F1685 /* YVBKeystrokesDataManager.m */; };
 		509B87721A33114D00CEE098 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 504A312C18164C0400BE4841 /* MainMenu.xib */; };
 		50A5F180186EA7C600C9A994 /* YVBDailyExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A5F17F186EA7C600C9A994 /* YVBDailyExecutor.m */; };
+		50AA782D1E30FAC90028421B /* CorePlot.framework in Resources */ = {isa = PBXBuildFile; fileRef = 5001CAC51C2FCC4C00461696 /* CorePlot.framework */; };
 		50C386F71AA4164E001497B3 /* KeystatsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C386F61AA4164E001497B3 /* KeystatsTests.m */; };
 		50C386FD1AA4166A001497B3 /* YVBKeystrokesDataManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5039F2F71870D65200D73FBB /* YVBKeystrokesDataManagerTests.m */; };
 		50C386FF1AA41816001497B3 /* YVBUtilitesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C386FE1AA41816001497B3 /* YVBUtilitesTests.m */; };
@@ -133,7 +133,6 @@
 				501FF8F51A27A3960013493A /* QuartzCore.framework in Frameworks */,
 				504A316418164C9F00BE4841 /* libsqlite3.dylib in Frameworks */,
 				504A316218164C9700BE4841 /* Carbon.framework in Frameworks */,
-				5001CAC61C2FCC4C00461696 /* CorePlot.framework in Frameworks */,
 				504A311818164C0400BE4841 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,7 +347,7 @@
 		504A310C18164C0400BE4841 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Yoshiki Vázquez Baeza";
 				TargetAttributes = {
 					50C386F11AA4164E001497B3 = {
@@ -395,6 +394,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50AA782D1E30FAC90028421B /* CorePlot.framework in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,19 +499,32 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -537,19 +550,32 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -564,9 +590,9 @@
 		504A314618164C0400BE4841 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -588,9 +614,9 @@
 		504A314718164C0400BE4841 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
