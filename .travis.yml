@@ -1,6 +1,6 @@
 language: objective-c
 osx_image: xcode9.4
 script:
-    - xcodebuild -project Keystats.xcodeproj -scheme Keystats clean
-    - xcodebuild -project Keystats.xcodeproj -scheme Keystats build-for-testing
-    - xcodebuild -project Keystats.xcodeproj -scheme Keystats -sdk macosx test
+    - set -o pipefail && xcodebuild -project Keystats.xcodeproj -scheme Keystats clean | xcpretty
+    - set -o pipefail && xcodebuild -project Keystats.xcodeproj -scheme Keystats build-for-testing | xcpretty
+    - set -o pipefail && xcodebuild -project Keystats.xcodeproj -scheme Keystats -sdk macosx test | xcpretty
