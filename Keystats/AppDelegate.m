@@ -202,7 +202,7 @@
 
 				[self->dataManager addKeystrokeWithTimeStamp:dateString
 													  string:string
-													 	keycode:keyCode
+													 keycode:keyCode
 												   eventType:eventType
 							  andApplicationBundleIdentifier:bundleIdentifier];
 			});
