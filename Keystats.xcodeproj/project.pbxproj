@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5001CAC71C2FCC4C00461696 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5001CAC51C2FCC4C00461696 /* CorePlot.framework */; };
-		5001CAC81C2FD13D00461696 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5001CAC51C2FCC4C00461696 /* CorePlot.framework */; };
-		5001CAC91C2FD13D00461696 /* CorePlot.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5001CAC51C2FCC4C00461696 /* CorePlot.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		181D5C1725F3524A00533D7B /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 181D5C1525F3524A00533D7B /* CorePlot.framework */; };
+		181D5C2125F354CD00533D7B /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 181D5C1525F3524A00533D7B /* CorePlot.framework */; };
+		181D5C2225F354CD00533D7B /* CorePlot.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 181D5C1525F3524A00533D7B /* CorePlot.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		501FF8F51A27A3960013493A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501FF8F41A27A3960013493A /* QuartzCore.framework */; };
+		503162F422C69FAF0044907E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 503162F222C69FAF0044907E /* SettingsViewController.m */; };
+		503162F522C69FAF0044907E /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 503162F322C69FAF0044907E /* SettingsViewController.xib */; };
+		503162F822C6B6230044907E /* KeystatsSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 503162F722C6B6230044907E /* KeystatsSettings.m */; };
 		504A311818164C0400BE4841 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A311718164C0400BE4841 /* Cocoa.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		504A312218164C0400BE4841 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 504A312018164C0400BE4841 /* InfoPlist.strings */; };
 		504A312418164C0400BE4841 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A312318164C0400BE4841 /* main.m */; };
@@ -24,13 +27,11 @@
 		504A315A18164C3500BE4841 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315518164C3500BE4841 /* FMResultSet.m */; };
 		504A316018164C7200BE4841 /* keystrokes in Resources */ = {isa = PBXBuildFile; fileRef = 504A315F18164C7200BE4841 /* keystrokes */; };
 		504A316218164C9700BE4841 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A316118164C9700BE4841 /* Carbon.framework */; };
-		504A316418164C9F00BE4841 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A316318164C9F00BE4841 /* libsqlite3.dylib */; };
 		505E323D181D530000FD6CDF /* YVBKeyLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E323C181D530000FD6CDF /* YVBKeyLogger.m */; };
 		508A3FC31AA19FA600EC872F /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 508A3FC21AA19FA600EC872F /* NSDate+Utilities.m */; };
 		50937AAC18223755000F1685 /* YVBKeystrokesDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50937AAB18223755000F1685 /* YVBKeystrokesDataManager.m */; };
 		509B87721A33114D00CEE098 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 504A312C18164C0400BE4841 /* MainMenu.xib */; };
 		50A5F180186EA7C600C9A994 /* YVBDailyExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A5F17F186EA7C600C9A994 /* YVBDailyExecutor.m */; };
-		50AA782D1E30FAC90028421B /* CorePlot.framework in Resources */ = {isa = PBXBuildFile; fileRef = 5001CAC51C2FCC4C00461696 /* CorePlot.framework */; };
 		50C386F71AA4164E001497B3 /* KeystatsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C386F61AA4164E001497B3 /* KeystatsTests.m */; };
 		50C386FD1AA4166A001497B3 /* YVBKeystrokesDataManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5039F2F71870D65200D73FBB /* YVBKeystrokesDataManagerTests.m */; };
 		50C386FF1AA41816001497B3 /* YVBUtilitesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C386FE1AA41816001497B3 /* YVBUtilitesTests.m */; };
@@ -40,7 +41,6 @@
 		50C387051AA45269001497B3 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315118164C3500BE4841 /* FMDatabasePool.m */; };
 		50C387061AA45269001497B3 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315318164C3500BE4841 /* FMDatabaseQueue.m */; };
 		50C387071AA45269001497B3 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315518164C3500BE4841 /* FMResultSet.m */; };
-		50C387091AA4527A001497B3 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 50C387081AA4527A001497B3 /* libsqlite3.0.dylib */; };
 		50C3870A1AA45286001497B3 /* YVBUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C387011AA41875001497B3 /* YVBUtilities.m */; };
 		50C3870B1AA45294001497B3 /* YVBKeystrokesDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50937AAB18223755000F1685 /* YVBKeystrokesDataManager.m */; };
 		50E73464186F76F80031095F /* Keystats.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 50E73463186F76F80031095F /* Keystats.iconset */; };
@@ -65,15 +65,20 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				5001CAC91C2FD13D00461696 /* CorePlot.framework in CopyFiles */,
+				181D5C2225F354CD00533D7B /* CorePlot.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5001CAC51C2FCC4C00461696 /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = "<group>"; };
+		181D5C1525F3524A00533D7B /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = "<group>"; };
 		501FF8F41A27A3960013493A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		503162F122C69FAF0044907E /* SettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		503162F222C69FAF0044907E /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		503162F322C69FAF0044907E /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		503162F622C6B6230044907E /* KeystatsSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeystatsSettings.h; sourceTree = "<group>"; };
+		503162F722C6B6230044907E /* KeystatsSettings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeystatsSettings.m; sourceTree = "<group>"; };
 		5039F2F71870D65200D73FBB /* YVBKeystrokesDataManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBKeystrokesDataManagerTests.m; sourceTree = "<group>"; };
 		504A311418164C0400BE4841 /* Keystats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keystats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		504A311718164C0400BE4841 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -101,7 +106,6 @@
 		504A315518164C3500BE4841 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		504A315F18164C7200BE4841 /* keystrokes */ = {isa = PBXFileReference; lastKnownFileType = file; path = keystrokes; sourceTree = "<group>"; };
 		504A316118164C9700BE4841 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
-		504A316318164C9F00BE4841 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		504C0D2E1A2B02C8008AF66A /* FMDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		505E323B181D530000FD6CDF /* YVBKeyLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVBKeyLogger.h; sourceTree = "<group>"; };
 		505E323C181D530000FD6CDF /* YVBKeyLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBKeyLogger.m; sourceTree = "<group>"; };
@@ -117,7 +121,6 @@
 		50C386FE1AA41816001497B3 /* YVBUtilitesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBUtilitesTests.m; sourceTree = "<group>"; };
 		50C387001AA41875001497B3 /* YVBUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVBUtilities.h; sourceTree = "<group>"; };
 		50C387011AA41875001497B3 /* YVBUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBUtilities.m; sourceTree = "<group>"; };
-		50C387081AA4527A001497B3 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		50E73463186F76F80031095F /* Keystats.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = Keystats.iconset; sourceTree = "<group>"; };
 		50E9A0C6187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVBKeystrokesSummaryViewController.h; sourceTree = "<group>"; };
 		50E9A0C7187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBKeystrokesSummaryViewController.m; sourceTree = "<group>"; };
@@ -129,10 +132,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5001CAC81C2FD13D00461696 /* CorePlot.framework in Frameworks */,
 				501FF8F51A27A3960013493A /* QuartzCore.framework in Frameworks */,
-				504A316418164C9F00BE4841 /* libsqlite3.dylib in Frameworks */,
 				504A316218164C9700BE4841 /* Carbon.framework in Frameworks */,
+				181D5C2125F354CD00533D7B /* CorePlot.framework in Frameworks */,
 				504A311818164C0400BE4841 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,8 +143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5001CAC71C2FCC4C00461696 /* CorePlot.framework in Frameworks */,
-				50C387091AA4527A001497B3 /* libsqlite3.0.dylib in Frameworks */,
+				181D5C1725F3524A00533D7B /* CorePlot.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,10 +174,8 @@
 		504A311618164C0400BE4841 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				50C387081AA4527A001497B3 /* libsqlite3.0.dylib */,
 				509B2CEA1A32DF100054AFF9 /* Vendor */,
 				501FF8F41A27A3960013493A /* QuartzCore.framework */,
-				504A316318164C9F00BE4841 /* libsqlite3.dylib */,
 				504A316118164C9700BE4841 /* Carbon.framework */,
 				504A311718164C0400BE4841 /* Cocoa.framework */,
 				504A311918164C0400BE4841 /* Other Frameworks */,
@@ -207,6 +206,11 @@
 				508A3FC21AA19FA600EC872F /* NSDate+Utilities.m */,
 				50C387001AA41875001497B3 /* YVBUtilities.h */,
 				50C387011AA41875001497B3 /* YVBUtilities.m */,
+				503162F122C69FAF0044907E /* SettingsViewController.h */,
+				503162F222C69FAF0044907E /* SettingsViewController.m */,
+				503162F622C6B6230044907E /* KeystatsSettings.h */,
+				503162F722C6B6230044907E /* KeystatsSettings.m */,
+				503162F322C69FAF0044907E /* SettingsViewController.xib */,
 				50E9A0C9187D25F70085ECBB /* YVBKeystrokesSummaryView.xib */,
 				504A312C18164C0400BE4841 /* MainMenu.xib */,
 				504A312F18164C0400BE4841 /* Images.xcassets */,
@@ -261,17 +265,9 @@
 		509B2CEA1A32DF100054AFF9 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				509B2CEB1A32DF100054AFF9 /* CorePlot */,
+				181D5C1525F3524A00533D7B /* CorePlot.framework */,
 			);
 			path = Vendor;
-			sourceTree = "<group>";
-		};
-		509B2CEB1A32DF100054AFF9 /* CorePlot */ = {
-			isa = PBXGroup;
-			children = (
-				5001CAC51C2FCC4C00461696 /* CorePlot.framework */,
-			);
-			path = CorePlot;
 			sourceTree = "<group>";
 		};
 		50C386F31AA4164E001497B3 /* KeystatsTests */ = {
@@ -347,7 +343,7 @@
 		504A310C18164C0400BE4841 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "Yoshiki Vázquez Baeza";
 				TargetAttributes = {
 					50C386F11AA4164E001497B3 = {
@@ -358,7 +354,7 @@
 			};
 			buildConfigurationList = 504A310F18164C0400BE4841 /* Build configuration list for PBXProject "Keystats" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -381,6 +377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				509B87721A33114D00CEE098 /* MainMenu.xib in Resources */,
+				503162F522C69FAF0044907E /* SettingsViewController.xib in Resources */,
 				504A316018164C7200BE4841 /* keystrokes in Resources */,
 				50E73464186F76F80031095F /* Keystats.iconset in Resources */,
 				504A312218164C0400BE4841 /* InfoPlist.strings in Resources */,
@@ -394,7 +391,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50AA782D1E30FAC90028421B /* CorePlot.framework in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,8 +428,10 @@
 				508A3FC31AA19FA600EC872F /* NSDate+Utilities.m in Sources */,
 				504A315718164C3500BE4841 /* FMDatabaseAdditions.m in Sources */,
 				505E323D181D530000FD6CDF /* YVBKeyLogger.m in Sources */,
+				503162F822C6B6230044907E /* KeystatsSettings.m in Sources */,
 				50E9A0C8187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m in Sources */,
 				504A315918164C3500BE4841 /* FMDatabaseQueue.m in Sources */,
+				503162F422C69FAF0044907E /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +494,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -513,6 +512,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -537,7 +537,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -547,6 +547,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -564,6 +565,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -582,7 +584,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -590,21 +593,29 @@
 		504A314618164C0400BE4841 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Keystats-dkavtkgpljrrjzftadevfnmjgbtj/Build/Products/Release",
 					"$(PROJECT_DIR)/Vendor/CorePlot",
+					"$(PROJECT_DIR)/Vendor",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Keystats/Keystats-Prefix.pch";
 				INFOPLIST_FILE = "Keystats/Keystats-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				OTHER_LDFLAGS = "-ObjC";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lsqlite3",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.eldeveloper.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -614,21 +625,29 @@
 		504A314718164C0400BE4841 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Keystats-dkavtkgpljrrjzftadevfnmjgbtj/Build/Products/Release",
 					"$(PROJECT_DIR)/Vendor/CorePlot",
+					"$(PROJECT_DIR)/Vendor",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Keystats/Keystats-Prefix.pch";
 				INFOPLIST_FILE = "Keystats/Keystats-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				OTHER_LDFLAGS = "-ObjC";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lsqlite3",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.eldeveloper.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -647,6 +666,8 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendor/CorePlot",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Vendor",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -655,6 +676,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = KeystatsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.eldeveloper.yoshiki.$(PRODUCT_NAME:rfc1034identifier)";
@@ -676,10 +701,16 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendor/CorePlot",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Vendor",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = KeystatsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.eldeveloper.yoshiki.$(PRODUCT_NAME:rfc1034identifier)";
