@@ -12,6 +12,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface KeystatsSettings : NSObject
 
+// construction
+- (id)init;
++ (KeystatsSettings *)sharedController;
+
+- (void)writeSettings;
+- (void)loadSettings;
+- (NSURL *)location;
+
+@property (nonatomic, strong) NSColor *color;
+@property (nonatomic, strong) NSNumber *saveDateAndKeystroke;
+
 @end
 
 NS_ASSUME_NONNULL_END

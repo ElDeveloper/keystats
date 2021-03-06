@@ -13,6 +13,8 @@
 #import "YVBKeystrokesDataManager.h"
 #import "YVBDailyExecutor.h"
 #import "YVBKeystrokesSummaryViewController.h"
+#import "SettingsViewController.h"
+#import "KeystatsSettings.h"
 
 @implementation AppDelegate
 
@@ -47,9 +49,11 @@
 		}
 
 	}
+    _saveDateAndKeystroke = [NSNumber numberWithBool:NO];
 	_knowsEarliestDate = NO;
 	_mainLogger = nil;
 	__tasksCompleted = 0;
+	_settings = nil;
 
 	// add the view controller & reposition it to a nice location in the window
 	CGSize currentSize;
@@ -138,6 +142,12 @@
 
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"saveDateAndKeystroke"]) {
+        _saveDateAndKeystroke = [change objectForKey:@"new"];
+    }
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification{
 	[self keystatsDidFinishLaunching];
 }
@@ -151,7 +161,13 @@
 		[self copyDatabase];
 	}
 
+    _settings = [[SettingsViewController alloc] initWithWindowNibName:@"SettingsViewController"];
 	dataManager = [[YVBKeystrokesDataManager alloc] initWithFilePath:databaseFilePath];
+
+	// setup the datamanager and view to listen to changes of the settings object
+	KeystatsSettings *settingsModel = [KeystatsSettings sharedController];
+	[settingsModel addObserver:self forKeyPath:@"saveDateAndKeystroke" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+	[settingsModel addObserver:_summaryView forKeyPath:@"color" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
 
 	// serve like cache of the values, until I figure out how to query a sqlite
 	// database about 100 times per second without it delaying the callbacks
@@ -170,8 +186,7 @@
 	}];
 	[executor start];
 
-	__block NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-	[dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    __block NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
 
 	__block NSWorkspace *workspace = [NSWorkspace sharedWorkspace];
 	__block NSString *bundleIdentifier;
@@ -183,6 +198,16 @@
 			self->_weeklyCountValue++;
 			self->_monthlyCountValue++;
 			self->_todayCountValue++;
+
+            // we'll discard the data unless the setting is enabled
+            if ([self->_saveDateAndKeystroke boolValue]) {
+                [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            }
+            else {
+                [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:00"];
+                string = @"";
+                keyCode = 0;
+            }
 
 			// update from the count buffers
 			[self->_summaryView updateWithTotalValue:[[self->dataManager resultFormatter] stringFromNumber:[NSNumber numberWithLongLong:self->_totalCountValue]]
@@ -418,6 +443,13 @@
 	options = [NSDictionary dictionaryWithObjectsAndKeys:gitInfo,@"Version",nil];
 
 	[[NSApplication sharedApplication] orderFrontStandardAboutPanelWithOptions:options];
+}
+
+- (IBAction)showSettingsWindow:(id)sender {
+	if (!_settings) {
+		_settings = [[SettingsViewController alloc] initWithWindowNibName:@"SettingsViewController"];
+	}
+	[_settings showWindow:self];
 }
 
 @end

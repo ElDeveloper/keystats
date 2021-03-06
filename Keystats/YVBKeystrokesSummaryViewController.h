@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import <CorePlot/CorePlot.h>
 
+@class KeystatsSettings;
+
 @interface YVBKeystrokesSummaryViewController : NSViewController<CPTPlotDataSource, CPTBarPlotDelegate, CPTScatterPlotDelegate, CALayerDelegate>{
 	IBOutlet NSTextField * __weak totalCountLabel;
 	IBOutlet NSTextField * __weak todayCountLabel;
@@ -28,6 +30,8 @@
 	NSNumberFormatter *__formatter;
 	BOOL __canDrawPlot;
 	NSTimer *__plotTimer;
+	KeystatsSettings *__settings;
+	NSColor *_plotColor;
 
 }
 

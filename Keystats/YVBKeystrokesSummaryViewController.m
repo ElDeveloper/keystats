@@ -10,6 +10,7 @@
 
 #import "NSDate+Utilities.h"
 #import "YVBUtilities.h"
+#import "KeystatsSettings.h"
 
 @implementation YVBKeystrokesSummaryViewController
 
@@ -39,6 +40,10 @@
 
 		__canDrawPlot = NO;
 
+		_plotColor = [NSColor colorWithRed:93.0f/255.0f green:130.0f/255.0f blue:176.0f/255.0f alpha:1];
+
+		__settings = [KeystatsSettings sharedController];
+
 		// we will reload the data every 20 minutes if this gets
 		// fired, meaning if there's enough data to be plotted
 		__plotTimer = [NSTimer timerWithTimeInterval:1200
@@ -51,7 +56,6 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-	NSLog(@"Listening to a message %@", change);
 	if ([keyPath isEqualToString:@"color"]) {
 		_plotColor = [change objectForKey:@"new"];
 		[__graph reloadData];
@@ -68,8 +72,8 @@
 	// value of the todayCountLabel
     NSInteger count = [__keystrokesData count];
     if (count) {
-	[__keystrokesData replaceObjectAtIndex:count-1
-								withObject:todayNumber];
+        [__keystrokesData replaceObjectAtIndex:count-1
+                                    withObject:todayNumber];
     }
 
 	// update the values of the labels
@@ -191,13 +195,13 @@
 	// __knownMax sets when we have to reload the full plot
 	__knownMax = maxKeystrokes;
 
-	CPTColor *dataColor = [CPTColor colorWithComponentRed:CPTFloat(93.0f/255.0f)
-													green:CPTFloat(130.0f/255.0f)
-													 blue:CPTFloat(176.0f/255.0f)
+	CPTColor *dataColor = [CPTColor colorWithComponentRed:[_plotColor redComponent]
+													green:[_plotColor greenComponent]
+													 blue:[_plotColor blueComponent]
 													alpha:CPTFloat(1.0f)];
-	CPTColor *fillingColor = [CPTColor colorWithComponentRed:CPTFloat(93.0f/255.0f)
-													   green:CPTFloat(130.0f/255.0f)
-														blue:CPTFloat(176.0f/255.0f)
+	CPTColor *fillingColor = [CPTColor colorWithComponentRed:[_plotColor redComponent]
+													   green:[_plotColor greenComponent]
+														blue:[_plotColor blueComponent]
 													   alpha:CPTFloat(0.5)];
 
 	CPTMutableTextStyle *textStyle = [CPTMutableTextStyle textStyle];

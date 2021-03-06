@@ -23,7 +23,7 @@ CGEventRef recordKeysCallback(CGEventTapProxy proxy, CGEventType type,
 @synthesize keyPressedHandler, isLogging;
 
 +(BOOL)accessibilityIsEnabled{
-	return AXAPIEnabled();
+	return AXIsProcessTrusted();
 }
 
 +(BOOL)requestAccessibilityEnabling{

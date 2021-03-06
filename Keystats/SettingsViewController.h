@@ -8,9 +8,20 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class KeystatsSettings;
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SettingsViewController : NSWindowController
+@interface SettingsViewController : NSWindowController {
+
+@private KeystatsSettings *settings;
+
+}
+@property (assign) IBOutlet NSButton *checkbox;
+@property (assign) IBOutlet NSColorWell *colorPicker;
+
+-(IBAction)checkboxChanged:(id)sender;
+-(IBAction)colorPickerChanged:(id)sender;
 
 @end
 

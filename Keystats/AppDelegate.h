@@ -11,6 +11,7 @@
 @class YVBKeystrokesDataManager;
 @class YVBKeystrokesSummaryViewController;
 @class YVBKeyLogger;
+@class SettingsViewController;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>{
 	 __block YVBKeystrokesDataManager *dataManager;
@@ -24,7 +25,9 @@
 	long long _todayCountValue;
 	BOOL waitingForConfirmation;
 	BOOL _knowsEarliestDate;
+    NSNumber * _saveDateAndKeystroke;
 	NSUInteger __tasksCompleted;
+	SettingsViewController * _settings;
 }
 
 @property (assign) IBOutlet NSWindow *window;
@@ -40,5 +43,6 @@
 - (void)keyLoggerPerishedNotification:(NSNotification *)aNotification;
 
 - (IBAction)showAboutWindow:(id)sender;
+- (IBAction)showSettingsWindow:(id)sender;
 
 @end

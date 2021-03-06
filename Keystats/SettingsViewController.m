@@ -7,17 +7,38 @@
 //
 
 #import "SettingsViewController.h"
-
-@interface SettingsViewController ()
-
-@end
+#import "KeystatsSettings.h"
 
 @implementation SettingsViewController
 
+@synthesize colorPicker = _colorPicker;
+@synthesize checkbox = _checkbox;
+
 - (void)windowDidLoad {
     [super windowDidLoad];
-    
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+
+	settings = [KeystatsSettings sharedController];
+
+    // TODO: set the values for the colorpicker and the checkbox according to
+    // the saved values
+    // cast these as NSColorWell and NSbutton
+    [_colorPicker setColor:[settings color]];
+    [_checkbox setState:[[settings saveDateAndKeystroke] boolValue] ? NSControlStateValueOn : NSControlStateValueOff];
+}
+
+- (IBAction)checkboxChanged:(id)sender {
+	NSButton *checkbox = (NSButton *)sender;
+
+	[settings setValue:[NSNumber numberWithBool:[checkbox state] == NSControlStateValueOn]
+				forKey:@"saveDateAndKeystroke"];
+	[settings writeSettings];
+}
+
+- (IBAction)colorPickerChanged:(id)sender {
+	NSColorWell *colorWell = (NSColorWell *)sender;
+
+	[settings setValue:[colorWell color] forKey:@"color"];
+	[settings writeSettings];
 }
 
 @end
