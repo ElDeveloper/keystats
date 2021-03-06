@@ -50,16 +50,27 @@
 	return self;
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+	NSLog(@"Listening to a message %@", change);
+	if ([keyPath isEqualToString:@"color"]) {
+		_plotColor = [change objectForKey:@"new"];
+		[__graph reloadData];
+	}
+}
+
 -(void)updateWithTotalValue:(NSString *)total todayValue:(NSString *)today
 		 lastSevenDaysValue:(NSString *)lastSevenDaysValue
 	 andLastThirtyDaysValue:(NSString *)lastThirtyDaysValue{
 	NSNumber *todayNumber = [__formatter numberFromString:today];
 	NSInteger current = [todayNumber integerValue];
-
+    
 	// we pretend the latest point is up to date by retrieving the current
 	// value of the todayCountLabel
-	[__keystrokesData replaceObjectAtIndex:[__keystrokesData count]-1
+    NSInteger count = [__keystrokesData count];
+    if (count) {
+	[__keystrokesData replaceObjectAtIndex:count-1
 								withObject:todayNumber];
+    }
 
 	// update the values of the labels
 	[_totalCountLabel setStringValue:total];
