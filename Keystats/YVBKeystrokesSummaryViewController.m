@@ -40,9 +40,8 @@
 
 		__canDrawPlot = NO;
 
-		_plotColor = [NSColor colorWithRed:93.0f/255.0f green:130.0f/255.0f blue:176.0f/255.0f alpha:1];
-
-		__settings = [KeystatsSettings sharedController];
+        __settings = [KeystatsSettings sharedController];
+        _plotColor = [__settings color];
 
 		// we will reload the data every 20 minutes if this gets
 		// fired, meaning if there's enough data to be plotted
@@ -58,7 +57,8 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
 	if ([keyPath isEqualToString:@"color"]) {
 		_plotColor = [change objectForKey:@"new"];
-		[__graph reloadData];
+
+        [self _drawKeystrokesPlotWithCachedData];
 	}
 }
 
@@ -100,51 +100,58 @@
 	}
 }
 
+-(void)_drawKeystrokesPlotWithCachedData {
+    // This method relies on the __datesData and __keystrokesData private properties.
+    // Both of these are updated by the data manager.
+    //
+    // every time we are asked to update the values let's force a hard restart
+    __previous = 0;
+
+    // figure out if we have today in the array
+    NSUInteger indexOfToday = [__datesData indexOfObjectPassingTest:
+     ^BOOL(id obj, NSUInteger idx, BOOL *stop){
+         return [(NSDate *)obj isToday];
+     }];
+
+    // add an empty entry if today's date is not saved already,
+    // this way the plot updating routine will work seamlessly
+    if(indexOfToday == NSNotFound){
+        [__datesData addObject:[NSDate todayWithoutTime]];
+        [__keystrokesData addObject:[NSNumber numberWithLongLong:0]];
+
+        // be consistent and remove the extra object
+        [__datesData removeObjectAtIndex:0];
+        [__keystrokesData removeObjectAtIndex:0];
+    }
+
+    // calculate the average once we've settled in on the values
+    // we will use for the keystrokes and the dates
+    __averageData = [[YVBUtilities weeklyAverageForData:__keystrokesData
+                                                perDate:__datesData] copy];
+
+    // convenience variable to check in other places whether
+    // or not we are drawing the keystrokes per day plot
+    __canDrawPlot = [__datesData count] > 2;
+
+    if (__canDrawPlot) {
+        // remove the "loading" label
+        [_dailyKeystrokesLabel setStringValue:@""];
+        [self _createPlot];
+
+        if (![__plotTimer isValid]){
+            [__plotTimer fire];
+        }
+    }
+    else{
+        [_dailyKeystrokesLabel setStringValue:@"Not Enough Data To Display Plot"];
+    }
+}
+
 -(void)updateDailyKeystrokesPlot:(NSArray *)data{
 	__datesData = [NSMutableArray arrayWithArray:[[data objectAtIndex:0] copy]];
 	__keystrokesData = [NSMutableArray arrayWithArray:[[data objectAtIndex:1] copy]];
 
-	// every time we are asked to update the values let's force a hard restart
-	__previous = 0;
-
-	// figure out if we have today in the array
-	NSUInteger indexOfToday = [__datesData indexOfObjectPassingTest:
-	 ^BOOL(id obj, NSUInteger idx, BOOL *stop){
-		 return [(NSDate *)obj isToday];
-	 }];
-
-	// add an empty entry if today's date is not saved already,
-	// this way the plot updating routine will work seamlessly
-	if(indexOfToday == NSNotFound){
-		[__datesData addObject:[NSDate todayWithoutTime]];
-		[__keystrokesData addObject:[NSNumber numberWithLongLong:0]];
-
-		// be consistent and remove the extra object
-		[__datesData removeObjectAtIndex:0];
-		[__keystrokesData removeObjectAtIndex:0];
-	}
-
-	// calculate the average once we've settled in on the values
-	// we will use for the keystrokes and the dates
-	__averageData = [[YVBUtilities weeklyAverageForData:__keystrokesData
-												perDate:__datesData] copy];
-
-	// convenience variable to check in other places whether
-	// or not we are drawing the keystrokes per day plot
-	__canDrawPlot = [__datesData count] > 5;
-
-	if (__canDrawPlot) {
-		// remove the "loading" label
-		[_dailyKeystrokesLabel setStringValue:@""];
-		[self _createPlot];
-
-		if (![__plotTimer isValid]){
-			[__plotTimer fire];
-		}
-	}
-	else{
-		[_dailyKeystrokesLabel setStringValue:@"Not Enough Data To Display Plot"];
-	}
+    [self _drawKeystrokesPlotWithCachedData];
 }
 
 -(void)_createPlot{

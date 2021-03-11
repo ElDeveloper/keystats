@@ -19,9 +19,6 @@
 
 	settings = [KeystatsSettings sharedController];
 
-    // TODO: set the values for the colorpicker and the checkbox according to
-    // the saved values
-    // cast these as NSColorWell and NSbutton
     [_colorPicker setColor:[settings color]];
     [_checkbox setState:[[settings saveDateAndKeystroke] boolValue] ? NSControlStateValueOn : NSControlStateValueOff];
 }
