@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		181D5C1725F3524A00533D7B /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 181D5C1525F3524A00533D7B /* CorePlot.framework */; };
-		181D5C2125F354CD00533D7B /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 181D5C1525F3524A00533D7B /* CorePlot.framework */; };
-		181D5C2225F354CD00533D7B /* CorePlot.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 181D5C1525F3524A00533D7B /* CorePlot.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		18562BDC25FEA1EB0072DC5A /* libCorePlot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18562BDA25FEA1EB0072DC5A /* libCorePlot.a */; };
+		18562BDD25FEA1EB0072DC5A /* libFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18562BDB25FEA1EB0072DC5A /* libFMDB.a */; };
 		501FF8F51A27A3960013493A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501FF8F41A27A3960013493A /* QuartzCore.framework */; };
 		503162F422C69FAF0044907E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 503162F222C69FAF0044907E /* SettingsViewController.m */; };
 		503162F522C69FAF0044907E /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 503162F322C69FAF0044907E /* SettingsViewController.xib */; };
@@ -20,11 +19,6 @@
 		504A312818164C0400BE4841 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 504A312618164C0400BE4841 /* Credits.rtf */; };
 		504A312B18164C0400BE4841 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A312A18164C0400BE4841 /* AppDelegate.m */; };
 		504A313018164C0400BE4841 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504A312F18164C0400BE4841 /* Images.xcassets */; };
-		504A315618164C3500BE4841 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A314D18164C3500BE4841 /* FMDatabase.m */; };
-		504A315718164C3500BE4841 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A314F18164C3500BE4841 /* FMDatabaseAdditions.m */; };
-		504A315818164C3500BE4841 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315118164C3500BE4841 /* FMDatabasePool.m */; };
-		504A315918164C3500BE4841 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315318164C3500BE4841 /* FMDatabaseQueue.m */; };
-		504A315A18164C3500BE4841 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315518164C3500BE4841 /* FMResultSet.m */; };
 		504A316018164C7200BE4841 /* keystrokes in Resources */ = {isa = PBXBuildFile; fileRef = 504A315F18164C7200BE4841 /* keystrokes */; };
 		504A316218164C9700BE4841 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504A316118164C9700BE4841 /* Carbon.framework */; };
 		505E323D181D530000FD6CDF /* YVBKeyLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E323C181D530000FD6CDF /* YVBKeyLogger.m */; };
@@ -36,16 +30,12 @@
 		50C386FD1AA4166A001497B3 /* YVBKeystrokesDataManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5039F2F71870D65200D73FBB /* YVBKeystrokesDataManagerTests.m */; };
 		50C386FF1AA41816001497B3 /* YVBUtilitesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C386FE1AA41816001497B3 /* YVBUtilitesTests.m */; };
 		50C387021AA41875001497B3 /* YVBUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C387011AA41875001497B3 /* YVBUtilities.m */; };
-		50C387031AA45269001497B3 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A314D18164C3500BE4841 /* FMDatabase.m */; };
-		50C387041AA45269001497B3 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A314F18164C3500BE4841 /* FMDatabaseAdditions.m */; };
-		50C387051AA45269001497B3 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315118164C3500BE4841 /* FMDatabasePool.m */; };
-		50C387061AA45269001497B3 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315318164C3500BE4841 /* FMDatabaseQueue.m */; };
-		50C387071AA45269001497B3 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 504A315518164C3500BE4841 /* FMResultSet.m */; };
 		50C3870A1AA45286001497B3 /* YVBUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C387011AA41875001497B3 /* YVBUtilities.m */; };
 		50C3870B1AA45294001497B3 /* YVBKeystrokesDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50937AAB18223755000F1685 /* YVBKeystrokesDataManager.m */; };
 		50E73464186F76F80031095F /* Keystats.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 50E73463186F76F80031095F /* Keystats.iconset */; };
 		50E9A0C8187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9A0C7187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m */; };
 		50E9A0CA187D25F70085ECBB /* YVBKeystrokesSummaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50E9A0C9187D25F70085ECBB /* YVBKeystrokesSummaryView.xib */; };
+		7D45ECA3486372F2E0B640DC /* libPods-KeystatsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BAB85A266267D3256126EA3 /* libPods-KeystatsTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,14 +55,18 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				181D5C2225F354CD00533D7B /* CorePlot.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		181D5C1525F3524A00533D7B /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = "<group>"; };
+		18562BDA25FEA1EB0072DC5A /* libCorePlot.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libCorePlot.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		18562BDB25FEA1EB0072DC5A /* libFMDB.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFMDB.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BBF335A6BD54B8A4154AF6E /* Pods-KeystatsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeystatsTests.debug.xcconfig"; path = "Target Support Files/Pods-KeystatsTests/Pods-KeystatsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		20170D4E76A676DF71531858 /* Pods-Keystats.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keystats.debug.xcconfig"; path = "Target Support Files/Pods-Keystats/Pods-Keystats.debug.xcconfig"; sourceTree = "<group>"; };
+		2B2AB7255A2D45A7411484B0 /* Pods-KeystatsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeystatsTests.release.xcconfig"; path = "Target Support Files/Pods-KeystatsTests/Pods-KeystatsTests.release.xcconfig"; sourceTree = "<group>"; };
+		3C3CCC8AE2656C7C0CE36E0C /* libPods-Keystats.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Keystats.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		501FF8F41A27A3960013493A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		503162F122C69FAF0044907E /* SettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		503162F222C69FAF0044907E /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
@@ -94,19 +88,8 @@
 		504A312A18164C0400BE4841 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		504A312D18164C0400BE4841 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		504A312F18164C0400BE4841 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		504A314C18164C3500BE4841 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
-		504A314D18164C3500BE4841 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
-		504A314E18164C3500BE4841 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
-		504A314F18164C3500BE4841 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
-		504A315018164C3500BE4841 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
-		504A315118164C3500BE4841 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
-		504A315218164C3500BE4841 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
-		504A315318164C3500BE4841 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
-		504A315418164C3500BE4841 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
-		504A315518164C3500BE4841 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		504A315F18164C7200BE4841 /* keystrokes */ = {isa = PBXFileReference; lastKnownFileType = file; path = keystrokes; sourceTree = "<group>"; };
 		504A316118164C9700BE4841 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
-		504C0D2E1A2B02C8008AF66A /* FMDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		505E323B181D530000FD6CDF /* YVBKeyLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVBKeyLogger.h; sourceTree = "<group>"; };
 		505E323C181D530000FD6CDF /* YVBKeyLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBKeyLogger.m; sourceTree = "<group>"; };
 		508A3FC11AA19FA600EC872F /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utilities.h"; sourceTree = "<group>"; };
@@ -125,6 +108,8 @@
 		50E9A0C6187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YVBKeystrokesSummaryViewController.h; sourceTree = "<group>"; };
 		50E9A0C7187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YVBKeystrokesSummaryViewController.m; sourceTree = "<group>"; };
 		50E9A0C9187D25F70085ECBB /* YVBKeystrokesSummaryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YVBKeystrokesSummaryView.xib; sourceTree = "<group>"; };
+		8BAB85A266267D3256126EA3 /* libPods-KeystatsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KeystatsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE743D3BE6AA20BFC0E3F106 /* Pods-Keystats.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keystats.release.xcconfig"; path = "Target Support Files/Pods-Keystats/Pods-Keystats.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,8 +119,9 @@
 			files = (
 				501FF8F51A27A3960013493A /* QuartzCore.framework in Frameworks */,
 				504A316218164C9700BE4841 /* Carbon.framework in Frameworks */,
-				181D5C2125F354CD00533D7B /* CorePlot.framework in Frameworks */,
+				18562BDD25FEA1EB0072DC5A /* libFMDB.a in Frameworks */,
 				504A311818164C0400BE4841 /* Cocoa.framework in Frameworks */,
+				18562BDC25FEA1EB0072DC5A /* libCorePlot.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,7 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				181D5C1725F3524A00533D7B /* CorePlot.framework in Frameworks */,
+				7D45ECA3486372F2E0B640DC /* libPods-KeystatsTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,10 +141,10 @@
 			children = (
 				504A315B18164C6100BE4841 /* KeyLogger */,
 				504A311D18164C0400BE4841 /* Keystats */,
-				504A314B18164C3500BE4841 /* FMDB */,
 				50C386F31AA4164E001497B3 /* KeystatsTests */,
 				504A311618164C0400BE4841 /* Frameworks */,
 				504A311518164C0400BE4841 /* Products */,
+				65E332E03A2865E75ACA0234 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -174,11 +160,15 @@
 		504A311618164C0400BE4841 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18562BDA25FEA1EB0072DC5A /* libCorePlot.a */,
+				18562BDB25FEA1EB0072DC5A /* libFMDB.a */,
 				509B2CEA1A32DF100054AFF9 /* Vendor */,
 				501FF8F41A27A3960013493A /* QuartzCore.framework */,
 				504A316118164C9700BE4841 /* Carbon.framework */,
 				504A311718164C0400BE4841 /* Cocoa.framework */,
 				504A311918164C0400BE4841 /* Other Frameworks */,
+				3C3CCC8AE2656C7C0CE36E0C /* libPods-Keystats.a */,
+				8BAB85A266267D3256126EA3 /* libPods-KeystatsTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -233,24 +223,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		504A314B18164C3500BE4841 /* FMDB */ = {
-			isa = PBXGroup;
-			children = (
-				504C0D2E1A2B02C8008AF66A /* FMDB.h */,
-				504A314C18164C3500BE4841 /* FMDatabase.h */,
-				504A314D18164C3500BE4841 /* FMDatabase.m */,
-				504A314E18164C3500BE4841 /* FMDatabaseAdditions.h */,
-				504A314F18164C3500BE4841 /* FMDatabaseAdditions.m */,
-				504A315018164C3500BE4841 /* FMDatabasePool.h */,
-				504A315118164C3500BE4841 /* FMDatabasePool.m */,
-				504A315218164C3500BE4841 /* FMDatabaseQueue.h */,
-				504A315318164C3500BE4841 /* FMDatabaseQueue.m */,
-				504A315418164C3500BE4841 /* FMResultSet.h */,
-				504A315518164C3500BE4841 /* FMResultSet.m */,
-			);
-			path = FMDB;
-			sourceTree = "<group>";
-		};
 		504A315B18164C6100BE4841 /* KeyLogger */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,7 +237,6 @@
 		509B2CEA1A32DF100054AFF9 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				181D5C1525F3524A00533D7B /* CorePlot.framework */,
 			);
 			path = Vendor;
 			sourceTree = "<group>";
@@ -297,6 +268,17 @@
 			name = Icons;
 			sourceTree = "<group>";
 		};
+		65E332E03A2865E75ACA0234 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				20170D4E76A676DF71531858 /* Pods-Keystats.debug.xcconfig */,
+				BE743D3BE6AA20BFC0E3F106 /* Pods-Keystats.release.xcconfig */,
+				1BBF335A6BD54B8A4154AF6E /* Pods-KeystatsTests.debug.xcconfig */,
+				2B2AB7255A2D45A7411484B0 /* Pods-KeystatsTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -304,6 +286,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 504A314518164C0400BE4841 /* Build configuration list for PBXNativeTarget "Keystats" */;
 			buildPhases = (
+				F4396B570BADEAD81207793C /* [CP] Check Pods Manifest.lock */,
 				504A311018164C0400BE4841 /* Sources */,
 				504A311118164C0400BE4841 /* Frameworks */,
 				504A311218164C0400BE4841 /* Resources */,
@@ -323,6 +306,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 50C386FC1AA4164E001497B3 /* Build configuration list for PBXNativeTarget "KeystatsTests" */;
 			buildPhases = (
+				1C17E9834A80B9FDAF810C06 /* [CP] Check Pods Manifest.lock */,
 				50C386EE1AA4164E001497B3 /* Sources */,
 				50C386EF1AA4164E001497B3 /* Frameworks */,
 				50C386F01AA4164E001497B3 /* Resources */,
@@ -397,6 +381,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1C17E9834A80B9FDAF810C06 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KeystatsTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5039F2FB1871126A00D73FBB /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -410,6 +416,28 @@
 			shellPath = "/usr/bin/env bash";
 			shellScript = "# Retrieve the current SHA of the repository and write it to the plist file\n# Author: Yoshiki Vazquez Baeza\n\n# PROJECT_DIR points to the location of the .xcodeproj file\nPROJECT_DIR=\"${PROJECT_DIR}/.git\"\nPLIST_PATH=\"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Info.plist\"\necho $PLIST_PATH\necho \"********\"\n\n# first seven chars of the git SHA\nGIT_SHA=$(git --git-dir \"${PROJECT_DIR}\" rev-parse --short HEAD)\n\n# current status\nGIT_STATUS=$(git --git-dir \"${PROJECT_DIR}\" diff --shortstat | wc -l)\n\n# current branch\nGIT_BRANCH=$(git --git-dir \"${PROJECT_DIR}\" rev-parse --abbrev-ref HEAD)\n\necho \"The current git SHA is ${GIT_SHA}\"\necho \"The repository has unstaged changes: ${GIT_STATUS}\"\necho \"The current working branch is ${GIT_BRANCH}\"\n\n# write the info into the plist file\ndefaults write ${PLIST_PATH} GitSHA ${GIT_SHA}\n\n# write a 1 to represent unstaged changes and 0 to represent a clean repo\ndefaults write ${PLIST_PATH} GitStatus ${GIT_STATUS}\n\n# write the current branch\ndefaults write ${PLIST_PATH} GitBranch ${GIT_BRANCH}\n";
 		};
+		F4396B570BADEAD81207793C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Keystats-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -417,20 +445,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				504A315618164C3500BE4841 /* FMDatabase.m in Sources */,
 				504A312B18164C0400BE4841 /* AppDelegate.m in Sources */,
-				504A315A18164C3500BE4841 /* FMResultSet.m in Sources */,
-				504A315818164C3500BE4841 /* FMDatabasePool.m in Sources */,
 				50A5F180186EA7C600C9A994 /* YVBDailyExecutor.m in Sources */,
 				50937AAC18223755000F1685 /* YVBKeystrokesDataManager.m in Sources */,
 				50C387021AA41875001497B3 /* YVBUtilities.m in Sources */,
 				504A312418164C0400BE4841 /* main.m in Sources */,
 				508A3FC31AA19FA600EC872F /* NSDate+Utilities.m in Sources */,
-				504A315718164C3500BE4841 /* FMDatabaseAdditions.m in Sources */,
 				505E323D181D530000FD6CDF /* YVBKeyLogger.m in Sources */,
 				503162F822C6B6230044907E /* KeystatsSettings.m in Sources */,
 				50E9A0C8187D1DA90085ECBB /* YVBKeystrokesSummaryViewController.m in Sources */,
-				504A315918164C3500BE4841 /* FMDatabaseQueue.m in Sources */,
 				503162F422C69FAF0044907E /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -441,11 +464,6 @@
 			files = (
 				50C3870B1AA45294001497B3 /* YVBKeystrokesDataManager.m in Sources */,
 				50C3870A1AA45286001497B3 /* YVBUtilities.m in Sources */,
-				50C387031AA45269001497B3 /* FMDatabase.m in Sources */,
-				50C387041AA45269001497B3 /* FMDatabaseAdditions.m in Sources */,
-				50C387051AA45269001497B3 /* FMDatabasePool.m in Sources */,
-				50C387061AA45269001497B3 /* FMDatabaseQueue.m in Sources */,
-				50C387071AA45269001497B3 /* FMResultSet.m in Sources */,
 				50C386FD1AA4166A001497B3 /* YVBKeystrokesDataManagerTests.m in Sources */,
 				50C386F71AA4164E001497B3 /* KeystatsTests.m in Sources */,
 				50C386FF1AA41816001497B3 /* YVBUtilitesTests.m in Sources */,
@@ -592,6 +610,7 @@
 		};
 		504A314618164C0400BE4841 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20170D4E76A676DF71531858 /* Pods-Keystats.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "-";
@@ -624,6 +643,7 @@
 		};
 		504A314718164C0400BE4841 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE743D3BE6AA20BFC0E3F106 /* Pods-Keystats.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "-";
@@ -656,6 +676,7 @@
 		};
 		50C386FA1AA4164E001497B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BBF335A6BD54B8A4154AF6E /* Pods-KeystatsTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -690,6 +711,7 @@
 		};
 		50C386FB1AA4164E001497B3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B2AB7255A2D45A7411484B0 /* Pods-KeystatsTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
